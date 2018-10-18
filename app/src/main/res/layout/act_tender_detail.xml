@@ -10,20 +10,13 @@
         android:layout_height="match_parent"
         app:retentionHeight="@dimen/y100">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-
-
-        </LinearLayout>
+        <include layout="@layout/act_detail_top"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <cn.carbs.android.indicatorview.library.IndicatorView
                 android:id="@+id/indicator_view"
                 android:layout_width="match_parent"
@@ -31,18 +24,17 @@
                 android:background="@color/white"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
+                app:iv_IndicatorColor="@color/colorAccent"
                 app:iv_IndicatorColorEnd="@color/app_color_principal"
                 app:iv_IndicatorColorGradient="false"
                 app:iv_IndicatorColorStart="@color/app_color_principal"
-                app:iv_IndicatorColor="@color/colorAccent"
-                app:iv_IndicatorTextColorNormal="@color/text_grey"
-                app:iv_IndicatorTextColorSelected="@color/text_dark"
                 app:iv_IndicatorEven="true"
                 app:iv_IndicatorLengthExtra="@dimen/x5"
                 app:iv_IndicatorTextArray="@array/find"
+                app:iv_IndicatorTextColorNormal="@color/text_grey"
+                app:iv_IndicatorTextColorSelected="@color/text_dark"
                 app:iv_IndicatorTextGap="@dimen/x40"
-                app:iv_IndicatorTextSize="@dimen/x30"
-                />
+                app:iv_IndicatorTextSize="@dimen/x30" />
 
         </LinearLayout>
 
@@ -61,5 +53,74 @@
             android:background="@color/green" />
     </com.sys.blackcat.stickheaderlayout.StickHeaderLayout>
 
-    <include layout="@layout/appbar_layout"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y110"
+        android:layout_alignParentBottom="true"
+        android:background="@color/detail_subscibe_bg">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y88"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:background="@drawable/fillet_btn_normal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_reduce"
+                android:layout_width="@dimen/x88"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="—"
+                android:textColor="@color/text_dark"
+                android:textSize="@dimen/x32" />
+
+            <View style="@style/vLineStyle" />
+
+            <TextView
+                android:id="@+id/tv_sum"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="50000.00"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:textColor="@color/text_dark"
+                android:textSize="@dimen/x40" />
+
+            <View style="@style/vLineStyle" />
+
+            <TextView
+                android:id="@+id/tv_add"
+                android:layout_width="@dimen/x88"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/text_dark"
+                android:textSize="@dimen/x40" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_subscribe"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y66"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x30"
+            android:background="@drawable/fillet_loginbtn_normal"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/x40"
+            android:paddingRight="@dimen/x40"
+            android:text="@string/detail_subscribe"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x35" />
+
+        <View style="@style/hLineStyle" />
+
+    </RelativeLayout>
+
 </RelativeLayout>

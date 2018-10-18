@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/detail_bg"
+        android:paddingLeft="@dimen/x30"
+        android:paddingTop="@dimen/y20">
+
+        <LinearLayout
+            android:id="@+id/ll_back"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y80">
+
+            <ImageView
+                android:layout_width="@dimen/x32"
+                android:layout_height="@dimen/x40"
+                android:background="@mipmap/back_white" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x36" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_detial_predictIncome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10.88%"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x80" />
+
+            <TextView
+                android:id="@+id/tv_detail_predictIncome_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y20"
+                android:text="预期年化收益"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x24" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/y30"
+        android:layout_marginTop="@dimen/y30"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_detail_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10.88%"
+                android:textColor="@color/text_dark"
+                android:textSize="@dimen/x32" />
+
+            <TextView
+                android:id="@+id/tv_detail_limit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:text="@string/detail_limit"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x20" />
+        </LinearLayout>
+
+        <View
+            style="@style/vLineStyle"
+            android:layout_marginBottom="@dimen/y10"
+            android:layout_marginTop="@dimen/y10" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_detail_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5万"
+                android:textColor="@color/text_dark"
+                android:textSize="@dimen/x32" />
+
+            <TextView
+                android:id="@+id/tv_detail_start_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:text="@string/detail_start"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x20" />
+        </LinearLayout>
+
+        <View
+            style="@style/vLineStyle"
+            android:layout_marginBottom="@dimen/x10"
+            android:layout_marginTop="@dimen/x10" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_detail_subscribe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100人"
+                android:textColor="@color/text_dark"
+                android:textSize="@dimen/x32" />
+
+            <TextView
+                android:id="@+id/tv_detail_subscribe_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:text="@string/detail_subscribeNum"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x20" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/hLineheight20Style" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y90"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/x30">
+
+            <ImageView
+                android:layout_width="@dimen/x32"
+                android:layout_height="@dimen/x32"
+                android:layout_gravity="center_vertical"
+                android:background="@mipmap/repayment" />
+
+            <TextView
+                android:id="@+id/tv_repayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x20"
+                android:text="一次性还本付息"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x24" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/x30">
+
+            <ImageView
+                android:layout_width="@dimen/x32"
+                android:layout_height="@dimen/x32"
+                android:layout_gravity="center_vertical"
+                android:background="@mipmap/incremental" />
+
+            <TextView
+                android:id="@+id/tv_incremental"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x20"
+                android:text="一万及整数倍数递增"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x24" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -11,8 +11,11 @@ import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.adapter.DropMenuAdapter;
+import com.zqzr.licaitong.adapter.TenderListAdapter;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.bean.Menu;
+import com.zqzr.licaitong.bean.Tender;
+import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.Utils;
 
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener{
     private ArrayList<Menu> menu = new ArrayList<>();
     private ArrayList<Menu> limit = new ArrayList<>();
     private ArrayList<Menu> start = new ArrayList<>();
+    private ArrayList<Tender> tenders = new ArrayList<>();
     private boolean isLimit,isStart;
 
     private ListView mTenderListView;
@@ -39,6 +43,7 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener{
     private TextView mTvConditionLimit,mTvConditionStart;
     private ImageView mIvConditionLimit,mIvConditionStart;
     private View mask;
+    private TenderListAdapter tenderListAdapter;
 
     @Override
     protected void onStart() {
@@ -66,6 +71,7 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener{
         mLlMenuList = (LinearLayout) findViewById(R.id.ll_menuList);
         mConditionListView = (ListView) findViewById(R.id.condition_listview);
         mRefreshLayout = (MaterialRefreshLayout) findViewById(R.id.mrl_refreshLayout);
+        mRefreshLayout.setLoadMore(true);
         mTenderListView = (ListView) findViewById(R.id.tenderList_listview);
         mask = findViewById(R.id.mask);
 
@@ -89,6 +95,10 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener{
         start.add(new Menu("10万起投"));
         start.add(new Menu("20万起投"));
 
+        for(int i=0;i<20;i++){
+            tenders.add(new Tender("盛向泰票据00"+i+"期","10.1"+i+"%","11"+i+"天",i+"万"));
+        }
+
         menuAdapter = new DropMenuAdapter();
         mConditionListView.setAdapter(menuAdapter);
         mConditionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -106,17 +116,38 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener{
             }
         });
 
+        tenderListAdapter = new TenderListAdapter(tenders);
+        mTenderListView.setAdapter(tenderListAdapter);
+
+        //刷新加载更多
         mRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
-
+                tenders.clear();
+                for(int i=0;i<20;i++){
+                    tenders.add(new Tender("盛向泰票据00"+i+"期","10.1"+i+"%","11"+i+"天",i+"万"));
+                }
+                mRefreshLayout.finishRefreshing();
             }
 
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
-
+                for(int i=tenders.size();i<tenders.size()+20;i++){
+                    tenders.add(new Tender("盛向泰票据00"+i+"期","10.1"+i+"%","11"+i+"天",i+"万"));
+                }
+                tenderListAdapter.notifyDataSetChanged();
+                mRefreshLayout.finishRefreshLoadMore();
             }
         });
+
+        mTenderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ActivityUtils.push(TenderDetailAct.class);
+            }
+        });
+
+
     }
 
     @Override

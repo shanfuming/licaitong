@@ -125,6 +125,28 @@
     <string name="list_selectCondition1">投资期限</string>
     <string name="list_selectCondition2">起投金额</string>
 
+    <!--详情页-->
+    <string name="detail_subscribe">立即预约</string>
+    <string name="detail_limit">项目期限</string>
+    <string name="detail_start">起投金额</string>
+    <string name="detail_subscribeNum">预约人数</string>
+
+    <!--我的页面-->
+    <string name="own_money_name">总投资金额（元）</string>
+    <string name="own_incoming_name">待收收益（元）</string>
+    <string name="own_incomed_name">已收收益（元）</string>
+    <string name="own_moneyRecord">资金记录</string>
+    <string name="own_order">我的订单</string>
+    <string name="own_returnPlan">回款计划</string>
+    <string name="own_info">我的信息</string>
+    <string name="own_personIdentify">实名认证</string>
+    <string name="own_isNotentify">未认证</string>
+    <string name="own_bankcard">绑定银行卡</string>
+    <string name="own_planner">我的理财师</string>
+    <string name="own_evalution">风险评测</string>
+    <string name="own_qualitied">合格投资者确认</string>
+
+
     <!-- 空态值 -->
     <string name="empty_product">暂无产品哦，等下再来看看吧</string>
     <string name="empty_invest">暂无投资记录</string>

@@ -2,7 +2,9 @@ package com.zqzr.licaitong.ui.home;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sys.blackcat.stickheaderlayout.IpmlScrollChangListener;
@@ -12,6 +14,7 @@ import com.zqzr.licaitong.adapter.FragmentAdapter;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.ui.find.fragment.DynamicFragment;
 import com.zqzr.licaitong.ui.find.fragment.NewsFragment;
+import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.Utils;
 
 import java.util.ArrayList;
@@ -27,13 +30,14 @@ import cn.carbs.android.indicatorview.library.IndicatorView;
  * Description:
  */
 
-public class TenderDetailAct extends BaseActivity {
+public class TenderDetailAct extends BaseActivity implements View.OnClickListener {
 
     private StickHeaderLayout mLayout;
     private FragmentAdapter mAdapter;
     private ViewPager mViewPager;
-    private TextView mAppbarTitle;
+    private TextView mTvTitle,mTvPredictIncome,mTvLimit,mTvStart,mTvsubscribe,mTvRepayment,mTvIncremental,mTvReduce,mTvAdd,mTvSum,mTvSubscribe;
     private IndicatorView mIndicatorViewEven;
+    private LinearLayout mLlBack;
 
     @Override
     protected void initView() {
@@ -42,7 +46,6 @@ public class TenderDetailAct extends BaseActivity {
         mLayout = (StickHeaderLayout) findViewById(R.id.stick_header_layout);
         mAdapter = new FragmentAdapter(getSupportFragmentManager(), getFragment());
         mViewPager = (ViewPager) findViewById(R.id.vp_view_pager);
-        mAppbarTitle = (TextView) findViewById(R.id.appbar_title);
         mIndicatorViewEven = (IndicatorView) this.findViewById(R.id.indicator_view);
         mLayout.setScroll(new IpmlScrollChangListener() {
             private int rColor = 0xff;
@@ -77,13 +80,31 @@ public class TenderDetailAct extends BaseActivity {
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(2);
         mIndicatorViewEven.setViewPager(mViewPager);
+
+        //上部控件
+        mLlBack = (LinearLayout) findViewById(R.id.ll_back);
+        mTvTitle = (TextView) findViewById(R.id.tv_detail_title);
+        mTvPredictIncome = (TextView) findViewById(R.id.tv_detial_predictIncome);
+        mTvLimit = (TextView) findViewById(R.id.tv_detail_limit);
+        mTvStart = (TextView) findViewById(R.id.tv_detail_start);
+        mTvsubscribe = (TextView) findViewById(R.id.tv_detail_subscribe);
+        mTvRepayment = (TextView) findViewById(R.id.tv_repayment);
+        mTvIncremental = (TextView) findViewById(R.id.tv_incremental);
+        //预约
+        mTvReduce = (TextView) findViewById(R.id.tv_reduce);
+        mTvAdd = (TextView) findViewById(R.id.tv_add);
+        mTvSum = (TextView) findViewById(R.id.tv_sum);
+        mTvSubscribe = (TextView) findViewById(R.id.tv_subscribe);
+
+        mLlBack.setOnClickListener(this);
+        mTvReduce.setOnClickListener(this);
+        mTvAdd.setOnClickListener(this);
+        mTvsubscribe.setOnClickListener(this);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        setTitle("发现");
-        setBackOption(false);
+    protected void initData() {
+
     }
 
     private List<Fragment> getFragment() {
@@ -91,5 +112,20 @@ public class TenderDetailAct extends BaseActivity {
         list.add(new NewsFragment());
         list.add(new DynamicFragment());
         return list;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_back:
+                ActivityUtils.pop();
+                break;
+            case R.id.tv_reduce:
+                break;
+            case R.id.tv_add:
+                break;
+            case R.id.tv_subscribe:
+                break;
+        }
     }
 }

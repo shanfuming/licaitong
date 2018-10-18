@@ -51,6 +51,7 @@
     <color name="enable_circle_color">#FF7F7F</color>
     <color name="disable_circle_color">#CCCCCC</color>
     <color name="app_color_select">#CCEA5415</color>
+    <color name="detail_subscibe_bg">#f9f9f9</color>
 
     <!--登录页面 - 渐变色-->
     <color name="start_blue">#0372D9</color>

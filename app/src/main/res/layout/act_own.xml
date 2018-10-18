@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:layout_marginRight="@dimen/x30"
+        android:layout_marginLeft="@dimen/x30"
+        >
+
+        <LinearLayout
+            android:layout_width="@dimen/x80"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/x56"
+                android:layout_height="@dimen/x56"
+                android:background="@mipmap/own_personinfo"
+                android:layout_gravity="center_vertical"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/x56"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/x56"
+                android:layout_height="@dimen/x56"
+                android:background="@mipmap/own_setting"
+                android:layout_gravity="center_vertical"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/y350"
+         android:orientation="vertical"
+         android:layout_marginTop="@dimen/x10"
+         android:background="@mipmap/own_bg"
+         >
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="0dp"
+             android:layout_weight="1"
+             android:orientation="vertical"
+             android:gravity="center"
+             >
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 >
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/white"
+                     android:textSize="@dimen/x60"
+                     android:text="@string/own_money_name"
+                     />
+                 
+                 <ImageView
+                     android:layout_width="@dimen/x32"
+                     android:layout_height="@dimen/x32"
+                     android:background="@mipmap/cansee"
+                     android:layout_gravity="center_vertical"
+                     />
+
+             </LinearLayout>
+
+             <TextView
+                 android:id="@+id/tv_own_money"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textColor="@color/white"
+                 android:textSize="@dimen/x60"
+                 android:text="10000.00"
+                 />
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="@dimen/y30"
+             android:layout_marginTop="@dimen/y30"
+             android:orientation="horizontal">
+
+             <LinearLayout
+                 android:id="@+id/ll_moneyRecord"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:orientation="vertical">
+
+                 <ImageView
+                     android:layout_width="@dimen/x48"
+                     android:layout_height="@dimen/x48"
+                     android:layout_gravity="center_horizontal"
+                     android:background="@drawable/own_tab1_selector" />
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_horizontal"
+                     android:layout_marginTop="@dimen/y10"
+                     android:text="@string/own_moneyRecord"
+                     android:textColor="@color/text_grey"
+                     android:textSize="@dimen/x24" />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:id="@+id/ll_order"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:orientation="vertical">
+
+                 <ImageView
+                     android:layout_width="@dimen/x48"
+                     android:layout_height="@dimen/x48"
+                     android:layout_gravity="center_horizontal"
+                     android:background="@drawable/own_tab2_selector" />
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_horizontal"
+                     android:layout_marginTop="@dimen/y10"
+                     android:text="@string/own_order"
+                     android:textColor="@color/text_grey"
+                     android:textSize="@dimen/x24" />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:id="@+id/ll_returnPlan"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:orientation="vertical">
+
+                 <ImageView
+                     android:id="@+id/imageView"
+                     android:layout_width="@dimen/x48"
+                     android:layout_height="@dimen/x48"
+                     android:layout_gravity="center_horizontal"
+                     android:background="@drawable/own_tab3_selector" />
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_horizontal"
+                     android:layout_marginTop="@dimen/y10"
+                     android:text="@string/own_returnPlan"
+                     android:textColor="@color/text_grey"
+                     android:textSize="@dimen/x24" />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:id="@+id/ll_info"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:orientation="vertical">
+
+                 <ImageView
+                     android:layout_width="@dimen/x48"
+                     android:layout_height="@dimen/x48"
+                     android:layout_gravity="center_horizontal"
+                     android:background="@drawable/own_tab4_selector" />
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_horizontal"
+                     android:layout_marginTop="@dimen/y10"
+                     android:text="@string/own_info"
+                     android:textColor="@color/text_grey"
+                     android:textSize="@dimen/x24" />
+             </LinearLayout>
+
+
+         </LinearLayout>
+
+     </LinearLayout>
+
+    <View style="@style/hLineheight30Style"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_own_identify"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+        
+        <ImageView
+            android:id="@+id/iv_ownIdentify"
+            android:layout_width="@dimen/x44"
+            android:layout_height="@dimen/x44"
+            android:background="@mipmap/person_identify"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/text_dark"
+            android:text="@string/own_personIdentify"
+            android:layout_toRightOf="@+id/iv_ownIdentify"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/tv_isIdentify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/text_grey"
+            android:text="@string/own_isNotentify"
+            android:layout_toLeftOf="@+id/iv_next"
+            android:layout_marginRight="@dimen/x20"
+            android:layout_centerVertical="true"
+            />
+        
+        <ImageView
+            android:id="@+id/iv_next"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y40"
+            android:background="@mipmap/drop_down_selected_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x30"
+            />
+    </RelativeLayout>
+
+    <View style="@style/hLineStyle"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rl_own_bankcard"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+
+        <ImageView
+            android:id="@+id/iv_bankcard"
+            android:layout_width="@dimen/x44"
+            android:layout_height="@dimen/x44"
+            android:background="@mipmap/bankcard"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/text_dark"
+            android:text="@string/own_bankcard"
+            android:layout_toRightOf="@+id/iv_bankcard"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y40"
+            android:background="@mipmap/drop_down_selected_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x30"
+            />
+    </RelativeLayout>
+
+    <View style="@style/hLineStyle"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rl_own_planner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+
+        <ImageView
+            android:id="@+id/iv_planner"
+            android:layout_width="@dimen/x44"
+            android:layout_height="@dimen/x44"
+            android:background="@mipmap/person_identify"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/text_dark"
+            android:text="@string/own_planner"
+            android:layout_toRightOf="@+id/iv_planner"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y40"
+            android:background="@mipmap/drop_down_selected_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x30"
+            />
+    </RelativeLayout>
+
+    <View style="@style/hLineStyle"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rl_own_evalution"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+
+        <ImageView
+            android:id="@+id/iv_evalution"
+            android:layout_width="@dimen/x44"
+            android:layout_height="@dimen/x44"
+            android:background="@mipmap/own_evalution"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/text_dark"
+            android:text="@string/own_personIdentify"
+            android:layout_toRightOf="@+id/iv_evalution"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y40"
+            android:background="@mipmap/drop_down_selected_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x30"
+            />
+    </RelativeLayout>
+
+    <View style="@style/hLineStyle"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rl_own_qualitied"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+
+        <ImageView
+            android:id="@+id/iv_qualitied"
+            android:layout_width="@dimen/x44"
+            android:layout_height="@dimen/x44"
+            android:background="@mipmap/own_qualitied"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/text_dark"
+            android:text="@string/own_qualitied"
+            android:layout_toRightOf="@+id/iv_qualitied"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y40"
+            android:background="@mipmap/drop_down_selected_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x30"
+            />
+    </RelativeLayout>
+
+    <View style="@style/hLineStyle"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        />
+
+</LinearLayout>

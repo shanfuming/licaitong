@@ -1,5 +1,6 @@
 package com.zqzr.licaitong.ui.own;
 
+import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
 
 /**
@@ -13,6 +14,8 @@ import com.zqzr.licaitong.base.BaseActivity;
 public class OwnActivity extends BaseActivity {
     @Override
     protected void initView() {
+        setContentView(R.layout.act_own);
+
 
     }
 }
