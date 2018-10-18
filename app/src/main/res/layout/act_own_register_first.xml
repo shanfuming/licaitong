@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y188"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/wave" />
+
+    <LinearLayout
+        android:id="@+id/register_first_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/titleBar"
+            layout="@layout/appbar_layout" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/y88"
+            android:layout_marginTop="@dimen/y88"
+            android:text="@string/register_first_tip"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x60" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/register_center"
+        android:layout_width="@dimen/x542"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_first_top"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y84"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/x32"
+                android:layout_height="@dimen/x32"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@mipmap/phone" />
+
+            <EditText
+                android:id="@+id/register_phone"
+                style="@style/LoginEditTextTheme"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x20"
+                android:hint="@string/register_phone_hint"
+                android:inputType="number"
+                android:maxLength="11"
+                android:textColor="@color/colorViewbg" />
+        </LinearLayout>
+
+        <View
+            style="@style/hLineStyle_login"
+            android:layout_gravity="center_horizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y84"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/x15"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/x32"
+                    android:layout_height="@dimen/x32"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/invite" />
+
+                <EditText
+                    android:id="@+id/register_inviter_code"
+                    style="@style/LoginEditTextTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_weight="1"
+                    android:hint="@string/register_planner_hint"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:paddingLeft="0dp"
+                    android:textColor="@color/colorViewbg" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/x1"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/x15"
+                android:layout_marginTop="@dimen/x15"
+                android:background="@color/hint_grey" />
+
+            <TextView
+                android:id="@+id/apply_planner"
+                android:layout_width="@dimen/x160"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_horizontal"
+                android:text="@string/register_apply_planner"
+                android:textColor="@color/app_color_principal"
+                android:textSize="@dimen/x24" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:background="@color/hint_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y84"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/x15"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y83"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/x32"
+                        android:layout_height="@dimen/x32"
+                        android:layout_gravity="center"
+                        android:background="@mipmap/code" />
+
+                    <EditText
+                        android:id="@+id/register_code"
+                        style="@style/LoginEditTextTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:hint="@string/register_code_hint"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:paddingLeft="0dp"
+                        android:textColor="@color/colorViewbg" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y1"
+                    android:background="@color/hint_grey" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/register_timebtn"
+                android:layout_width="@dimen/x160"
+                android:layout_height="@dimen/y58"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/x5"
+                android:background="@drawable/code_disable"
+                android:gravity="center"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x20"
+                android:text="@string/register_get_code"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x24" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y30"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="@dimen/x32"
+                android:layout_height="@dimen/x32"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y80"
+                android:layout_gravity="end"
+                android:gravity="center_vertical"
+                android:text="@string/register_agree_one"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x24" />
+
+            <TextView
+                android:id="@+id/turn_rule"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y80"
+                android:layout_gravity="end"
+                android:gravity="center_vertical"
+                android:text="@string/register_agree_two"
+                android:textColor="@color/rule_blue"
+                android:textSize="@dimen/x24" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/register_next"
+            style="@style/FilletLoginBtnStyle"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/x25"
+            android:layout_marginRight="@dimen/x25"
+            android:layout_marginTop="@dimen/x50"
+            android:background="@drawable/fillet_loginbtn_normal"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x32" />
+    </LinearLayout>
+</RelativeLayout>

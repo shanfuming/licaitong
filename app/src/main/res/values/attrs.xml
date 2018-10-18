@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 侧滑删除 - attr -->
+    <declare-styleable name="ZSwipeItem">
+        <attr name="drag_edge" format="enum">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+            <enum name="top" value="2" />
+            <enum name="bottom" value="3" />
+        </attr>
+        <attr name="horizontalSwipeOffset" format="dimension" />
+        <attr name="verticalSwipeOffset" format="dimension" />
+        <attr name="show_mode" format="enum">
+            <enum name="lay_down" value="0" />
+            <enum name="pull_out" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <!-- 邮戳 -->
+    <declare-styleable name="StampView">
+        <attr name="text" format="string" />
+        <attr name="textColor" format="color" />
+        <attr name="stampViewtextSize" format="dimension" />
+        <attr name="circleWidth" format="dimension" />
+        <attr name="dividerWidth" format="dimension" />
+        <attr name="circleColor" format="color" />
+        <attr name="degrees" format="float" />
+        <attr name="textSpace" format="dimension" />
+        <attr name="translate" format="dimension" />
+    </declare-styleable>
+
+    <!-- 资产饼状图 -->
+    <declare-styleable name="AssetsPie">
+        <attr name="assets" format="string" />
+        <attr name="assetsColor" format="color" />
+        <attr name="assetsTextSize" format="dimension" />
+        <attr name="tips" format="string" />
+        <attr name="tipsColor" format="color" />
+        <attr name="tipsTextSize" format="dimension" />
+        <attr name="roundWidth" format="dimension" />
+        <attr name="textMargin" format="dimension" />
+    </declare-styleable>
+
+    <!-- 下拉放大图片 -->
+    <declare-styleable name="PullToZoomView">
+        <attr name="headerView" format="reference" />
+        <attr name="contentView" format="reference" />
+        <attr name="zoomView" format="reference" />
+        <attr name="isHeaderParallax" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="LockPatternView">
+        <!-- Aspect to use when drawing LockPatternView. Choices are "square"(default), "lock_width"
+             or "lock_height" -->
+        <attr name="aspect" format="string" />
+    </declare-styleable>
+
+    <!-- 圆形进度 -->
+    <declare-styleable name="RoundProgressBar">
+        <attr name="roundColor" format="color" />
+        <attr name="roundProgressColor" format="color" />
+        <attr name="roundTextSize" format="dimension" />
+        <attr name="max" format="integer" />
+        <attr name="textIsDisplayable" format="boolean" />
+        <attr name="style">
+            <enum name="STROKE" value="0" />
+            <enum name="FILL" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <!-- 矩形进度条 -->
+    <declare-styleable name="CountProgress">
+        <attr name="proHeight" format="dimension"/>
+        <attr name="proColorBottom" format="color"/>
+        <attr name="proColorTop" format="color"/>
+        <attr name="textColors" format="color"/>
+        <attr name="textSizes" format="dimension"/>
+        <attr name="Padding" format="dimension"/>
+        <attr name="orientation">
+            <enum name="Vertical" value="0" />
+            <enum name="Horizontal" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

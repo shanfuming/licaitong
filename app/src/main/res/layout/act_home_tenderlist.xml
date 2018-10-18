@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/titleBar"
+        layout="@layout/appbar_layout" />
+
+    <LinearLayout
+        android:id="@+id/ll_condition"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:layout_below="@+id/titleBar"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_condition_limit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_condition_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/list_selectCondition1"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x32" />
+
+            <ImageView
+                android:id="@+id/iv_limitImg"
+                android:layout_width="@dimen/x32"
+                android:layout_height="@dimen/x32"
+                android:layout_marginLeft="@dimen/x20"
+                android:src="@mipmap/drop_down_unselected_icon" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/vLineStyle"
+            android:layout_marginBottom="@dimen/y32"
+            android:layout_marginTop="@dimen/y32" />
+
+        <LinearLayout
+            android:id="@+id/ll_condition_start"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_condition_startMark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/list_selectCondition2"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x32" />
+
+            <ImageView
+                android:id="@+id/iv_startImg"
+                android:layout_width="@dimen/x32"
+                android:layout_height="@dimen/x32"
+                android:layout_marginLeft="@dimen/x20"
+                android:src="@mipmap/drop_down_unselected_icon" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        style="@style/hLineheight20Style"
+        android:layout_below="@+id/ll_condition" />
+
+    <com.cjj.MaterialRefreshLayout
+        android:id="@+id/mrl_refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/view"
+        >
+
+        <ListView
+            android:id="@+id/tenderList_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@drawable/bg_dotted_line" />
+
+    </com.cjj.MaterialRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_menuList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_condition"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <ListView
+            android:id="@+id/condition_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/hint_grey"
+            android:dividerHeight="@dimen/y1"
+            android:background="@color/white"
+            />
+
+        <View
+            android:id="@+id/mask"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/round_out_paint"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

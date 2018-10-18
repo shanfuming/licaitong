@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="lock_pattern_recording_incorrect_too_short">请至少设置4个点</string>
+    <string name="lock_pattern_recording_incorrect_start">请滑动设置密码</string>
+    <string name="lock_pattern_recording_incorrect_again">请再次滑动确认密码</string>
+    <string name="lock_pattern_recording_incorrect_again_wrong">与上次绘制不一致，请重新绘制</string>
+    <string name="lock_pattern_recording_incorrect_finish">完成设置</string>
+    <string name="lock_pattern_error1">"手势密码不正确"</string>
+    <string name="lock_pattern_error2">"密码输入错误你还有 %1$d 次机会"</string>
+    <string name="lock_pattern_error3">"密码验证失败请重新登录"</string>
+    <string name="lock_setup">设置手势密码</string>
+    <string name="lock_setup_start">验证密码</string>
+    <string name="lock_setup_again">重新设置手势密码</string>
+    <string name="lock_prompt"> %1$s ,您好！</string>
+    <string name="lock_change">修改手势密码</string>
+    <string name="lock_forgot">忘记手势密码</string>
+    <string name="lock_forgot_prompt">忘记密码，您需要重新登录</string>
+    <string name="lock_visitor">切换用户</string>
+    <string name="lock_visitor_prompt">更换账号，您需要重新登录</string>
+    <string name="lock_input_original">请输入原手势密码</string>
+    <string name="lock_input_original_title">原手势密码</string>
+    <string name="lock_dialog_ensure">重新登录</string>
+
+</resources>

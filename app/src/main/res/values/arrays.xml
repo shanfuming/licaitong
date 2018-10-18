@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="glide_tag" type="id" />
+
+    <!-- 投资记录 - titles -->
+    <array name="find">
+        <item>行业新闻</item>
+        <item>公司动态</item>
+    </array>
+
+    <!-- 投资记录 - titles -->
+    <array name="investmentRecordNoFlowTitles">
+        <item>定期理财</item>
+        <item>债权转让</item>
+    </array>
+
+    <!-- 投资记录 - titles -->
+    <array name="investmentRecordNoOtherTitles">
+        <item>定期理财</item>
+    </array>
+
+    <!-- 自动投标 - titles -->
+    <array name="autoInvestRecordTitles">
+        <item>投标成功</item>
+        <item>投标失败</item>
+    </array>
+
+    <!-- 投资记录 - tips -->
+    <array name="investmentRecordTips">
+        <item>投资人/投资时间</item>
+        <item>投资金额(元)</item>
+    </array>
+
+    <!-- 投资记录 - tips -->
+    <array name="investmentRecordTips_without_time">
+        <item>投资人</item>
+        <item>投资金额(元)</item>
+    </array>
+
+    <array name="flowInvestmentRecordTips">
+        <item>投资人/投资时间</item>
+        <item>投资份数(份)</item>
+    </array>
+
+    <!-- 投资记录 - tips -->
+    <array name="accountInvestmentRecordTips">
+        <item>投资产品/投资金额(元)</item>
+        <item>状态/投资时间</item>
+    </array>
+
+    <array name="flowAccountInvestmentRecordTips">
+        <item>投资产品/投资份数(份)</item>
+        <item>状态/投资时间</item>
+    </array>
+
+    <!-- 投资详情 - titles -->
+    <array name="investmentDetailTitles">
+        <item>投资信息</item>
+        <item>回款信息</item>
+    </array>
+
+    <!-- 投资管理 - 投资信息 - 列描述 -->
+    <array name="investmentDetailSuccessItemDesc">
+        <item>状态</item>
+        <item>金额</item>
+        <item>优惠</item>
+        <item>年化利率</item>
+        <item>已收收益</item>
+        <item>待收收益</item>
+        <item>还款方式</item>
+        <item>投资时间</item>
+        <item>计息起始日</item>
+        <item>到期日</item>
+    </array>
+
+    <!-- 投资管理详情-回款中 -->
+    <array name="investRecordDetail1">
+        <item>状态</item>
+        <item>年化利率</item>
+        <item>投资金额</item>
+        <item>计息起始日</item>
+        <item>到期日</item>
+        <item>已收本金</item>
+        <item>已收收益</item>
+        <item>预计待收收益</item>
+    </array>
+
+    <!-- 投资管理详情-已结算 -->
+    <array name="investRecordDetail2">
+        <item>状态</item>
+        <item>年化利率</item>
+        <item>投资金额</item>
+        <item>计息起始日</item>
+        <item>到期日</item>
+        <item>已收收益</item>
+    </array>
+
+    <!-- 投资管理详情-投资中 -->
+    <array name="investRecordDetail0">
+        <item>状态</item>
+        <item>年化利率</item>
+        <item>项目期限</item>
+        <item>投资金额</item>
+        <item>项目进度</item>
+        <item>预计待收收益</item>
+    </array>
+
+    <!-- 投资记录详情-失败 -->
+    <array name="investRecordDetail3">
+        <item>状态</item>
+        <item>年化利率</item>
+        <item>项目期限</item>
+        <item>投资金额</item>
+        <item>失败备注</item>
+    </array>
+
+    <!-- 安全保障 -->
+    <array name="securityTips">
+        <item>安全保障</item>
+        <item>风险控制</item>
+    </array>
+
+    <!-- 投资记录 - 投资信息 - 债转列描述 -->
+    <array name="investmentBondDetailSuccessItemDesc">
+        <item>状态</item>
+        <item>债权价值</item>
+        <item>转让折扣率</item>
+        <item>转入价格</item>
+        <item>年化利率</item>
+        <item>已收收益</item>
+        <item>待收收益</item>
+        <item>还款方式</item>
+        <item>转入时间</item>
+    </array>
+    <!-- 投资记录 - 投资信息 - 债转列描述 -->
+    <array name="investmentBondDetailItemDesc">
+        <item>状态</item>
+        <item>债权价值</item>
+        <item>优惠</item>
+        <item>年化利率</item>
+        <item>还款方式</item>
+        <item>转入时间</item>
+    </array>
+
+    <array name="investmentDetailItemDesc">
+        <item>状态</item>
+        <item>金额</item>
+        <item>优惠</item>
+        <item>年化利率</item>
+        <item>预期收益</item>
+        <item>还款方式</item>
+        <item>投资时间</item>
+    </array>
+
+    <!-- 可转让债权详情 -->
+    <array name="cantransferBond">
+        <item>债权名称</item>
+        <item>转让状态</item>
+        <item>债权价值</item>
+        <item>转让价格</item>
+        <item>折让率</item>
+        <item>发起时间</item>
+        <item>投资截止日</item>
+        <item>本期回款日</item>
+        <item>转让的投资</item>
+    </array>
+
+    <!-- 撤回债权详情 -->
+    <array name="recallBond">
+        <item>债权名称</item>
+        <item>转让状态</item>
+        <item>撤回时间</item>
+        <item>债权价值</item>
+        <item>转让价格</item>
+        <item>折让率</item>
+        <item>发起时间</item>
+        <item>投资截止日</item>
+        <item>本期回款日</item>
+        <item>转让的投资</item>
+    </array>
+
+    <!-- 已完成债权详情 -->
+    <array name="transferedBond">
+        <item>债权名称</item>
+        <item>转让状态</item>
+        <item>转让时间</item>
+        <item>手续费</item>
+        <item>债权价值</item>
+        <item>转让价格</item>
+        <item>折让率</item>
+        <item>发起时间</item>
+        <item>投资截止日</item>
+        <item>本期回款日</item>
+        <item>转让的投资</item>
+        <item>协议</item>
+        <item>投资记录</item>
+    </array>
+
+    <!-- 产品列表 - titles -->
+    <array name="productListTitles">
+        <item>优选计划</item>
+        <item>即息理财</item>
+        <item>债权专区</item>
+    </array>
+    <!-- 产品列表 - titles -->
+    <array name="productListNoBondTitles">
+        <item>优选计划</item>
+        <item>即息理财</item>
+    </array>
+    <!-- 产品列表 - titles -->
+    <array name="productListNoFlowTitles">
+        <item>优选计划</item>
+        <item>债权专区</item>
+    </array>
+    <!-- 产品列表 - titles -->
+    <array name="productListNoOtherTitles">
+        <item>优选计划</item>
+    </array>
+
+    <!-- 了解项目 - titles -->
+    <array name="productMoreInfoTitles">
+        <item>产品描述</item>
+        <item>产品说明</item>
+    </array>
+
+    <!-- 了解项目 - titles -->
+    <array name="productMoreInfoTitlesNoData">
+        <item>产品描述</item>
+    </array>
+
+    <!-- 投资记录 - 回款信息 - 列描述 -->
+    <array name="investmentReceivedItemDesc">
+        <item>回款总额</item>
+        <item>下期回款时间</item>
+        <item>总期数</item>
+        <item>已回款</item>
+    </array>
+
+    <!-- 回款记录 - titles -->
+    <array name="paymentRecordActTitles">
+        <item>待回款</item>
+        <item>已回款</item>
+    </array>
+
+    <!-- 回款记录 - tips -->
+    <array name="paymentRecordActTips">
+        <item>投资产品/回款期数</item>
+        <item>本息金额(元)/回款日期</item>
+    </array>
+
+    <!-- 资金记录 - titles -->
+    <array name="financialRecordsActTitles">
+        <item>资金记录</item>
+        <item>充值</item>
+        <item>提现</item>
+    </array>
+
+    <!-- 资金记录 - 充值 - tips -->
+    <array name="financialRecordsActTips1">
+        <item>充值状态</item>
+        <item>交易金额/时间</item>
+    </array>
+
+    <!-- 资金记录 - 提现 - tips -->
+    <array name="financialRecordsActTips2">
+        <item>提现状态</item>
+        <item>交易金额/时间</item>
+    </array>
+
+    <!-- 转让列表 - titles -->
+    <array name="creditorListTitles">
+        <item>可转让</item>
+        <item>转让中</item>
+        <item>已转让</item>
+    </array>
+
+    <!-- 投资记录 - tips -->
+    <array name="investRecordTips">
+        <item>投资人/投资时间</item>
+        <item>投资金额(元)</item>
+    </array>
+
+    <!-- 还款记录 - tips -->
+    <array name="productReturnTips">
+        <item>还款期数</item>
+        <item>还款状态</item>
+    </array>
+
+    <string name="month0">0个月</string>
+    <array name="monthTips">
+        <item>1个月</item>
+        <item>2个月</item>
+        <item>3个月</item>
+        <item>4个月</item>
+        <item>5个月</item>
+        <item>6个月</item>
+        <item>7个月</item>
+        <item>8个月</item>
+        <item>9个月</item>
+        <item>10个月</item>
+        <item>11个月</item>
+        <item>12个月</item>
+    </array>
+    <!-- 好友记录 -->
+    <array name="userInviteTips">
+        <item>邀请人</item>
+        <item>被邀请人</item>
+        <item>邀请日期</item>
+    </array>
+
+</resources>

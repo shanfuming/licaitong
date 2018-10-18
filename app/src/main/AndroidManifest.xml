@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zqzr.licaitong">
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.zqzr.licaitong.ui.home.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.home.TenderDetailAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.home.TenderListAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.select_shengshiqu.ShengShiQuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.find.FindActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.activity.AActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.OwnActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.FindPwdFirstAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.FindPwdSecondAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.RegistFirstAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.RegistSecondAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.LoginAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.ApplyPlannerAct"
+            android:screenOrientation="portrait" />
+
+        <!-- 适配全面屏 -->
+        <meta-data android:name="android.max_aspect" android:value="2.3" />
+
+    </application>
+
+</manifest>

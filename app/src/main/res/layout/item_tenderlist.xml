@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/x30"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/tv_tender_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/text_dark"
+            />
+        
+        <ImageView
+            android:id="@+id/iv_tender_state"
+            android:layout_width="@dimen/x70"
+            android:layout_height="@dimen/y28"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x20"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x44"
+            android:layout_marginTop="@dimen/x44"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_predictIncome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10.88%"
+                android:textColor="@color/app_color_principal"
+                android:textSize="@dimen/x48" />
+
+            <TextView
+                android:id="@+id/tv_predictIncome_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:text="预期年化收益"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x20" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x44"
+            android:layout_marginTop="@dimen/x44"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_timeLimit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="112天"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x48" />
+
+            <TextView
+                android:id="@+id/tv_timeLimit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:text="期限"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x20" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x44"
+            android:layout_marginTop="@dimen/x44"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_tenderStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5万起投"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x48" />
+
+            <TextView
+                android:id="@+id/tv_tenderStart_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:text="起投金额"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x20" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
