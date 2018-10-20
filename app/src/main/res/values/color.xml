@@ -70,6 +70,9 @@
     <!-- 底部菜单切换文字颜色 -->
     <color name="tab_normal">#969696</color>
 
+    <!-- 银行卡页面色值 -->
+    <color name="bank_text">#ffdddc</color>
+
     <!-- 原型头像外圈颜色 -->
     <color name="round_out_paint">#66000000</color>
 

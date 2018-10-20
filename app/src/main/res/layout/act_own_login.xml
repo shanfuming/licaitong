@@ -164,7 +164,7 @@
             android:layout_height="@dimen/y88"
             android:textColor="@color/white"
             android:textSize="@dimen/x32"
-            android:text="@string/login_btn_login"
+            android:text="@string/login_title"
             android:gravity="center"
             android:background="@drawable/fillet_loginbtn_normal"
             />

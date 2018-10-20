@@ -35,9 +35,9 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
     private StickHeaderLayout mLayout;
     private FragmentAdapter mAdapter;
     private ViewPager mViewPager;
-    private TextView mTvTitle,mTvPredictIncome,mTvLimit,mTvStart,mTvsubscribe,mTvRepayment,mTvIncremental,mTvReduce,mTvAdd,mTvSum,mTvSubscribe;
+    private TextView mTvTitle,mTvPredictIncome,mTvLimit,mTvStart,mTvsubscribe,mTvRepayment,mTvIncremental,mTvReduce,mTvAdd,mTvSum,mTvSubscribe,mTvRest;
     private IndicatorView mIndicatorViewEven;
-    private LinearLayout mLlBack;
+    private LinearLayout mLlBack,mLlLimit,mLlStart,mLlAll,mLlRest;
 
     @Override
     protected void initView() {
@@ -90,6 +90,11 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
         mTvsubscribe = (TextView) findViewById(R.id.tv_detail_subscribe);
         mTvRepayment = (TextView) findViewById(R.id.tv_repayment);
         mTvIncremental = (TextView) findViewById(R.id.tv_incremental);
+        mTvRest = (TextView) findViewById(R.id.tv_detail_rest);
+        mLlLimit = (LinearLayout) findViewById(R.id.ll_limit);
+        mLlStart = (LinearLayout) findViewById(R.id.ll_start);
+        mLlAll = (LinearLayout) findViewById(R.id.ll_all);
+        mLlRest = (LinearLayout) findViewById(R.id.ll_rest);
         //预约
         mTvReduce = (TextView) findViewById(R.id.tv_reduce);
         mTvAdd = (TextView) findViewById(R.id.tv_add);

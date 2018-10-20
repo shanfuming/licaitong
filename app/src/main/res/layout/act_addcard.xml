@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/appbar_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/y100"
+        >
+
+        <TextView
+            android:layout_width="@dimen/x542"
+            android:layout_height="wrap_content"
+            android:text="@string/own_card_username"
+            android:textSize="@dimen/x28"
+            android:textColor="@color/text_dark"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <TextView
+            android:id="@+id/tv_card_username"
+            android:layout_width="@dimen/x542"
+            android:layout_height="@dimen/y80"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/x26"
+            android:gravity="center_vertical"
+            android:textColor="@color/dayAndMark" />
+
+        <TextView
+            android:layout_width="@dimen/x542"
+            android:layout_height="wrap_content"
+            android:text="@string/own_card_addTip"
+            android:textSize="@dimen/x28"
+            android:textColor="@color/text_dark"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y30"
+            />
+
+        <LinearLayout
+            android:layout_width="@dimen/x542"
+            android:layout_height="@dimen/y84"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y20"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_addCardNum"
+                style="@style/LoginEditTextTheme"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:hint="@string/own_card_addHint"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingLeft="0dp"
+                android:textColor="@color/colorViewbg"
+                android:textSize="@dimen/x25" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/hLineStyle_login"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <TextView
+            android:id="@+id/code_tip"
+            android:layout_width="@dimen/x542"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x24"
+            android:textColor="@color/text_dark"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y10"
+            />
+
+        <TextView
+            android:id="@+id/tv_add_bind"
+            style="@style/FilletLoginBtnStyle"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/x50"
+            android:background="@drawable/fillet_loginbtn_normal"
+            android:text="@string/own_card_bind"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -133,7 +133,7 @@ public class MyApplication extends Application {
 //            }
 //        });
 //        watcher.startWatch();
-//        initLocalData();
+        initLocalData();
 //        initUmengShare();
 //        addPromotion();
 //        MobclickAgent.setScenarioType(getInstance(), MobclickAgent.EScenarioType.E_UM_NORMAL);
@@ -147,7 +147,7 @@ public class MyApplication extends Application {
      */
     private void initLocalData() {
 //        if (SharedInfo.getInstance().getValue(OauthTokenMo.class) != null) {
-//            MyApplication.getInstance().isLand = true;
+            MyApplication.getInstance().isLand = true;
 //        }
     }
 

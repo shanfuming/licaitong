@@ -68,6 +68,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/ll_limit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -98,6 +99,7 @@
             android:layout_marginTop="@dimen/y10" />
 
         <LinearLayout
+            android:id="@+id/ll_start"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -128,6 +130,7 @@
             android:layout_marginTop="@dimen/x10" />
 
         <LinearLayout
+            android:id="@+id/ll_all"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -138,7 +141,7 @@
                 android:id="@+id/tv_detail_subscribe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100人"
+                android:text="100万"
                 android:textColor="@color/text_dark"
                 android:textSize="@dimen/x32" />
 
@@ -147,7 +150,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y20"
-                android:text="@string/detail_subscribeNum"
+                android:text="@string/detail_subscribeAll"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x20" />
+        </LinearLayout>
+
+        <View
+            style="@style/vLineStyle"
+            android:layout_marginBottom="@dimen/x10"
+            android:layout_marginTop="@dimen/x10" />
+
+        <LinearLayout
+            android:id="@+id/ll_rest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_detail_rest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50万"
+                android:textColor="@color/text_dark"
+                android:textSize="@dimen/x32" />
+
+            <TextView
+                android:id="@+id/tv_detail_rest_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:text="@string/detail_subscribeRest"
                 android:textColor="@color/text_grey"
                 android:textSize="@dimen/x20" />
         </LinearLayout>

@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         app:retentionHeight="@dimen/y100">
 
-        <include layout="@layout/act_detail_top"/>
+        <include layout="@layout/act_tender_detail_top"/>
 
         <LinearLayout
             android:layout_width="match_parent"

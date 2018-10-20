@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y85"
+            android:layout_marginLeft="@dimen/x30"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/own_order_id"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x24" />
+
+            <TextView
+                android:id="@+id/tv_orderId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x20"
+                android:text="@string/own_order_id"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x24" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_orderTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/x30"
+            android:text="@string/own_order_id"
+            android:textColor="@color/dayAndMark"
+            android:textSize="@dimen/x24" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/hLineStyle"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/y44"
+        android:layout_marginTop="@dimen/y30">
+
+        <TextView
+            android:id="@+id/tv_orderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:text="@string/own_personIdentify"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x30" />
+
+        <ImageView
+            android:id="@+id/iv_orderState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x20"
+            android:layout_toLeftOf="@+id/iv_next"
+            android:text="@string/own_isNotentify"
+            android:textColor="@color/text_grey"
+            android:textSize="@dimen/x30" />
+
+        <ImageView
+            android:id="@+id/iv_next"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y40"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x30"
+            android:background="@mipmap/drop_down_selected_icon" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/x30"
+        android:layout_marginBottom="@dimen/y40"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/own_order_planMoney"
+                    android:textColor="@color/dayAndMark"
+                    android:textSize="@dimen/x20" />
+
+                <TextView
+                    android:id="@+id/tv_planMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y20"
+                    android:text="1000.00"
+                    android:textColor="@color/dayAndMark"
+                    android:textSize="@dimen/x30" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View style="@style/vLineStyle"
+            android:layout_marginTop="@dimen/y5"
+            android:layout_marginBottom="@dimen/y5"/>
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/own_order_predictIncome"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x20" />
+
+            <TextView
+                android:id="@+id/tv_predictIncome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:text="1000.00"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x30" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -56,4 +56,5 @@ dependencies {
     //粘性scrollview
     compile project(':library')
     compile 'cn.carbs.android:IndicatorView:1.0.1'
+    compile project(':countdown')
 }

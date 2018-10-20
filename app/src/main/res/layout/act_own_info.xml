@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/appbar_layout" />
+
+    <View style="@style/hLineheight30Style" />
+
+    <RelativeLayout
+        android:id="@+id/rl_info_head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y140">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:text="@string/own_info_headImg"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x30" />
+
+        <com.zqzr.licaitong.view.CircleImageView
+            android:id="@+id/iv_info_icon"
+            android:layout_width="@dimen/x88"
+            android:layout_height="@dimen/y88"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x30"
+            android:background="@mipmap/moren_person" />
+    </RelativeLayout>
+
+    <View style="@style/hLineheight20Style" />
+
+    <RelativeLayout
+        android:id="@+id/rl_info_phone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:text="@string/own_info_phone"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:id="@+id/tv_info_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/own_info_phone"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x30"
+            android:textColor="@color/dayAndMark"
+            android:textSize="@dimen/x30" />
+    </RelativeLayout>
+
+    <View
+        style="@style/hLineStyle" />
+
+    <RelativeLayout
+        android:id="@+id/rl_info_trueName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:text="@string/own_info_trueName"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:id="@+id/tv_info_trueName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/own_info_phone"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x30"
+            android:textColor="@color/dayAndMark"
+            android:textSize="@dimen/x30" />
+    </RelativeLayout>
+
+    <View
+        style="@style/hLineStyle"
+         />
+
+    <RelativeLayout
+        android:id="@+id/rl_info_IDcardNum"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:text="@string/own_info_IDcardNum"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:id="@+id/tv_info_IDcardNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/own_info_phone"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x30"
+            android:textColor="@color/dayAndMark"
+            android:textSize="@dimen/x30" />
+    </RelativeLayout>
+
+    <View
+        style="@style/hLineheight20Style"
+         />
+
+    <RelativeLayout
+        android:id="@+id/rl_info_plannerInviteCode"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:text="@string/own_info_plannerInviteCode"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:id="@+id/tv_info_plannerInviteCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/own_info_phone"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x30"
+            android:textColor="@color/dayAndMark"
+            android:textSize="@dimen/x30" />
+    </RelativeLayout>
+
+    <View
+        style="@style/hLineStyle"
+         />
+
+</LinearLayout>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <include layout="@layout/appbar_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/y100"
+        >
+
+        <TextView
+            android:layout_width="@dimen/x542"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/own_identify_name"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x28" />
+
+        <EditText
+            android:id="@+id/et_identify_name"
+            style="@style/LoginEditTextTheme"
+            android:layout_width="@dimen/x542"
+            android:layout_height="@dimen/y84"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
+            android:inputType="textPersonName"
+            android:hint="@string/own_identify_name_hint"
+            android:textColor="@color/colorViewbg"
+            android:textSize="@dimen/x25" />
+
+        <View
+            style="@style/hLineStyle_login"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="@dimen/x542"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y40"
+            android:text="@string/own_identify_idcard"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x28" />
+
+        <LinearLayout
+            android:layout_width="@dimen/x542"
+            android:layout_height="@dimen/y84"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y20"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_identify_idcard"
+                style="@style/LoginEditTextTheme"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:inputType="number"
+                android:hint="@string/own_identify_idcard_hint"
+                android:paddingLeft="0dp"
+                android:textColor="@color/colorViewbg"
+                android:textSize="@dimen/x25" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/hLineStyle_login"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="@dimen/x542"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y40"
+            android:text="@string/own_identify_address"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x28" />
+
+        <LinearLayout
+            android:layout_width="@dimen/x542"
+            android:layout_height="@dimen/y84"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y20"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_identify_address"
+                style="@style/LoginEditTextTheme"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:inputType="number"
+                android:hint="@string/own_identify_address_hint"
+                android:paddingLeft="0dp"
+                android:textColor="@color/colorViewbg"
+                android:textSize="@dimen/x25" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/hLineStyle_login"
+            android:layout_gravity="center_horizontal" />
+
+
+        <TextView
+            android:id="@+id/tv_identify_commit"
+            style="@style/FilletLoginBtnStyle"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/x80"
+            android:background="@drawable/fillet_loginbtn_normal"
+            android:text="@string/commit"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

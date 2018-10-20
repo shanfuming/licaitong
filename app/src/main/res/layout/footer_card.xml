@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_addCard"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y90"
+        android:orientation="horizontal"
+        android:background="@drawable/fillet_btn_normal"
+        android:gravity="center"
+        android:layout_margin="@dimen/x30"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/x52"
+            android:layout_height="@dimen/x52"
+            android:background="@mipmap/own_addcard"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x36"
+            android:textColor="@color/dayAndMark"
+            android:text="@string/own_card_addcard"
+            android:layout_marginLeft="@dimen/x30"
+            />
+    </LinearLayout>
+
+</LinearLayout>

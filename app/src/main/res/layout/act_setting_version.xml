@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/view_grey"
+    >
+
+    <include layout="@layout/appbar_layout"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y165"
+        android:padding="@dimen/x20"
+        android:background="@color/white"
+        >
+
+        <ImageView
+            android:id="@+id/iv_version_logo"
+            android:layout_width="@dimen/x124"
+            android:layout_height="@dimen/x124"
+            android:background="@mipmap/logo"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_version_logo"
+            android:layout_marginLeft="@dimen/x30"
+            >
+            <TextView
+                android:id="@+id/tv_version_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/x30"
+                android:textColor="@color/text_dark"
+                />
+
+            <TextView
+                android:id="@+id/tv_version_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/x24"
+                android:textColor="@color/dayAndMark"
+                android:layout_marginTop="@dimen/y20"
+                />
+            
+        </LinearLayout>
+
+        
+        <ImageView
+            android:id="@+id/iv_version_update"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/y58"
+            android:background="@mipmap/update"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

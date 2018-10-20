@@ -6,39 +6,58 @@
 
     <LinearLayout
         android:layout_width="@dimen/x500"
-        android:layout_height="@dimen/y350"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:paddingTop="@dimen/y45"
         android:background="@drawable/fillet_btn_normal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="@dimen/y45">
 
         <ImageView
             android:id="@+id/dialog_success_img"
             android:layout_width="@dimen/x142"
             android:layout_height="@dimen/x142"
-            android:src="@mipmap/success"
             android:layout_gravity="center_horizontal"
+            android:src="@mipmap/success"
+            android:visibility="gone"
             />
 
         <TextView
             android:id="@+id/dialog_success_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/text_dark"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/y30"
+            android:background="@color/text_dark"
             android:textColor="@color/text_dark"
             android:textSize="@dimen/x36"
+            android:visibility="gone"
             />
-
+        <!--android:visibility="gone"-->
         <TextView
             android:id="@+id/dialog_success_des"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/y20"
             android:gravity="center"
-            android:layout_gravity="center_horizontal"
             android:textColor="@color/text_grey"
-            android:textSize="@dimen/x24" />
+            android:textSize="@dimen/x24"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/dialog_success_next"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/y60"
+            android:layout_marginTop="@dimen/y40"
+            android:layout_marginBottom="@dimen/y40"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x26"
+            android:gravity="center"
+            android:background="@drawable/fillet_loginbtn_normal"
+            android:visibility="gone"
+            />
     </LinearLayout>
 </RelativeLayout>

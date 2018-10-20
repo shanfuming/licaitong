@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+
+    <include layout="@layout/appbar_layout"/>
+
+    <TextView
+        android:layout_width="@dimen/x542"
+        android:layout_height="wrap_content"
+        android:text="@string/findpwd_tip2"
+        android:textSize="@dimen/x26"
+        android:textColor="@color/text_dark"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y100"
+        />
+
+    <LinearLayout
+        android:layout_width="@dimen/x542"
+        android:layout_height="@dimen/y84"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y20"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <EditText
+                android:id="@+id/et_change_code"
+                style="@style/LoginEditTextTheme"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y83"
+                android:hint="@string/own_change_hint1"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingLeft="0dp"
+                android:textSize="@dimen/x25"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorViewbg" />
+
+            <View style="@style/hLineStyle"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_change_code"
+            android:layout_width="@dimen/x170"
+            android:layout_height="@dimen/y58"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/code_disable"
+            android:gravity="center"
+            android:textSize="@dimen/x25"
+            android:text="@string/register_get_code"
+            android:textColor="@color/text_grey" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_change_next"
+        style="@style/FilletLoginBtnStyle"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/x50"
+        android:background="@drawable/fillet_loginbtn_normal"
+        android:text="@string/next"
+        android:textColor="@color/white" />
+
+</LinearLayout>

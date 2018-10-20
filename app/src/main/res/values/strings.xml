@@ -32,7 +32,7 @@
     <string name="login_title">登录</string>
     <string name="login_et_username">请输入手机号码</string>
     <string name="login_et_password">请输入登录密码</string>
-    <string name="login_btn_login">登录</string>
+    <string name="login_btn_loginout">退出登录</string>
     <string name="login_tv_forget">忘记密码?</string>
     <string name="login_tv_register">注册新用户</string>
     <string name="login_tv_error_time">密码错误，您还有 %1$s 次输入机会</string>
@@ -42,7 +42,6 @@
     <string name="login_tv_call_service">拨打客服</string>
     <string name="login_tv_register_tip">还没有注册会员?</string>
     <!--登录页面-->
-
 
     <!-- 登录注册 -->
     <string name="register_phone_err">手机号格式错误</string>
@@ -129,7 +128,8 @@
     <string name="detail_subscribe">立即预约</string>
     <string name="detail_limit">项目期限</string>
     <string name="detail_start">起投金额</string>
-    <string name="detail_subscribeNum">预约人数</string>
+    <string name="detail_subscribeAll">项目总额</string>
+    <string name="detail_subscribeRest">可预约金额</string>
 
     <!--我的页面-->
     <string name="own_money_name">总投资金额（元）</string>
@@ -145,6 +145,101 @@
     <string name="own_planner">我的理财师</string>
     <string name="own_evalution">风险评测</string>
     <string name="own_qualitied">合格投资者确认</string>
+
+    <!--我的信息-->
+    <string name="own_info_headImg">头像</string>
+    <string name="own_info_phone">绑定手机</string>
+    <string name="own_info_trueName">真实姓名</string>
+    <string name="own_info_IDcardNum">身份证号</string>
+    <string name="own_info_plannerInviteCode">理财师推荐码</string>
+
+    <!--我的订单-->
+    <string name="own_order_condition1">按时间</string>
+    <string name="own_order_condition2">按状态</string>
+    <string name="own_order_condition3">按产品</string>
+    <string name="own_order_id">订单编号</string>
+    <string name="own_order_planMoney">预约金额</string>
+    <string name="own_order_predictIncome">预期年化收益</string>
+
+    <!--订单详情-->
+    <string name="order_detail_time">订单时间</string>
+    <string name="order_detail_state">订单状态</string>
+    <string name="order_detail_username">用户姓名</string>
+    <string name="order_detail_phone">手机号码</string>
+    <string name="order_detail_paybankcard">打款银行卡</string>
+    <string name="order_detail_returnbankcard">回款银行卡</string>
+    <string name="order_detail_paynum">用户打款金额</string>
+    <string name="order_detail_paydate">用户打款日期</string>
+    <string name="order_detail_voucher">用户打款凭证</string>
+    <string name="order_detail_voucher_on">点击打开</string>
+    <string name="order_detail_voucher_off">收起</string>
+    <string name="order_detail_cancel">取消订单</string>
+
+    <!--回款计划-->
+    <string name="own_return_not">待回款</string>
+    <string name="own_return_ed">已回款</string>
+    <string name="own_return_type">产品类型</string>
+    <string name="own_return_All">本息金额</string>
+    <string name="own_return_date">汇款日期</string>
+
+    <!--取消订单-->
+    <string name="own_order_cancelTip1">您确定要取消订单吗？</string>
+    <string name="own_order_cancelTip2">请填写取消订单的原因：</string>
+
+    <!--设置-->
+    <string name="own_setting_title">设置</string>
+    <string name="own_setting_security">安全设置</string>
+    <string name="own_setting_help">帮助中心</string>
+    <string name="own_setting_opinion">意见反馈</string>
+    <string name="own_setting_version">版本信息</string>
+    <string name="own_setting_contact">联系客服</string>
+
+    <!--安全设置-->
+    <string name="own_security_lock">手势密码开关</string>
+    <string name="own_security_changeLoginPwd">修改登录密码</string>
+    <string name="own_security_changePhone">更换手机号码</string>
+
+    <!--意见反馈-->
+    <string name="own_opinion_tip">请输入您的意见或建议</string>
+    <string name="own_opinion_hint">请至少输入10字以上</string>
+
+    <!--实名认证-->
+    <string name="own_identify_name">真实姓名</string>
+    <string name="own_identify_idcard">身份证号</string>
+    <string name="own_identify_name_hint">请输入真实姓名</string>
+    <string name="own_identify_idcard_hint">请输入身份证号</string>
+    <string name="own_identify_address">现居住地址</string>
+    <string name="own_identify_address_hint">请输入现居住地址</string>
+    <string name="own_identify_success">认证成功</string>
+    <string name="own_identify_fail">认证失败</string>
+    <string name="own_identify_bindingReturn">请绑定会回款银行卡</string>
+
+    <!--版本更新-->
+    <string name="own_version_tip1">当前有最新版本请更新</string>
+    <string name="own_version_tip2">已是最新版本</string>
+
+    <!--更换手机号-->
+    <string name="own_change_codeName">验证码</string>
+    <string name="own_change_hint1">请输入旧手机动态码</string>
+    <string name="own_change_newPhone">新手机号码</string>
+    <string name="own_change_hint2">请输入新手机号码</string>
+    <string name="own_change_hint3">请输入新手机动态码</string>
+
+    <!--我的理财师-->
+    <string name="own_planner_user">理财师姓名</string>
+    <string name="own_planner_phone">理财师电话</string>
+    <string name="own_planner_city">理财师所在城市</string>
+    <string name="own_planner_contact">联系理财师</string>
+
+    <!--银行卡-->
+    <string name="own_card_title">银行卡</string>
+    <string name="own_card_addcard">添加银行卡</string>
+
+    <!--添加银行卡-->
+    <string name="own_card_username">持卡人</string>
+    <string name="own_card_addTip">卡号（请绑定持卡人本人银行卡）</string>
+    <string name="own_card_addHint">请输入银行卡号</string>
+    <string name="own_card_bind">绑卡</string>
 
 
     <!-- 空态值 -->

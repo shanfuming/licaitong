@@ -90,6 +90,11 @@ public class BaseParams {
     public static final String SP_LOCK             = "lock_";
     public static final String SP_SIGN_OUT_TIME    = "sign_out_time";
     public static final String SP_IS_FIRST_INE     = "is_first_in";
+
+    /**
+     * 客服电话
+     */
+    public static final String servicePhone             = "4006069129";
     /**
      * 微信APPKey APPSecret
      */

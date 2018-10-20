@@ -58,6 +58,48 @@
         <activity
             android:name="com.zqzr.licaitong.ui.own.ApplyPlannerAct"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.MoneyRecordAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.OrderAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.OrderDetailAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.SettingAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.SettingSecurityAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.SettingOpinionAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.SettingVersionAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.IdentifyAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.SecurityChangePhoneActF"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.SecurityChangePhoneActS"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.PlannerAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.BankCardAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.AddCardAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.ReturnPlanAct"
+            android:screenOrientation="portrait" />
 
         <!-- 适配全面屏 -->
         <meta-data android:name="android.max_aspect" android:value="2.3" />
