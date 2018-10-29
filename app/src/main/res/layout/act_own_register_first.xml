@@ -115,10 +115,10 @@
             <TextView
                 android:id="@+id/apply_planner"
                 android:layout_width="@dimen/x160"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="4dp"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="@string/register_apply_planner"
                 android:textColor="@color/app_color_principal"
                 android:textSize="@dimen/x24" />
@@ -163,6 +163,7 @@
                         android:inputType="number"
                         android:maxLength="6"
                         android:paddingLeft="0dp"
+                        android:layout_marginLeft="@dimen/x20"
                         android:textColor="@color/colorViewbg" />
                 </LinearLayout>
 
@@ -194,9 +195,11 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:layout_width="@dimen/x32"
-                android:layout_height="@dimen/x32"
-                android:gravity="center_vertical" />
+                android:id="@+id/checkBox"
+                android:layout_width="@dimen/x50"
+                android:layout_height="@dimen/x50"
+                android:layout_gravity="center_vertical"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -205,6 +208,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/register_agree_one"
                 android:textColor="@color/text_grey"
+                android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x24" />
 
             <TextView

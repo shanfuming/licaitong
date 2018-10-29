@@ -50,14 +50,14 @@
             />
 
         <EditText
-            android:id="@+id/findpwd_pw1"
+            android:id="@+id/et_apply_userName"
             style="@style/LoginEditTextTheme"
             android:layout_width="@dimen/x542"
             android:layout_height="@dimen/y84"
             android:layout_gravity="center_horizontal"
             android:gravity="center_vertical"
             android:hint="@string/apply_name_hint"
-            android:inputType="text"
+            android:inputType="textPersonName"
             android:maxLength="20"
             android:maxLines="1"
             android:textColor="@color/colorViewbg"
@@ -86,13 +86,13 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/findpwd_pw2"
+                android:id="@+id/et_apply_phone"
                 style="@style/LoginEditTextTheme"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:hint="@string/findpwd_ed_hint"
-                android:inputType="number"
+                android:inputType="phone"
                 android:maxLength="11"
                 android:maxLines="1"
                 android:paddingLeft="0dp"
@@ -118,7 +118,7 @@
             />
 
         <LinearLayout
-            android:id="@+id/apply_selectCity"
+            android:id="@+id/ll_apply_city"
             android:layout_width="@dimen/x542"
             android:layout_height="@dimen/y84"
             android:layout_gravity="center_horizontal"
@@ -126,7 +126,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/apply_city"
+                android:id="@+id/tv_apply_city"
                 style="@style/LoginEditTextTheme"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -151,7 +151,46 @@
             />
 
         <TextView
-            android:id="@+id/apply"
+            android:layout_width="@dimen/x542"
+            android:layout_height="wrap_content"
+            android:text="@string/apply_address"
+            android:textSize="@dimen/x28"
+            android:textColor="@color/text_dark"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y40"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_apply_address"
+            android:layout_width="@dimen/x542"
+            android:layout_height="@dimen/y84"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y20"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_apply_address"
+                style="@style/LoginEditTextTheme"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="@string/apply_address_hint"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="0dp"
+                android:textSize="@dimen/x25"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorViewbg" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/hLineStyle_login"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <TextView
+            android:id="@+id/tv_apply"
             style="@style/FilletLoginBtnStyle"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/x50"
@@ -160,45 +199,4 @@
             android:textColor="@color/white" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/findpwd_second"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x20"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/findpwd_pwd"
-                style="@style/LoginEditTextTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/register_pwd_hint"
-                android:inputType="textPassword"
-                android:maxLength="16"
-                android:textColor="@color/colorViewbg" />
-
-            <ImageView
-                android:id="@+id/findpwd_eyes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x35"
-                android:src="@mipmap/cannotsee" />
-        </RelativeLayout>
-
-        <com.zqzr.licaitong.view.NoDoubleClickButton
-            style="@style/FilletLoginBtnStyle"
-            android:layout_marginLeft="@dimen/x25"
-            android:layout_marginRight="@dimen/x25"
-            android:layout_marginTop="@dimen/x50"
-            android:text="@string/findpwd_title" />
-    </LinearLayout>
 </RelativeLayout>

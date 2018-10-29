@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y70"
+        android:layout_marginRight="@dimen/y30"
+        android:layout_marginLeft="@dimen/x30"
+        >
+
+        <TextView
+            android:id="@+id/record_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x24"
+            android:textColor="@color/text_grey"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x20"
+            />
+
+        <TextView
+            android:id="@+id/record_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x24"
+            android:textColor="@color/text_grey"
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:id="@+id/record_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x24"
+            android:textColor="@color/text_grey"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

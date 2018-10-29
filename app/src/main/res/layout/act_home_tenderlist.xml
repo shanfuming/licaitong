@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,12 +8,18 @@
         android:id="@+id/titleBar"
         layout="@layout/appbar_layout" />
 
+    <View
+        android:id="@+id/view"
+        style="@style/hLineheight20Style"
+        android:layout_below="@+id/ll_condition" />
     <LinearLayout
         android:id="@+id/ll_condition"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y100"
         android:layout_below="@+id/titleBar"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone"
+        >
 
         <LinearLayout
             android:id="@+id/ll_condition_limit"
@@ -75,23 +80,63 @@
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/view"
-        style="@style/hLineheight20Style"
-        android:layout_below="@+id/ll_condition" />
+    <LinearLayout
+        android:id="@+id/ll_piaoju"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/x100"
+        android:paddingRight="@dimen/x100"
+        android:paddingBottom="@dimen/y20"
+        android:paddingTop="@dimen/y20"
+        android:layout_below="@+id/view"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/tv_property"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y70"
+            android:layout_weight="1"
+            android:background="@drawable/fillet_btn_left"
+            android:textSize="@dimen/x32"
+            android:text="@string/piaojuList_selectCondition1"
+            android:textColor="@color/white"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/tv_piaoju"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y70"
+            android:layout_weight="1"
+            android:background="@drawable/fillet_btn_diable_right"
+            android:textSize="@dimen/x32"
+            android:text="@string/piaojuList_selectCondition2"
+            android:textColor="@color/app_color_principal"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
 
     <com.cjj.MaterialRefreshLayout
         android:id="@+id/mrl_refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/view"
+        android:background="@color/white"
         >
 
         <ListView
             android:id="@+id/tenderList_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@drawable/bg_dotted_line" />
+            android:divider="@color/line_grey"
+            android:dividerHeight="@dimen/y1"
+            android:background="@color/white"
+            />
 
     </com.cjj.MaterialRefreshLayout>
 
@@ -122,4 +167,4 @@
             />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

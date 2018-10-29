@@ -76,7 +76,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x20"
             android:layout_toLeftOf="@+id/iv_next"
-            android:text="@string/own_isNotentify"
+            android:text="@string/own_isNotIdentify"
             android:textColor="@color/text_grey"
             android:textSize="@dimen/x30" />
 

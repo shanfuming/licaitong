@@ -8,13 +8,16 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.framwork.MenuActivity;
 import com.zqzr.licaitong.framwork.TabItem;
 import com.zqzr.licaitong.ui.activity.AActivity;
 import com.zqzr.licaitong.ui.find.FindActivity;
 import com.zqzr.licaitong.ui.home.HomeActivity;
+import com.zqzr.licaitong.ui.own.LoginAct;
 import com.zqzr.licaitong.ui.own.OwnActivity;
+import com.zqzr.licaitong.utils.ActivityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,5 +135,14 @@ public class MainActivity extends MenuActivity implements OnClickListener {
     @Override
     public void onClick(View v) {
         updateTab(v);
+        switch (v.getId()){
+            case R.id.btn_my_tv:
+                if (MyApplication.getInstance().isLand()){
+                    Intent intent = new Intent();
+                    intent.putExtra("turnMian",3);
+                    ActivityUtils.push(LoginAct.class,intent);
+                }
+                break;
+        }
     }
 }

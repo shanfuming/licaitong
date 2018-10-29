@@ -78,6 +78,18 @@ public class DateUtil {
     }
 
     /**
+     * 日期格式化
+     */
+    public static String formatter(String format, long date) {
+        if (date  <= 0) {
+            return "";
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.getDefault());
+            return sdf.format(new Date(date));
+        }
+    }
+
+    /**
      * 计算两个时间之间的天数 -- 自然日
      *
      * @param startDate

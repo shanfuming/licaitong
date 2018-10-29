@@ -10,6 +10,9 @@ import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.bean.FindItem;
 import com.zqzr.licaitong.utils.ActivityUtils;
+import com.zqzr.licaitong.utils.ConverterUtil;
+import com.zqzr.licaitong.utils.DateUtil;
+import com.zqzr.licaitong.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -23,9 +26,9 @@ import java.util.ArrayList;
 
 public class FindItemAdapter extends BaseAdapter {
 
-    private ArrayList<FindItem> findItems;
+    private ArrayList<FindItem.Data.CList> findItems;
 
-    public FindItemAdapter(ArrayList<FindItem> findItems) {
+    public FindItemAdapter(ArrayList<FindItem.Data.CList> findItems) {
         this.findItems = findItems;
     }
 
@@ -59,9 +62,9 @@ public class FindItemAdapter extends BaseAdapter {
         viewHolder.findItemTitle = (TextView) convertView.findViewById(R.id.tv_find_title);
         viewHolder.findItemTime = (TextView) convertView.findViewById(R.id.tv_find_time);
 
-        viewHolder.findItemImg.setImageDrawable(MyApplication.getInstance().getResources().getDrawable(R.mipmap.guide_01));
-        viewHolder.findItemTitle.setText(findItems.get(position).getFind_title());
-        viewHolder.findItemTime.setText(findItems.get(position).getFind_time());
+        Utils.loadImg(viewHolder.findItemImg,findItems.get(position).imageUrl,null);
+        viewHolder.findItemTitle.setText(findItems.get(position).title);
+        viewHolder.findItemTime.setText(DateUtil.formatter(DateUtil.Format.DATE,Long.valueOf(findItems.get(position).publishTime)));
 
         return convertView;
     }

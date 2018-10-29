@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/x30">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/in_baoli_rule1_t"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x26" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y20"
+            android:layout_marginTop="@dimen/y20"
+            android:text="@string/in_baoli_rule1"
+            android:textColor="@color/text_grey"
+            android:textSize="@dimen/x24" />
+
+        <View style="@style/hLineStyle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y30"
+            android:text="@string/in_baoli_rule2_t"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x26" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y20"
+            android:layout_marginTop="@dimen/y20"
+            android:text="@string/in_baoli_rule2"
+            android:textColor="@color/text_grey"
+            android:textSize="@dimen/x24" />
+
+        <View style="@style/hLineStyle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y30"
+            android:text="@string/in_baoli_rule3_t"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x26" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y20"
+            android:layout_marginTop="@dimen/y20"
+            android:text="@string/in_baoli_rule3"
+            android:textColor="@color/text_grey"
+            android:textSize="@dimen/x24" />
+
+        <View style="@style/hLineStyle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y30"
+            android:text="@string/in_baoli_rule4_t"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x26" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y20"
+            android:layout_marginTop="@dimen/y20"
+            android:text="@string/in_baoli_rule4"
+            android:textColor="@color/text_grey"
+            android:textSize="@dimen/x24" />
+
+        <View style="@style/hLineStyle" />
+
+    </LinearLayout>
+</ScrollView>

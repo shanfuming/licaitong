@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.Time;
 import android.util.Base64;
@@ -22,7 +23,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UploadManager;
 import com.zqzr.licaitong.R;
+import com.zqzr.licaitong.base.Constant;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -36,8 +43,11 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -60,11 +70,8 @@ public class Utils {
     /**
      * 以最省内存的方式读取本地资源的图片
      *
-     * @param context
-     *         上下文
-     * @param resId
-     *         资源ID
-     *
+     * @param context 上下文
+     * @param resId   资源ID
      * @return bitmap
      */
     public static Bitmap readBitmap(Context context, int resId) {
@@ -127,7 +134,7 @@ public class Utils {
         }
 
         String fileFullName = "";
-        FileOutputStream fos          = null;
+        FileOutputStream fos = null;
         try {
             String suffix = "";
             if (filePath == null || filePath.trim().length() == 0) {
@@ -159,8 +166,7 @@ public class Utils {
     /**
      * 递归删除文件和文件夹
      *
-     * @param file
-     *         要删除的根目录
+     * @param file 要删除的根目录
      */
     public static void deleteFile(File file) {
         if (file.exists()) {
@@ -210,8 +216,8 @@ public class Utils {
     /**
      * toast 过滤 5s内禁止重复出现
      */
-    private static final long                  Interval = 3 * 1000;
-    private static final SoftMap<String, Long> map      = new SoftMap<>();
+    private static final long Interval = 3 * 1000;
+    private static final SoftMap<String, Long> map = new SoftMap<>();
     private static Toast CURR_TOAST;
 
     public static void toast(Context context, String msg) {
@@ -245,18 +251,17 @@ public class Utils {
     /**
      * 颜色加深处理
      *
-     * @param RGBValues
-     *         RGB的值，由alpha（透明度）、red（红）、green（绿）、blue（蓝）构成，
-     *         Android中我们一般使用它的16进制，
-     *         例如："#FFAABBCC",最左边到最右每两个字母就是代表alpha（透明度）、
-     *         red（红）、green（绿）、blue（蓝）。每种颜色值占一个字节(8位)，值域0~255
-     *         所以下面使用移位的方法可以得到每种颜色的值，然后每种颜色值减小一下，在合成RGB颜色，颜色就会看起来深一些了
+     * @param RGBValues RGB的值，由alpha（透明度）、red（红）、green（绿）、blue（蓝）构成，
+     *                  Android中我们一般使用它的16进制，
+     *                  例如："#FFAABBCC",最左边到最右每两个字母就是代表alpha（透明度）、
+     *                  red（红）、green（绿）、blue（蓝）。每种颜色值占一个字节(8位)，值域0~255
+     *                  所以下面使用移位的方法可以得到每种颜色的值，然后每种颜色值减小一下，在合成RGB颜色，颜色就会看起来深一些了
      */
     public static int colorBurn(int RGBValues) {
         int alpha = RGBValues >> 24;
-        int red   = RGBValues >> 16 & 0xFF;
+        int red = RGBValues >> 16 & 0xFF;
         int green = RGBValues >> 8 & 0xFF;
-        int blue  = RGBValues & 0xFF;
+        int blue = RGBValues & 0xFF;
         red = (int) Math.floor(red * (1 - 0.1));
         green = (int) Math.floor(green * (1 - 0.1));
         blue = (int) Math.floor(blue * (1 - 0.1));
@@ -269,8 +274,8 @@ public class Utils {
      */
     public static boolean isInstanceOfCollection(Class clazz) {
         Type genType = clazz.getGenericSuperclass();
-        Type[] params  = ((ParameterizedType) genType).getActualTypeArguments();
-        String result  = params[0].toString();
+        Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
+        String result = params[0].toString();
         return result.contains(Collection.class.getName());
     }
 
@@ -278,7 +283,6 @@ public class Utils {
      * 判断是否是为String
      *
      * @param object
-     *
      * @return
      */
     private static boolean isString(Object object) {
@@ -292,7 +296,6 @@ public class Utils {
      * map 转换为 json
      *
      * @param data
-     *
      * @return
      */
     public static String mapData2Json(Map<String, Object> data) {
@@ -312,14 +315,13 @@ public class Utils {
      * InputStream --> String
      *
      * @param is
-     *
      * @return
      */
     public static String inputStream2String(InputStream is) {
         try {
-            BufferedReader in     = new BufferedReader(new InputStreamReader(is));
+            BufferedReader in = new BufferedReader(new InputStreamReader(is));
             StringBuffer buffer = new StringBuffer();
-            String line   = "";
+            String line = "";
             while ((line = in.readLine()) != null) {
                 buffer.append(line);
             }
@@ -334,7 +336,6 @@ public class Utils {
      * File --> InputStream
      *
      * @param file
-     *
      * @return
      */
     public static InputStream file2InputStream(File file) {
@@ -349,7 +350,6 @@ public class Utils {
      * File --> String
      *
      * @param file
-     *
      * @return
      */
     public static String flie2String(File file) {
@@ -368,8 +368,8 @@ public class Utils {
     public static TreeMap<String, Object> removeNull(Map<String, Object> map) {
 
         TreeMap<String, Object> newMap = new TreeMap<>();
-        if(map == null || map.size() == 0){
-            return  newMap;
+        if (map == null || map.size() == 0) {
+            return newMap;
         }
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             if (entry.getValue() != null) {
@@ -408,14 +408,15 @@ public class Utils {
 
     /**
      * 加载图片
+     *
      * @param view
      * @param url
      * @param drawable
      */
-    public static void loadImg(ImageView view, String url, Drawable drawable){
-        if (drawable!=null){
+    public static void loadImg(ImageView view, String url, Drawable drawable) {
+        if (drawable != null) {
             Glide.with(ActivityUtils.peek()).load(url).placeholder(drawable).into(view);//设置默认加载图
-        }else{
+        } else {
             Glide.with(ActivityUtils.peek()).load(url).placeholder(drawable).into(view);//默认加载图
         }
     }
@@ -443,8 +444,8 @@ public class Utils {
     public static int getVersion() {
         try {
             Context context = ActivityUtils.peek();
-            PackageManager pm      = context.getPackageManager();//context为当前Activity上下文
-            PackageInfo pi      = pm.getPackageInfo(context.getPackageName(), 0);
+            PackageManager pm = context.getPackageManager();//context为当前Activity上下文
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
             return pi.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
             return 1;
@@ -457,8 +458,8 @@ public class Utils {
     public static String getVersionName() {
         try {
             Context context = ActivityUtils.peek();
-            PackageManager pm      = context.getPackageManager();//context为当前Activity上下文
-            PackageInfo pi      = pm.getPackageInfo(context.getPackageName(), 0);
+            PackageManager pm = context.getPackageManager();//context为当前Activity上下文
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
             return pi.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             return "--";
@@ -524,5 +525,106 @@ public class Utils {
             result = !now.before(startTime) && !now.after(endTime); // startTime <= now <= endTime
         }
         return result;
+    }
+
+    /**
+     * 获得IMEI号
+     */
+    public static String getIMEI() {
+        Context context = ActivityUtils.peek();
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        if (tm != null) {
+            String imei = tm.getDeviceId() != null ? tm.getDeviceId() : "";
+            if (imei.equals("0")) {
+                imei = "000000000000000";
+            }
+            int len = 15 - imei.length();
+            for (int i = 0; i < len; i++) {
+                imei += "0";
+            }
+            return imei;
+        }
+        return "";
+    }
+
+    /**
+     * 投资类型
+     */
+    public static String getType(int type) {
+        String typeStr = "";
+        switch (type) {
+            case Constant.NUMBER_0:
+                typeStr = Constant.Type_PiaoJu;
+                break;
+            case Constant.NUMBER_1:
+                typeStr = Constant.Type_BaoLi;
+                break;
+            case Constant.NUMBER_2:
+                typeStr = Constant.Type_GuQuan;
+                break;
+            case Constant.NUMBER_3:
+                typeStr = Constant.Type_FangChan;
+                break;
+            case Constant.NUMBER_4:
+                typeStr = Constant.Type_PiaoJu;
+                break;
+        }
+
+        return typeStr;
+
+    }
+
+    /**
+     * 实名结果
+     */
+    public static String getIdentifyType(int type) {
+        String typeStr = "";
+        switch (type) {
+            case Constant.NUMBER_0:
+                typeStr = Constant.Identify_Not;
+                break;
+            case Constant.NUMBER_1:
+                typeStr = Constant.Identify_Success;
+                break;
+            case Constant.NUMBER_2:
+                typeStr = Constant.Identify_Fail;
+                break;
+        }
+
+        return typeStr;
+
+    }
+
+    /**
+     * 用户名和银行卡加密***
+     *
+     * @param string
+     * @return
+     */
+    public static String getEncodeStr(String string) {
+        String str1 = string.substring(0, 2);
+        String str2 = string.substring(string.length() - 4, string.length());
+        String str3 = "";
+        for (int i = 3; i < string.length() - 4; i++) {
+            str3 = str3 + "*";
+        }
+        return str1 + str3 + str2;
+    }
+
+    /**
+     * 强制获取double类型到小数点后两位
+     *
+     * @param d
+     * @return
+     */
+    public static String getDouble2(double d) {
+        DecimalFormat decimalFormat = new DecimalFormat("#####0.00");
+        return decimalFormat.format(d);
+    }
+
+    public static String getWan(int num){
+        String str = "";
+        str = num / 10000 + "万";
+        return str;
     }
 }

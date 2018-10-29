@@ -2,27 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <com.sys.blackcat.stickheaderlayout.StickHeaderLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/stick_header_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:retentionHeight="@dimen/y100">
+        android:layout_below="@+id/titlebar"
+        >
 
-        <TextView
+        <ImageView
+            android:id="@+id/iv_topBanner"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@color/red"
-            android:gravity="center"
-            android:text="我是头部"
-            android:textColor="@color/white" />
+            android:layout_height="@dimen/y180"
+            android:background="@mipmap/new_top" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <cn.carbs.android.indicatorview.library.IndicatorView
                 android:id="@+id/indicator_view"
                 android:layout_width="match_parent"
@@ -30,35 +30,35 @@
                 android:background="@color/white"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
+                app:iv_IndicatorColor="@color/colorAccent"
                 app:iv_IndicatorColorEnd="@color/app_color_principal"
                 app:iv_IndicatorColorGradient="false"
                 app:iv_IndicatorColorStart="@color/app_color_principal"
-                app:iv_IndicatorColor="@color/colorAccent"
-                app:iv_IndicatorTextColorNormal="@color/text_grey"
-                app:iv_IndicatorTextColorSelected="@color/text_dark"
                 app:iv_IndicatorEven="true"
                 app:iv_IndicatorLengthExtra="@dimen/x5"
                 app:iv_IndicatorTextArray="@array/find"
+                app:iv_IndicatorTextColorNormal="@color/text_grey"
+                app:iv_IndicatorTextColorSelected="@color/text_dark"
                 app:iv_IndicatorTextGap="@dimen/x40"
-                app:iv_IndicatorTextSize="@dimen/x30"
-                />
+                app:iv_IndicatorTextSize="@dimen/x30" />
 
         </LinearLayout>
 
         <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:background="@color/blue"-->
-            <!--android:gravity="center"-->
-            <!--android:text="我是标题"-->
-            <!--android:textColor="@color/white" />-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:background="@color/blue"-->
+        <!--android:gravity="center"-->
+        <!--android:text="我是标题"-->
+        <!--android:textColor="@color/white" />-->
         <!--内容-->
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/green" />
+            android:layout_height="wrap_content" />
     </com.sys.blackcat.stickheaderlayout.StickHeaderLayout>
 
-    <include layout="@layout/appbar_layout"/>
+    <include layout="@layout/appbar_layout"
+        android:id="@+id/titlebar"
+        />
 </RelativeLayout>

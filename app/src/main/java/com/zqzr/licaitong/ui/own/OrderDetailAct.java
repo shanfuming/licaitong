@@ -42,6 +42,7 @@ public class OrderDetailAct extends BaseActivity {
         mTvCancel = (TextView) findViewById(R.id.tv_detail_cancel);
 
 
+
     }
 
     @Override

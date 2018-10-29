@@ -1,9 +1,11 @@
 package com.zqzr.licaitong;
 
 import android.app.Application;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
 import com.zqzr.licaitong.receiver.GestureLockWatcher;
+import com.zqzr.licaitong.utils.SPUtil;
 
 import java.util.Map;
 
@@ -146,9 +148,11 @@ public class MyApplication extends Application {
      * 根据本地数据，进行初始化
      */
     private void initLocalData() {
-//        if (SharedInfo.getInstance().getValue(OauthTokenMo.class) != null) {
+        if (!TextUtils.isEmpty(SPUtil.getString("token",""))) {
             MyApplication.getInstance().isLand = true;
-//        }
+        }else{
+            MyApplication.getInstance().isLand = false;
+        }
     }
 
     /**

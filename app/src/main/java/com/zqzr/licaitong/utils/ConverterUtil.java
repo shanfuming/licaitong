@@ -34,7 +34,7 @@ public class ConverterUtil {
      */
     public static int getInteger(String args) {
         try {
-            if (TextUtil.isEmpty(args)) {
+            if (TextUtils.isEmpty(args)) {
                 return 0;
             } else {
                 return new BigDecimal(args).intValue();
@@ -50,7 +50,7 @@ public class ConverterUtil {
      */
     public static int getShort(String args) {
         try {
-            if (TextUtil.isEmpty(args)) {
+            if (TextUtils.isEmpty(args)) {
                 return 0;
             } else {
                 return new BigDecimal(args).shortValue();
@@ -66,7 +66,7 @@ public class ConverterUtil {
      */
     public static long getLong(String args) {
         try {
-            if (TextUtil.isEmpty(args)) {
+            if (TextUtils.isEmpty(args)) {
                 return 0L;
             } else {
                 return new BigDecimal(args).longValue();
@@ -82,7 +82,7 @@ public class ConverterUtil {
      */
     public static float getFloat(String args) {
         try {
-            if (TextUtil.isEmpty(args)) {
+            if (TextUtils.isEmpty(args)) {
                 return 0.0F;
             } else {
                 return new BigDecimal(args).floatValue();
@@ -103,7 +103,7 @@ public class ConverterUtil {
      */
     public static float getFloat(String args, int scale) {
         try {
-            if (TextUtil.isEmpty(args)) {
+            if (TextUtils.isEmpty(args)) {
                 return 0.0F;
             } else {
                 return new BigDecimal(args).setScale(scale, BigDecimal.ROUND_HALF_UP).floatValue();
@@ -119,7 +119,7 @@ public class ConverterUtil {
      */
     public static double getDouble(String args) {
         try {
-            if (TextUtil.isEmpty(args)) {
+            if (TextUtils.isEmpty(args)) {
                 return 0.0D;
             } else {
                 return new BigDecimal(args).doubleValue();
@@ -140,7 +140,7 @@ public class ConverterUtil {
      */
     public static double getDouble(String args, int scale) {
         try {
-            if (TextUtil.isEmpty(args)) {
+            if (TextUtils.isEmpty(args)) {
                 return 0.0D;
             } else {
                 return new BigDecimal(args).setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();

@@ -1,8 +1,5 @@
 package com.zqzr.licaitong.adapter;
 
-import android.content.Context;
-import android.support.constraint.solver.ArrayLinkedVariables;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -12,7 +9,6 @@ import android.widget.TextView;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.bean.Menu;
 import com.zqzr.licaitong.utils.ActivityUtils;
-import com.zqzr.licaitong.utils.TextUtil;
 
 import java.util.ArrayList;
 

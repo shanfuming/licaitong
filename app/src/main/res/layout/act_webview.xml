@@ -4,28 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/appbar_layout"/>
+    <include layout="@layout/appbar_layout" />
 
-    <ProgressBar
-        android:id="@+id/pb_find"
-        style="?android:attr/progressBarStyleHorizontal"
+
+    <com.cjj.MaterialRefreshLayout
+        android:id="@+id/mrl_refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:indeterminateOnly="false"
-        android:max="100"
-        android:progress="0"
-        android:progressDrawable="@drawable/progress" />
+        android:layout_height="match_parent">
 
-        <com.cjj.MaterialRefreshLayout
-            android:id="@+id/mrl_refreshLayout"
+        <WebView
+            android:id="@+id/webview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
 
-            <WebView
-                android:id="@+id/webview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </com.cjj.MaterialRefreshLayout>
+    </com.cjj.MaterialRefreshLayout>
 
 </LinearLayout>

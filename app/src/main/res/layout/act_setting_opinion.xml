@@ -37,6 +37,7 @@
             android:hint="@string/own_opinion_hint"
             android:paddingLeft="@dimen/x10"
             android:paddingTop="@dimen/y30"
+            android:maxLength="150"
             android:textColor="@color/text_dark"
             android:textColorHint="@color/hint_grey"
             android:textSize="@dimen/x24" />
@@ -44,7 +45,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/login"
+        android:id="@+id/opinion_commit"
         android:layout_width="@dimen/x542"
         android:layout_height="@dimen/y88"
         android:textColor="@color/white"

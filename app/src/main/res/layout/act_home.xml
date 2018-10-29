@@ -2,31 +2,37 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/white"
+            >
 
             <com.jude.rollviewpager.RollPagerView
                 android:id="@+id/roll_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y360"
                 app:rollviewpager_play_delay="3000"
-
                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/y40"
-                android:layout_marginTop="@dimen/y30"
-                android:orientation="horizontal">
+                android:layout_height="@dimen/y150"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/white"
+                >
 
                 <LinearLayout
                     android:id="@+id/ll_piaoju"
@@ -132,7 +138,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@color/view_grey"
-                android:dividerHeight="@dimen/y20" />
+                android:dividerHeight="@dimen/y20"
+                android:background="@color/white"
+                />
 
             <View style="@style/hLineheight20Style" />
 
@@ -145,6 +153,7 @@
                 android:textSize="@dimen/x32"
                 android:textColor="@color/text_dark"
                 android:gravity="center_vertical"
+                android:background="@color/white"
                 />
 
             <View
@@ -155,8 +164,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/y100"
-                android:divider="@color/view_grey"
-                android:dividerHeight="@dimen/y20" />
+                android:divider="@color/line_grey"
+                android:dividerHeight="@dimen/y1"
+                android:background="@color/white"
+                />
 
         </LinearLayout>
 

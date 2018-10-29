@@ -137,6 +137,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@mipmap/wrong"
+                    android:visibility="gone"
                     />
 
             </RelativeLayout>

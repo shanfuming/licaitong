@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,9 +21,21 @@
                 android:layout_width="@dimen/x56"
                 android:layout_height="@dimen/x56"
                 android:layout_gravity="center_vertical"
-                android:background="@mipmap/own_personinfo" />
+                android:background="@mipmap/icon"
+                app:border_color="@color/transparent"
+                />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/own_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/text_dark"
+            android:layout_toRightOf="@+id/ll_person"
+            android:layout_centerVertical="true"
+            />
 
         <LinearLayout
             android:id="@+id/ll_setting"
@@ -72,6 +84,7 @@
                     android:textSize="@dimen/x24" />
 
                 <ImageView
+                    android:id="@+id/iv_cansee"
                     android:layout_width="@dimen/x32"
                     android:layout_height="@dimen/x32"
                     android:layout_marginLeft="@dimen/x10"
@@ -84,7 +97,7 @@
                 android:id="@+id/tv_own_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10000.00"
+                android:text="*****"
                 android:textColor="@color/white"
                 android:textSize="@dimen/x60" />
 
@@ -121,7 +134,7 @@
                     android:textSize="@dimen/x36"
                     android:textColor="#ffe5e5"
                     android:layout_marginTop="@dimen/y20"
-                    android:text="10000,00"
+                    android:text="*****"
                     />
 
             </LinearLayout>
@@ -149,7 +162,7 @@
                     android:textSize="@dimen/x36"
                     android:textColor="#ffe5e5"
                     android:layout_marginTop="@dimen/y20"
-                    android:text="10000,00"
+                    android:text="*****"
                     />
 
             </LinearLayout>
@@ -295,7 +308,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x20"
             android:layout_toLeftOf="@+id/iv_next"
-            android:text="@string/own_isNotentify"
+            android:text="@string/own_isNotIdentify"
             android:textColor="@color/text_grey"
             android:textSize="@dimen/x30" />
 

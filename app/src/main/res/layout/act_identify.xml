@@ -32,6 +32,7 @@
             android:gravity="center_vertical"
             android:inputType="textPersonName"
             android:hint="@string/own_identify_name_hint"
+            android:lines="1"
             android:textColor="@color/colorViewbg"
             android:textSize="@dimen/x25" />
 
@@ -63,6 +64,8 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:inputType="number"
+                android:lines="1"
+                android:maxLength="18"
                 android:hint="@string/own_identify_idcard_hint"
                 android:paddingLeft="0dp"
                 android:textColor="@color/colorViewbg"
@@ -70,6 +73,40 @@
 
         </LinearLayout>
 
+        <View
+            style="@style/hLineStyle_login"
+            android:layout_gravity="center_horizontal" />
+
+
+        <TextView
+            android:layout_width="@dimen/x542"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y40"
+            android:text="@string/apply_city"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x28" />
+
+        <LinearLayout
+            android:layout_width="@dimen/x542"
+            android:layout_height="@dimen/y84"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y20"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_identify_city"
+                style="@style/LoginEditTextTheme"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:hint="@string/apply_city_hint"
+                android:paddingLeft="0dp"
+                android:textColor="@color/colorViewbg"
+                android:textSize="@dimen/x25" />
+
+        </LinearLayout>
         <View
             style="@style/hLineStyle_login"
             android:layout_gravity="center_horizontal" />
@@ -100,6 +137,7 @@
                 android:inputType="number"
                 android:hint="@string/own_identify_address_hint"
                 android:paddingLeft="0dp"
+                android:lines="1"
                 android:textColor="@color/colorViewbg"
                 android:textSize="@dimen/x25" />
 

@@ -6,8 +6,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.zqzr.licaitong.R;
+import com.zqzr.licaitong.bean.Product;
 import com.zqzr.licaitong.bean.Tender;
 import com.zqzr.licaitong.utils.ActivityUtils;
+import com.zqzr.licaitong.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -21,9 +23,9 @@ import java.util.ArrayList;
 
 public class TenderListAdapter extends BaseAdapter {
 
-    ArrayList<Tender> tenders;
+    ArrayList<Product.Data.CList> tenders;
 
-    public TenderListAdapter(ArrayList<Tender> tenders) {
+    public TenderListAdapter(ArrayList<Product.Data.CList> tenders) {
         this.tenders = tenders;
     }
 
@@ -57,11 +59,22 @@ public class TenderListAdapter extends BaseAdapter {
         viewHolder.predictIncome = (TextView) convertView.findViewById(R.id.tv_predictIncome);
         viewHolder.limit = (TextView) convertView.findViewById(R.id.tv_timeLimit);
         viewHolder.start = (TextView) convertView.findViewById(R.id.tv_tenderStart);
+        viewHolder.status = (TextView) convertView.findViewById(R.id.tv_tender_state);
 
-        viewHolder.tenderTitle.setText(tenders.get(position).getTenderTitle());
-        viewHolder.predictIncome.setText(tenders.get(position).getPredictIncome());
-        viewHolder.limit.setText(tenders.get(position).getLimit());
-        viewHolder.start.setText(tenders.get(position).getStart());
+        viewHolder.tenderTitle.setText(tenders.get(position).name);
+        viewHolder.predictIncome.setText(tenders.get(position).expectedYield+"%");
+        viewHolder.limit.setText(tenders.get(position).projectDuration+"天");
+        viewHolder.start.setText(Utils.getWan(tenders.get(position).purchaseAmount)+"起投");
+
+        if(tenders.get(position).status > 0){
+            if (tenders.get(position).status == 1){
+                viewHolder.status.setText("发行中");
+                viewHolder.status.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_ing));
+            }else{
+                viewHolder.status.setText("已募满");
+                viewHolder.status.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_ed));
+            }
+        }
 
         return convertView;
     }
@@ -71,5 +84,6 @@ public class TenderListAdapter extends BaseAdapter {
         TextView predictIncome;
         TextView limit;
         TextView start;
+        TextView status;
     }
 }

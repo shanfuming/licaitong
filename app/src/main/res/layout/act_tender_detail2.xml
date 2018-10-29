@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.sys.blackcat.stickheaderlayout.StickHeaderLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/stick_header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:retentionHeight="48dp"
+        >
+
+        <include layout="@layout/act_tender_detail_top" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y80"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:id="@+id/ll_in"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/tv_project_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="@dimen/x30"
+                    android:text="@string/project_in"
+                    android:textColor="@color/text_dark" />
+                <TextView
+                    android:id="@+id/tv_project_in_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y3"
+                    android:textColor="@color/app_color_principal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_audit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/tv_project_audit"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="@dimen/x30"
+                    android:text="@string/project_audit"
+                    android:textColor="@color/text_dark" />
+                <TextView
+                    android:id="@+id/tv_project_audit_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y3"
+                    android:textColor="@color/app_color_principal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_record"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/tv_project_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="@dimen/x30"
+                    android:text="@string/project_record"
+                    android:textColor="@color/text_dark" />
+                <TextView
+                    android:id="@+id/tv_project_record_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y3"
+                    android:textColor="@color/app_color_principal" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" />
+    </com.sys.blackcat.stickheaderlayout.StickHeaderLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y110"
+        android:layout_alignParentBottom="true"
+        android:background="@color/detail_subscibe_bg">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y88"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:background="@drawable/fillet_btn_normal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_reduce"
+                android:layout_width="@dimen/x88"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="—"
+                android:textColor="@color/text_dark"
+                android:textSize="@dimen/x32" />
+
+            <View style="@style/vLineStyle" />
+
+            <TextView
+                android:id="@+id/tv_sum"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/text_dark"
+                android:textSize="@dimen/x40" />
+
+            <View style="@style/vLineStyle" />
+
+            <TextView
+                android:id="@+id/tv_add"
+                android:layout_width="@dimen/x88"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/text_dark"
+                android:textSize="@dimen/x40" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_subscribe"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y66"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x30"
+            android:background="@drawable/fillet_loginbtn_normal"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/x40"
+            android:paddingRight="@dimen/x40"
+            android:text="@string/detail_subscribe"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x35" />
+
+        <View style="@style/hLineStyle" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zqzr.licaitong.R;
-import com.zqzr.licaitong.bean.HomeTouziType;
+import com.zqzr.licaitong.bean.HomeTouziTypeAndFind;
+import com.zqzr.licaitong.ui.home.TenderDetailAct;
 import com.zqzr.licaitong.ui.home.TenderListAct;
 import com.zqzr.licaitong.utils.ActivityUtils;
+import com.zqzr.licaitong.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -23,9 +26,9 @@ import java.util.ArrayList;
 
 public class HomeTouziListAdapter extends BaseAdapter {
 
-    private ArrayList<HomeTouziType> touziList;
+    private ArrayList<HomeTouziTypeAndFind.Data.Inve> touziList;
 
-    public HomeTouziListAdapter(ArrayList<HomeTouziType> touziList) {
+    public HomeTouziListAdapter(ArrayList<HomeTouziTypeAndFind.Data.Inve> touziList) {
         this.touziList = touziList;
     }
 
@@ -62,28 +65,49 @@ public class HomeTouziListAdapter extends BaseAdapter {
         viewHolder.tenderName = (TextView) convertView.findViewById(R.id.tv_tender_name);
         viewHolder.tenderDayNum = (TextView) convertView.findViewById(R.id.tv_tender_dayNum);
         viewHolder.tenderStartMark = (TextView) convertView.findViewById(R.id.tv_condition_startMark);
+        viewHolder.touziDetail = (LinearLayout) convertView.findViewById(R.id.ll_touzi_detail);
+        viewHolder.tenderState = (TextView) convertView.findViewById(R.id.tv_tender_state);
 
-        viewHolder.predictIncome.setText(touziList.get(position).getPredictIncome());
-        viewHolder.predictIncomeName.setText(touziList.get(position).getPredictIncomeName());
-        viewHolder.touziType.setText(touziList.get(position).getTouziType());
-        viewHolder.tenderName.setText(touziList.get(position).getTenderName());
-        viewHolder.tenderDayNum.setText(touziList.get(position).getDayNum());
-        viewHolder.tenderStartMark.setText(touziList.get(position).getStartMark());
+        viewHolder.predictIncome.setText(touziList.get(position).expectedYield+"%");
+//        viewHolder.predictIncomeName.setText(touziList.get(position).getPredictIncomeName());
+        viewHolder.touziType.setText(Utils.getType(touziList.get(position).type));
+        viewHolder.tenderName.setText(touziList.get(position).name);
+        viewHolder.tenderDayNum.setText(touziList.get(position).projectDuration+"天");
+        viewHolder.tenderStartMark.setText(Utils.getWan(touziList.get(position).purchaseAmount)+"起投");
+        if(touziList.get(position).status > 0){
+            if (touziList.get(position).status == 1){
+                viewHolder.tenderState.setText("发行中");
+                viewHolder.tenderState.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_ing));
+            }else{
+                viewHolder.tenderState.setText("已募满");
+                viewHolder.tenderState.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_ed));
+            }
+        }
 
         viewHolder.touziMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent();
-                intent.putExtra("type",touziList.get(position).getTypeId());
+                intent.putExtra("type",touziList.get(position).type);
                 ActivityUtils.push(TenderListAct.class,intent);
             }
         });
 
+        viewHolder.touziDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent();
+                intent.putExtra("type",touziList.get(position).type);
+                intent.putExtra("id",touziList.get(position).id);
+                ActivityUtils.push(TenderDetailAct .class,intent);
+            }
+        });
 
         return convertView;
     }
 
     class ViewHolder{
-        TextView touziType,touziMore,predictIncome,predictIncomeName,tenderName,tenderDayNum,tenderStartMark;
+        TextView touziType,touziMore,predictIncome,predictIncomeName,tenderName,tenderDayNum,tenderStartMark,tenderState;
+        LinearLayout touziDetail;
     }
 }

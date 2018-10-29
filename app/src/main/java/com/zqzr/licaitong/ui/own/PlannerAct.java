@@ -1,14 +1,12 @@
 package com.zqzr.licaitong.ui.own;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
-import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.view.TipDialog;
-
-import org.w3c.dom.Text;
 
 /**
  * Author: shanfuming
@@ -19,7 +17,8 @@ import org.w3c.dom.Text;
  */
 
 public class PlannerAct extends BaseActivity {
-    private TextView mTvName,mTvPhone,mtvCommoit;
+    private TextView mTvName,mTvPhone, mTvCommoit,mTvCity;
+    private String plannerName,plannerPhone,plannerCity;
 
     @Override
     protected void initView() {
@@ -27,9 +26,10 @@ public class PlannerAct extends BaseActivity {
 
         mTvName = (TextView) findViewById(R.id.tv_planner_name);
         mTvPhone = (TextView) findViewById(R.id.tv_planner_phone);
-        mtvCommoit = (TextView) findViewById(R.id.tv_change_commit);
+        mTvCity = (TextView) findViewById(R.id.tv_planner_city);
+        mTvCommoit = (TextView) findViewById(R.id.tv_change_commit);
 
-        mtvCommoit.setOnClickListener(new View.OnClickListener() {
+        mTvCommoit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tip();
@@ -42,6 +42,18 @@ public class PlannerAct extends BaseActivity {
         super.onStart();
         setTitle(getResources().getString(R.string.own_planner));
         setBackOption(true);
+    }
+
+    @Override
+    protected void initData() {
+        Intent intent = getIntent();
+        plannerName = intent.getStringExtra("plannerName");
+        plannerPhone = intent.getStringExtra("plannerPhone");
+        plannerCity = intent.getStringExtra("plannerCity");
+
+        mTvName.setText(plannerName);
+        mTvPhone.setText(plannerPhone);
+        mTvCity.setText(plannerCity);
     }
 
     /**

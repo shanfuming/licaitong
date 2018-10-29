@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,7 +18,7 @@
             android:layout_height="@dimen/y80">
 
             <ImageView
-                android:layout_width="@dimen/x32"
+                android:layout_width="@dimen/x25"
                 android:layout_height="@dimen/x40"
                 android:background="@mipmap/back_white" />
         </LinearLayout>
@@ -42,7 +41,6 @@
                 android:id="@+id/tv_detial_predictIncome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10.88%"
                 android:textColor="@color/white"
                 android:textSize="@dimen/x80" />
 
@@ -79,7 +77,6 @@
                 android:id="@+id/tv_detail_limit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10.88%"
                 android:textColor="@color/text_dark"
                 android:textSize="@dimen/x32" />
 
@@ -110,7 +107,6 @@
                 android:id="@+id/tv_detail_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5万"
                 android:textColor="@color/text_dark"
                 android:textSize="@dimen/x32" />
 
@@ -141,7 +137,6 @@
                 android:id="@+id/tv_detail_subscribe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100万"
                 android:textColor="@color/text_dark"
                 android:textSize="@dimen/x32" />
 
@@ -172,7 +167,6 @@
                 android:id="@+id/tv_detail_rest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50万"
                 android:textColor="@color/text_dark"
                 android:textSize="@dimen/x32" />
 
@@ -236,7 +230,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x20"
-                android:text="一万及整数倍数递增"
                 android:textColor="@color/text_grey"
                 android:textSize="@dimen/x24" />
 

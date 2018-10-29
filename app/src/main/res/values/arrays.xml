@@ -9,12 +9,6 @@
     </array>
 
     <!-- 投资记录 - titles -->
-    <array name="investmentRecordNoFlowTitles">
-        <item>定期理财</item>
-        <item>债权转让</item>
-    </array>
-
-    <!-- 投资记录 - titles -->
     <array name="investmentRecordNoOtherTitles">
         <item>定期理财</item>
     </array>

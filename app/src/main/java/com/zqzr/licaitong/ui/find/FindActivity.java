@@ -3,6 +3,7 @@ package com.zqzr.licaitong.ui.find;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sys.blackcat.stickheaderlayout.IpmlScrollChangListener;
@@ -12,6 +13,7 @@ import com.zqzr.licaitong.adapter.FragmentAdapter;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.ui.find.fragment.DynamicFragment;
 import com.zqzr.licaitong.ui.find.fragment.NewsFragment;
+import com.zqzr.licaitong.ui.find.fragment.OnChangeFindActivityData;
 import com.zqzr.licaitong.utils.Utils;
 
 import java.util.ArrayList;
@@ -27,18 +29,20 @@ import cn.carbs.android.indicatorview.library.IndicatorView;
  * Description:
  */
 
-public class FindActivity extends BaseActivity {
+public class FindActivity extends BaseActivity implements OnChangeFindActivityData{
     private StickHeaderLayout mLayout;
     private FragmentAdapter mAdapter;
     private ViewPager mViewPager;
     private TextView mAppbarTitle;
     private IndicatorView mIndicatorViewEven;
+    private ImageView mIvTopBanner;
 
     @Override
     protected void initView() {
         setContentView(R.layout.act_find);
 
         mLayout = (StickHeaderLayout) findViewById(R.id.stick_header_layout);
+        mIvTopBanner = (ImageView) findViewById(R.id.iv_topBanner);
         mAdapter = new FragmentAdapter(getSupportFragmentManager(), getFragment());
         mViewPager = (ViewPager) findViewById(R.id.vp_view_pager);
         mAppbarTitle = (TextView) findViewById(R.id.appbar_title);
@@ -90,5 +94,10 @@ public class FindActivity extends BaseActivity {
         list.add(new NewsFragment());
         list.add(new DynamicFragment());
         return list;
+    }
+
+    @Override
+    public void ChangeDatas(String url) {
+        Utils.loadImg(mIvTopBanner,url,null);
     }
 }

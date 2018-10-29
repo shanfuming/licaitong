@@ -75,6 +75,8 @@
     <string name="register_agree_two">《中企智信用户协议》</string>
     <string name="apply_name">姓名</string>
     <string name="apply_city">所在城市</string>
+    <string name="apply_address">居住地址</string>
+    <string name="apply_address_hint">请输入居住地址</string>
     <string name="register_apply">申请</string>
     <string name="apply_name_hint">请输入姓名</string>
     <string name="apply_city_hint">请选择所在城市</string>
@@ -124,12 +126,59 @@
     <string name="list_selectCondition1">投资期限</string>
     <string name="list_selectCondition2">起投金额</string>
 
+    <!--票据列表分类-->
+    <string name="piaojuList_selectCondition1">资产专区</string>
+    <string name="piaojuList_selectCondition2">票据直投</string>
+
     <!--详情页-->
     <string name="detail_subscribe">立即预约</string>
     <string name="detail_limit">项目期限</string>
     <string name="detail_start">起投金额</string>
     <string name="detail_subscribeAll">项目总额</string>
     <string name="detail_subscribeRest">可预约金额</string>
+
+    <!--项目介绍等-->
+    <string name="introduce_rule1_t">出借规则</string>
+    <string name="introduce_rule1">起投金额5万，以1万元的整数倍递增</string>
+    <string name="introduce_rule2_t">退出规则</string>
+    <string name="introduce_rule2">到期一次性还本付息</string>
+    <string name="introduce_incoming_t">预期收益</string>
+    <string name="introduce_incoming">单个出借中借款标应计利息=出借本金*年利率*(累计计息天数/365)</string>
+    <string name="introduce_rule3_t">计息规则</string>
+    <string name="introduce_rule3">即投即息，即T+1,从投资次日开始计算利息，到期付息</string>
+    <string name="introduce_use_t">资金用途</string>
+    <string name="introduce_use">资金投向电子商业汇票系统ECDS中基于真实贸易背景的支付型优质票据</string>
+    <string name="introduce_measure_t">风控措施</string>
+    <string name="introduce_measure1">1.线下风控筛选票据资产，线上系统审核承兑企业征信，承兑企业均为上市公司，国企，央企，商业信用优质，保证资金按时到期兑付。</string>
+    <string name="introduce_measure2">2.所做票据均为央行开发ECDS系统内电子商业承兑汇票，底层资产真实可查，信息披露及时，公开透明</string>
+
+    <string name="introduce_rule6">即投即息，即T+1,从投资次日开始计算利息</string>
+    <string name="introduce_use2">投向国润盛世国际商业保理，为广大的中、小、微企业提供保理融资服务，解决企业在发展过程中所需的流动资金需求</string>
+
+    <string name="in_baoli_rule1_t">账户监管</string>
+    <string name="in_baoli_rule1">国润盛世设立应收账款保理专户，监控应收账款的归集及收回，保证受让应收账款按时足额偿付</string>
+    <string name="in_baoli_rule2_t">商票质押</string>
+    <string name="in_baoli_rule2">原债权人提前开具足额的商业承兑汇票质押于我司，以保证到期可以足额还款</string>
+    <string name="in_baoli_rule3_t">对原债权人进行尽职调查</string>
+    <string name="in_baoli_rule3">包括但不限于对原债权人经营情况、财务状况、征信状况、法定代表人经历及征信、涉诉涉案情况进行专业调查</string>
+    <string name="in_baoli_rule4_t">原债权人关联企业回购责任</string>
+    <string name="in_baoli_rule4">原债权人依照保理合同约定承担债权回购责任，同时出具付款承诺函</string>
+
+    <string name="audit">已通过</string>
+    <string name="audit_1">人工专业验票</string>
+    <string name="audit_2">持票企业经营资质审核</string>
+    <string name="audit_3">开票企业资质审核</string>
+    <string name="audit_4">开票企业票据兑付审核</string>
+    <string name="look_compact">预览协议</string>
+
+    <string name="recode_name">预约人</string>
+    <string name="recode_num">预约金额</string>
+    <string name="recode_time">预约时间</string>
+
+    <!-- 项目详情 - titles -->
+    <string name="project_in">项目介绍</string>
+    <string name="project_audit">项目审核</string>
+    <string name="project_record">预约记录</string>
 
     <!--我的页面-->
     <string name="own_money_name">总投资金额（元）</string>
@@ -140,7 +189,9 @@
     <string name="own_returnPlan">回款计划</string>
     <string name="own_info">我的信息</string>
     <string name="own_personIdentify">实名认证</string>
-    <string name="own_isNotentify">未认证</string>
+    <string name="own_isNotIdentify">未认证</string>
+    <string name="own_isIdentify">已认证</string>
+    <string name="own_isNotFail">未通过</string>
     <string name="own_bankcard">绑定银行卡</string>
     <string name="own_planner">我的理财师</string>
     <string name="own_evalution">风险评测</string>
@@ -240,6 +291,9 @@
     <string name="own_card_addTip">卡号（请绑定持卡人本人银行卡）</string>
     <string name="own_card_addHint">请输入银行卡号</string>
     <string name="own_card_bind">绑卡</string>
+
+    <!--活动-->
+    <string name="activity_tip">距离开始倒计时：</string>
 
 
     <!-- 空态值 -->

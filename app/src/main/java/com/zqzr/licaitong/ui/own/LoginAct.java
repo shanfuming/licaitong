@@ -1,8 +1,10 @@
 package com.zqzr.licaitong.ui.own;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
-import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -11,17 +13,26 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.base.BaseParams;
+import com.zqzr.licaitong.base.Constant;
+import com.zqzr.licaitong.bean.CommonBean;
+import com.zqzr.licaitong.bean.Getcode;
+import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.http.OKGO_GetData;
+import com.zqzr.licaitong.ui.MainActivity;
 import com.zqzr.licaitong.utils.ActivityUtils;
+import com.zqzr.licaitong.utils.JsonUtil;
 import com.zqzr.licaitong.utils.RegularUtil;
-import com.zqzr.licaitong.utils.TextUtil;
+import com.zqzr.licaitong.utils.SPUtil;
+import com.zqzr.licaitong.utils.Utils;
+import com.zqzr.licaitong.utils.encryption.MD5Util;
+import com.zqzr.licaitong.view.KeyDownLoadingDialog;
 
 import java.util.TreeMap;
 
@@ -38,6 +49,28 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
     private ImageView mIvIsRight,mIvIsSee,mIvIsWrong;
     private EditText mUserName,mPassword;
     private boolean isSee = false;
+    private KeyDownLoadingDialog loadingDialog;
+    private int turnMain;
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case Constant.NUMBER_1:
+                    if (loadingDialog.isShowing()){
+                        loadingDialog.dismiss();
+                    }
+                    if (turnMain == 3){
+                        Intent intent = new Intent();
+                        intent.putExtra("tab",3);
+                        ActivityUtils.push(MainActivity.class,intent);
+                    }
+                    finish();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void initView() {
@@ -63,6 +96,11 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initData() {
+
+        turnMain = getIntent().getIntExtra("turnMian",-1);
+
+        loadingDialog = new KeyDownLoadingDialog(this);
+
         mUserName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -84,7 +122,26 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
             }
         });
 
+        mPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() > 0){
+                    mIvIsWrong.setVisibility(View.VISIBLE);
+                }else{
+                    mIvIsWrong.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override
@@ -123,33 +180,52 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
     }
 
     private void login() {
-
+        loadingDialog.setText("正在登录");
+        loadingDialog.show();
         //判断手机号是否符合
         if (!RegularUtil.isPhone(mUserName.getText().toString())){
+            Utils.toast(Constant.Login_UserName_Null);
             return;
         }
         //判断密码是否符合
-        if (TextUtil.isEmpty(mUserName.getText().toString())){
+        if (TextUtils.isEmpty(mPassword.getText().toString())){
+            Utils.toast(Constant.Login_PassWord_Null);
             return;
         }
 
         TreeMap<String,String> params = new TreeMap<>();
         params.put("phone",mUserName.getText().toString());
-        params.put("password",mPassword.getText().toString());
+        params.put("password", MD5Util.getMD5Str(mPassword.getText().toString()));
 
         PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Do_Lgoin,params);
         postRequest.execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
+                if (!TextUtils.isEmpty(response.body())) {
+                    Login login = JsonUtil.parseJsonToBean(response.body(), Login.class);
+                    if (200 == Integer.parseInt(login.code)) {
+                        MyApplication.getInstance().updataLand(true);
+                        SPUtil.setValue("token",login.data.token);
+                        SPUtil.setValue("userid",login.data.id);
+                        SPUtil.setValue("username",login.data.phone);
+                        SPUtil.setValue("usericon",login.data.headPortraitUrl);
+                        loadingDialog.setText("登录成功");
 
+                        handler.sendEmptyMessageDelayed(Constant.NUMBER_1,1500);
+
+                    } else {
+                        Utils.toast(login.message);
+                        loadingDialog.dismiss();
+                    }
+                }else loadingDialog.dismiss();
             }
 
             @Override
             public void onError(Response<String> response) {
                 super.onError(response);
+                Utils.toast(Constant.NetWork_Error);
+                loadingDialog.dismiss();
             }
         });
-
-
     }
 }

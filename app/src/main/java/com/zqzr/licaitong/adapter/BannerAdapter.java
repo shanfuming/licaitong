@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
+import com.zqzr.licaitong.R;
+import com.zqzr.licaitong.bean.Banner;
+import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.Utils;
 
 import java.util.ArrayList;
@@ -20,9 +23,9 @@ import java.util.ArrayList;
 
 public class BannerAdapter extends StaticPagerAdapter {
 
-    private ArrayList<Integer> bannerList;
+    private ArrayList<Banner.Data> bannerList;
 
-    public BannerAdapter(ArrayList<Integer> bannerList) {
+    public BannerAdapter(ArrayList<Banner.Data> bannerList) {
         this.bannerList = bannerList;
     }
 
@@ -31,10 +34,10 @@ public class BannerAdapter extends StaticPagerAdapter {
 
         ImageView imageView = new ImageView(container.getContext());
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setBackground(ActivityUtils.peek().getResources().getDrawable(R.mipmap.load_moren));
         imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         //设置banner图片
-//        Utils.loadImg(imageView,,null);
-        imageView.setImageResource(bannerList.get(position));
+        Utils.loadImg(imageView,bannerList.get(position).imageUrl,null);
         return imageView;
     }
 

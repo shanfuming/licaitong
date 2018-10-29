@@ -60,6 +60,8 @@ public class SuccessAndFailDialog extends Dialog implements View.OnClickListener
         mContent = (TextView) findViewById(R.id.dialog_success_content);
         mDes = (TextView) findViewById(R.id.dialog_success_des);
         mNext = (TextView) findViewById(R.id.dialog_success_next);
+
+        mNext.setOnClickListener(this);
     }
 
     private void setListener() {
@@ -132,6 +134,10 @@ public class SuccessAndFailDialog extends Dialog implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()){
+            case R.id.dialog_success_next:
+                mClickListener.onClickLook();
+                break;
+        }
     }
 }

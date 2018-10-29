@@ -8,38 +8,47 @@ package com.zqzr.licaitong.bean;
  * Description:
  */
 
-public class FindItem {
-    String find_img;
-    String find_title;
-    String find_time;
 
-    public FindItem(String find_img, String find_title, String find_time) {
-        this.find_img = find_img;
-        this.find_title = find_title;
-        this.find_time = find_time;
-    }
+import java.lang.reflect.Field;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-    public String getFind_img() {
-        return find_img;
-    }
+public class FindItem implements Serializable {
 
-    public void setFind_img(String find_img) {
-        this.find_img = find_img;
-    }
+    public String ext;
+    public String code;
+    public String attach;
+    public String message;
+    public Data data;
 
-    public String getFind_title() {
-        return find_title;
-    }
+    public class Data implements Serializable {
 
-    public void setFind_title(String find_title) {
-        this.find_title = find_title;
-    }
+        public int total;
+        public String bannerUrl;
+        public int pageNum;
+        public ArrayList<CList> cList;
 
-    public String getFind_time() {
-        return find_time;
-    }
+        public class CList implements Serializable {
 
-    public void setFind_time(String find_time) {
-        this.find_time = find_time;
+            public Long publishTime;
+            public Long addTime;
+            public String updateIp;
+            public Long updateTime;
+            public String updateOperator;
+            public String source;
+            public String title;
+            public int type;
+            public String addIp;
+            public int isDisplay;
+            public String content;
+            public String urlHref;
+            public String addOperator;
+            public String subTitle;
+            public int isTop;
+            public String imageUrl;
+            public int id;
+            public String introduction;
+        }
     }
 }

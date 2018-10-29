@@ -18,7 +18,7 @@
             android:layout_height="@dimen/x142"
             android:layout_gravity="center_horizontal"
             android:src="@mipmap/success"
-            android:visibility="gone"
+            android:layout_marginBottom="@dimen/y30"
             />
 
         <TextView
@@ -26,11 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/y30"
             android:background="@color/text_dark"
             android:textColor="@color/text_dark"
             android:textSize="@dimen/x36"
-            android:visibility="gone"
+            android:layout_marginBottom="@dimen/y20"
             />
         <!--android:visibility="gone"-->
         <TextView
@@ -38,18 +37,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/y20"
             android:gravity="center"
             android:textColor="@color/text_grey"
             android:textSize="@dimen/x24"
-            android:visibility="gone"
+            android:layout_marginBottom="@dimen/y40"
             />
 
         <TextView
             android:id="@+id/dialog_success_next"
             android:layout_width="@dimen/x200"
             android:layout_height="@dimen/y60"
-            android:layout_marginTop="@dimen/y40"
             android:layout_marginBottom="@dimen/y40"
             android:layout_gravity="center_horizontal"
             android:text="@string/next"

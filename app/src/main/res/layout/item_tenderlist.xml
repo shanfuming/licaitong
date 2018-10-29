@@ -19,10 +19,13 @@
             android:textColor="@color/text_dark"
             />
         
-        <ImageView
-            android:id="@+id/iv_tender_state"
-            android:layout_width="@dimen/x70"
-            android:layout_height="@dimen/y28"
+        <TextView
+            android:id="@+id/tv_tender_state"
+            android:layout_width="@dimen/x90"
+            android:layout_height="@dimen/y30"
+            android:gravity="center"
+            android:textSize="@dimen/x22"
+            android:textColor="@color/white"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/x20"
             />
@@ -44,7 +47,6 @@
                 android:id="@+id/tv_predictIncome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10.88%"
                 android:textColor="@color/app_color_principal"
                 android:textSize="@dimen/x48" />
 
@@ -70,7 +72,6 @@
                 android:id="@+id/tv_timeLimit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="112天"
                 android:textColor="@color/dayAndMark"
                 android:textSize="@dimen/x48" />
 
@@ -98,7 +99,6 @@
                 android:id="@+id/tv_tenderStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5万起投"
                 android:textColor="@color/dayAndMark"
                 android:textSize="@dimen/x48" />
 

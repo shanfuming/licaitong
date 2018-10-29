@@ -29,7 +29,9 @@ public class BaseParams {
     /**
      * 测试服务器地址
      */
-    private static final String URL_BETA            = "http://10.16.8.43:8080";
+//    private static final String URL_BETA            = "http://10.16.8.43:8080";
+    private static final String URL_BETA            = "http://10.16.8.33:8080";
+
     /**
      * 正式服务器地址
      */
@@ -38,10 +40,6 @@ public class BaseParams {
      * 服务器地址
      */
     public static final String URL_ADDRESS         = IS_DEBUG ? URL_BETA : URL_RELEASE;
-    /**
-     * 模块名称("接口地址"会拼接在 URL 中最后的"/"之后，故URL最好以"/"结尾)
-     */
-    public static final String URL_SCHEME          = "/app/";
     /**
      * appkey
      */
@@ -109,5 +107,90 @@ public class BaseParams {
      * 登录
      */
     public static final String Do_Lgoin     = "/user/doLogin";
+    /**
+     * 注册下一步
+     */
+    public static final String Regist_Next = "/user/nextStep";
+    /**
+     * 注册发送验证码
+     */
+    public static final String Regist_Code = "/user/sendCode";
 
+    /**
+     * 申请理财师
+     */
+    public static final String Apply_Planner = "/user/financialPlanner";
+
+    /**
+     * 注册
+     */
+    public static final String Regist = "/user/register";
+    /**
+     * 忘记密码发送验证码
+     */
+    public static final String FindPwd_Code = "/user/forgetPassword";
+    /**
+     * 忘记密码
+     */
+    public static final String FindPwd = "/user/forgetPwSub";
+    /**
+     * 获取首页轮播图
+     */
+    public static final String Home_Banner = "/home/getSysScrollImages";
+    /**
+     * 活动
+     */
+    public static final String Activity = "/activity/homePage";
+    /**
+     * 意见反馈
+     */
+    public static final String Opinion = "/setting/opinion";
+    /**
+     * 获取版本信息
+     */
+    public static final String Version = "/commonSetting/getVersion";
+    /**
+     * 修改手机号
+     */
+    public static final String ChangePhone_Code = "/setting/changePhone";
+    /**
+     * 修改手机号
+     */
+    public static final String ChangePhone_Next = "/setting/nextStep";
+    /**
+     * 新闻和公司动态
+     */
+    public static final String Monent = "/moment/getMomentByParam";
+    /**
+     * 我的 页面信息
+     */
+    public static final String OwnPage = "/my/homePage";
+    /**
+     * 首页 投资分类和发现
+     */
+    public static final String GetTopOrSuggInvestions = "/home/getTopOrSuggInvestions";
+    /**
+     * 实名认证
+     */
+    public static final String AuthenticationUser = "/commonSetting/authenticationUser";
+    /**
+     * 绑定银行卡
+     */
+    public static final String BindBankCard = "/commonSetting/bankCheck";
+    /**
+     * 银行卡列表
+     */
+    public static final String BankCardList = "/my/bankCardList";
+    /**
+     * 解绑银行卡
+     */
+    public static final String UnBankCard = "/my/unbindBankCard";
+    /**
+     * 投资列表
+     */
+    public static final String ProductList = "/home/getHomeProductsByParam";
+    /**
+     * 投资详情
+     */
+    public static final String ProductDetail = "/home/getProductDetail";
 }

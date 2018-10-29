@@ -16,7 +16,6 @@ import com.zqzr.licaitong.ui.find.FindActivity;
 import com.zqzr.licaitong.ui.home.HomeActivity;
 import com.zqzr.licaitong.ui.own.OwnActivity;
 import com.zqzr.licaitong.utils.ActivityUtils;
-import com.zqzr.licaitong.utils.NetworkUtil;
 import com.zqzr.licaitong.utils.PermissionCheck;
 
 import java.util.List;
@@ -84,7 +83,6 @@ public abstract class BaseActivity extends AppBarActivity {
 
     @Override
     protected void onDestroy() {
-        NetworkUtil.dismissCutscenes();
         super.onDestroy();
         ActivityUtils.remove(this);
         //页面销毁时，取消网络请求
