@@ -1,9 +1,15 @@
 package com.zqzr.licaitong.ui.own.select_shengshiqu;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import com.umeng.analytics.MobclickAgent;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
@@ -24,7 +30,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 
-public class ShengShiQuActivity extends BaseActivity implements View.OnClickListener, OnWheelChangedListener {
+public class ShengShiQuActivity extends Activity implements View.OnClickListener, OnWheelChangedListener {
 
     private WheelView mViewProvince;
     private WheelView mViewCity;
@@ -131,10 +137,16 @@ public class ShengShiQuActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        initView();
+    }
+
     /**
      * ********************************************************************************************
      */
-    @Override
     protected void initView() {
         setContentView(R.layout.select_shengshiqu);
         setUpViews();
@@ -233,8 +245,6 @@ public class ShengShiQuActivity extends BaseActivity implements View.OnClickList
         intent.putExtra("CityName", mCurrentCityName);
         intent.putExtra("DistrictName", mCurrentDistrictName);
         setResult(Constant.CITY_SELECT_CODE, intent);
-//        Toast.makeText(ShengShiQuActivity.this, "当前选中:" + mCurrentProviceName + "," + mCurrentCityName + ","
-//                + mCurrentDistrictName + "," + mCurrentZipCode, Toast.LENGTH_SHORT).show();
         finish();
     }
 

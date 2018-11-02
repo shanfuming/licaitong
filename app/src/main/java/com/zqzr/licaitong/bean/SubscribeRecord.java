@@ -8,12 +8,12 @@ package com.zqzr.licaitong.bean;
  * Description:
  */
 
-public class Record {
+public class SubscribeRecord {
     String name;
     String num;
     String phone;
 
-    public Record(String name, String num, String phone) {
+    public SubscribeRecord(String name, String num, String phone) {
         this.name = name;
         this.num = num;
         this.phone = phone;

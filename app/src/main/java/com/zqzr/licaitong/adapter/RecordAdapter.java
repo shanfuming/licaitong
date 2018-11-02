@@ -1,13 +1,12 @@
 package com.zqzr.licaitong.adapter;
 
-import android.icu.text.AlphabeticIndex;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.zqzr.licaitong.R;
-import com.zqzr.licaitong.bean.Record;
+import com.zqzr.licaitong.bean.SubscribeRecord;
 import com.zqzr.licaitong.utils.ActivityUtils;
 
 import java.util.ArrayList;
@@ -22,9 +21,9 @@ import java.util.ArrayList;
 
 public class RecordAdapter extends BaseAdapter {
 
-    private ArrayList<Record> records;
+    private ArrayList<SubscribeRecord> records;
 
-    public RecordAdapter(ArrayList<Record> records) {
+    public RecordAdapter(ArrayList<SubscribeRecord> records) {
         this.records = records;
     }
 
@@ -49,14 +48,14 @@ public class RecordAdapter extends BaseAdapter {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = View.inflate(ActivityUtils.peek(), R.layout.item_record,null);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.record_name);
+            viewHolder.num = (TextView) convertView.findViewById(R.id.record_num);
+            viewHolder.phone = (TextView) convertView.findViewById(R.id.record_phone);
+
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
-        viewHolder.name = (TextView) convertView.findViewById(R.id.record_name);
-        viewHolder.num = (TextView) convertView.findViewById(R.id.record_num);
-        viewHolder.phone = (TextView) convertView.findViewById(R.id.record_phone);
 
         viewHolder.num.setText(records.get(position).getNum());
         viewHolder.name.setText(records.get(position).getName());

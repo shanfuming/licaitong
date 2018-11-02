@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_color_principal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lock_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/x150"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lock_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lock_small"
+        android:layout_marginTop="@dimen/x40"
+        android:gravity="center"
+        android:text="@string/lock_setup_start"
+        android:textColor="@color/text_white"
+        android:textSize="17sp" />
+
+    <com.zqzr.licaitong.view.lock.LockPatternView
+        android:id="@+id/lock_pattern"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" />
+
+    <LinearLayout
+        android:id="@+id/gesture_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="@dimen/x40"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/x30"
+        android:paddingRight="@dimen/x30">
+
+        <TextView
+            android:id="@+id/lock_forgot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="@string/lock_forgot"
+            android:textColor="#99FFFFFF"
+            android:textSize="@dimen/x27" />
+
+        <TextView
+            android:id="@+id/lock_visitor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/lock_visitor"
+            android:textColor="#99FFFFFF"
+            android:textSize="@dimen/x27" />
+    </LinearLayout>
+</LinearLayout>

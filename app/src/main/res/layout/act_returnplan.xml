@@ -42,13 +42,45 @@
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/returnPlan_listview"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/x30"
-        android:divider="@color/line_grey"
-        android:dividerHeight="@dimen/y1"
-        />
+        android:layout_height="match_parent">
+
+        <com.cjj.MaterialRefreshLayout
+            android:id="@+id/mrl_refreshLayout_ing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/returnPlan_listview_ing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/x30"
+                android:divider="@color/line_grey"
+                android:dividerHeight="@dimen/y1"
+                />
+
+        </com.cjj.MaterialRefreshLayout>
+
+        <com.cjj.MaterialRefreshLayout
+            android:id="@+id/mrl_refreshLayout_ed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            >
+
+            <ListView
+                android:id="@+id/returnPlan_listview_ed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/x30"
+                android:divider="@color/line_grey"
+                android:dividerHeight="@dimen/y1"
+                android:visibility="gone"
+                />
+
+        </com.cjj.MaterialRefreshLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

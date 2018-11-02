@@ -22,8 +22,8 @@ public class BankCards implements Serializable {
     public class Data implements Serializable {
 
         public String bank;
-        public int type;
+        public boolean type;
         public String bankNo;
-        public String id;
+        public int id;
     }
 }

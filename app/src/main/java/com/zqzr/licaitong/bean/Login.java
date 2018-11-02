@@ -22,8 +22,9 @@ public class Login implements Serializable {
 
     public class Data implements Serializable {
 
+        public String realName;
         public String phone;
-        public int id;
+        public int  id;
         public String headPortraitUrl;
         public String token;
     }

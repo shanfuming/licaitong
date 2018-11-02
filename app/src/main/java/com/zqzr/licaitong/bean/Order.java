@@ -1,5 +1,9 @@
 package com.zqzr.licaitong.bean;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Author: shanfuming
  * E-mail: shanfuming@zqzr.onaliyun.com
@@ -9,10 +13,27 @@ package com.zqzr.licaitong.bean;
  */
 
 public class Order {
-    String orderId;
-    String time;
-    String name;
-    String state;
-    String planmoney;
-    String predictIncome;
+    public String ext;
+    public String code;
+    public String attach;
+    public String message;
+    public Data data;
+
+    public class Data implements Serializable {
+
+        public int total;
+        public int pageNum;
+        public ArrayList<CList> cList;
+
+        public class CList implements Serializable {
+
+            public String productName;
+            public String investmentNo;
+            public double rateYear;
+            public int id;
+            public int status;
+            public double subscribeAmount;
+            public long addTime;
+        }
+    }
 }

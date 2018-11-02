@@ -50,16 +50,15 @@ public class TenderListAdapter extends BaseAdapter {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = View.inflate(ActivityUtils.peek(), R.layout.item_tenderlist,null);
+            viewHolder.tenderTitle = (TextView) convertView.findViewById(R.id.tv_tender_title);
+            viewHolder.predictIncome = (TextView) convertView.findViewById(R.id.tv_predictIncome);
+            viewHolder.limit = (TextView) convertView.findViewById(R.id.tv_timeLimit);
+            viewHolder.start = (TextView) convertView.findViewById(R.id.tv_tenderStart);
+            viewHolder.status = (TextView) convertView.findViewById(R.id.tv_tender_state);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
-        viewHolder.tenderTitle = (TextView) convertView.findViewById(R.id.tv_tender_title);
-        viewHolder.predictIncome = (TextView) convertView.findViewById(R.id.tv_predictIncome);
-        viewHolder.limit = (TextView) convertView.findViewById(R.id.tv_timeLimit);
-        viewHolder.start = (TextView) convertView.findViewById(R.id.tv_tenderStart);
-        viewHolder.status = (TextView) convertView.findViewById(R.id.tv_tender_state);
 
         viewHolder.tenderTitle.setText(tenders.get(position).name);
         viewHolder.predictIncome.setText(tenders.get(position).expectedYield+"%");

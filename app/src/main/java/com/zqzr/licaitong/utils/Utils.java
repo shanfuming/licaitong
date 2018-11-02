@@ -28,6 +28,7 @@ import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.Constant;
+import com.zqzr.licaitong.bean.Menu;
 
 import org.json.JSONObject;
 
@@ -596,19 +597,34 @@ public class Utils {
     }
 
     /**
-     * 用户名和银行卡加密***
+     * 银行卡加密***
      *
      * @param string
      * @return
      */
     public static String getEncodeStr(String string) {
-        String str1 = string.substring(0, 2);
+        String str1 = string.substring(0, 3);
         String str2 = string.substring(string.length() - 4, string.length());
         String str3 = "";
         for (int i = 3; i < string.length() - 4; i++) {
             str3 = str3 + "*";
         }
         return str1 + str3 + str2;
+    }
+
+    /**
+     * 用户名加密***
+     *
+     * @param string
+     * @return
+     */
+    public static String getEncodeName(String string) {
+        String str1 = string.substring(0, 1);
+        String str3 = "";
+        for (int i = 1; i < string.length(); i++) {
+            str3 = str3 + "*";
+        }
+        return str1 + str3;
     }
 
     /**
@@ -622,9 +638,165 @@ public class Utils {
         return decimalFormat.format(d);
     }
 
-    public static String getWan(int num){
+    /**
+     * 强制获取double类型到小数点后两位
+     *
+     * @param d
+     * @return
+     */
+    public static String getDouble(double d) {
+        DecimalFormat decimalFormat = new DecimalFormat("#####0.##");
+        return decimalFormat.format(d);
+    }
+
+    /**
+     * 返回详情页字段
+     * @param num
+     * @return
+     */
+    public static String getWan(double num){
         String str = "";
-        str = num / 10000 + "万";
+        if (num > 10000){
+            str = getDouble(num / 10000) + "万";
+        }else{
+            str = getDouble(num) + "";
+        }
         return str;
     }
+
+    /**
+     * 获取时间范围
+     * @param currentDate
+     * @return
+     */
+    public static String dateLimit(String currentDate){
+        String date = "";
+        switch (currentDate){
+            case "一个月":
+                date = "oneMonth";
+                break;
+            case "三个月":
+                date = "threeMonth";
+                break;
+            case "六个月":
+                date = "halfYear";
+                break;
+            case "一年":
+                date = "oneYear";
+                break;
+        }
+        return date;
+    }
+
+    /**
+     * 获取产品类型
+     * @param currentDate
+     * @return
+     */
+    public static String productName(String currentDate){
+        String name = "";
+        switch (currentDate){
+            case "票据":
+                name = "0";
+                break;
+            case "保理":
+                name = "1";
+                break;
+            case "房产":
+                name = "2";
+                break;
+            case "股权":
+                name = "3";
+                break;
+            case "票据直投":
+                name = "4";
+                break;
+        }
+        return name;
+    }
+
+    /**
+     * 获取订单状态
+     * @param currentDate
+     * @return
+     */
+    public static String orderStatus(String currentDate){
+        String status = "";
+        switch (currentDate){
+            case "待受理":
+                status = "0";
+                break;
+            case "待签约":
+                status = "1";
+                break;
+            case "已签约":
+                status = "2";
+                break;
+            case "签约作废":
+                status = "3";
+                break;
+            case "签约不成功":
+                status = "4";
+                break;
+            case "已取消":
+                status = "5";
+                break;
+            case "已退款":
+                status = "6";
+                break;
+            case "待赎回":
+                status = "7";
+                break;
+            case "已赎回":
+                status = "8";
+                break;
+            case "已还款":
+                status = "9";
+                break;
+        }
+        return status;
+    }
+
+    /**
+     * 获取订单状态
+     * @param currentDate
+     * @return
+     */
+    public static String orderStatus(int currentDate){
+        String status = "";
+        switch (currentDate){
+            case 0:
+                status = "待受理";
+                break;
+            case 1:
+                status = "待签约";
+                break;
+            case 2:
+                status = "已签约";
+                break;
+            case 3:
+                status = "签约作废";
+                break;
+            case 4:
+                status = "签约不成功";
+                break;
+            case 5:
+                status = "已取消";
+                break;
+            case 6:
+                status = "已退款";
+                break;
+            case 7:
+                status = "待赎回";
+                break;
+            case 8:
+                status = "已赎回";
+                break;
+            case 9:
+                status = "已还款";
+                break;
+        }
+        return status;
+    }
+
 }

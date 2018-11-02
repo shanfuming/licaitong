@@ -21,8 +21,6 @@ import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
-import com.zqzr.licaitong.bean.CommonBean;
-import com.zqzr.licaitong.bean.Getcode;
 import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.http.OKGO_GetData;
 import com.zqzr.licaitong.ui.MainActivity;
@@ -45,32 +43,48 @@ import java.util.TreeMap;
  */
 
 public class LoginAct extends BaseActivity implements View.OnClickListener {
-    private TextView mTvForgetpwd,mLogin,mTvTurnRegist;
-    private ImageView mIvIsRight,mIvIsSee,mIvIsWrong;
-    private EditText mUserName,mPassword;
+    private TextView mTvForgetpwd, mLogin, mTvTurnRegist;
+    private ImageView mIvIsRight, mIvIsSee, mIvIsWrong;
+    private EditText mUserName, mPassword;
     private boolean isSee = false;
     private KeyDownLoadingDialog loadingDialog;
-    private int turnMain;
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case Constant.NUMBER_1:
-                    if (loadingDialog.isShowing()){
+                    loadingDialog.setText("登录成功");
+                    handler.sendEmptyMessageDelayed(Constant.NUMBER_2,1000);
+                    break;
+                case Constant.NUMBER_2:
+                    if (loadingDialog.isShowing()) {
                         loadingDialog.dismiss();
-                    }
-                    if (turnMain == 3){
-                        Intent intent = new Intent();
-                        intent.putExtra("tab",3);
-                        ActivityUtils.push(MainActivity.class,intent);
                     }
                     finish();
                     break;
             }
         }
     };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setBackOption(true, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getIntent().getIntExtra("turn",-1) == 1){
+                    Intent intent = new Intent();
+                    intent.putExtra("tab", 0);
+                    ActivityUtils.push(MainActivity.class, intent);
+                    finish();
+                }else{
+                    ActivityUtils.pop();
+                }
+            }
+        });
+    }
 
     @Override
     protected void initView() {
@@ -84,7 +98,7 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
         mIvIsWrong = (ImageView) findViewById(R.id.login_wrong);
 
         mTvForgetpwd = (TextView) findViewById(R.id.forgetpwd);
-        mLogin = (TextView) findViewById(R.id.login);
+        mLogin = (TextView) findViewById(R.id.loginout);
         mTvTurnRegist = (TextView) findViewById(R.id.turn_regist);
 
         mIvIsSee.setOnClickListener(this);
@@ -96,8 +110,6 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initData() {
-
-        turnMain = getIntent().getIntExtra("turnMian",-1);
 
         loadingDialog = new KeyDownLoadingDialog(this);
 
@@ -114,9 +126,9 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (RegularUtil.isPhone(s.toString())){
+                if (RegularUtil.isPhone(s.toString())) {
                     mIvIsRight.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     mIvIsRight.setVisibility(View.GONE);
                 }
             }
@@ -135,9 +147,9 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() > 0){
+                if (s.toString().length() > 0) {
                     mIvIsWrong.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     mIvIsWrong.setVisibility(View.GONE);
                 }
             }
@@ -146,14 +158,14 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.login_see:
-                if (!isSee){ //如果是不能看到密码的情况下，
+                if (!isSee) { //如果是不能看到密码的情况下，
                     mPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    isSee=true;
-                }else { //如果是能看到密码的状态下
+                    isSee = true;
+                } else { //如果是能看到密码的状态下
                     mPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    isSee=false;
+                    isSee = false;
                 }
                 break;
             case R.id.login_wrong:
@@ -161,20 +173,20 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.forgetpwd:
                 Intent forgetpwd = new Intent();
-                if (RegularUtil.isPhone(mUserName.getText().toString())){
-                    forgetpwd.putExtra("phone",mUserName.getText().toString());
+                if (RegularUtil.isPhone(mUserName.getText().toString())) {
+                    forgetpwd.putExtra("phone", mUserName.getText().toString());
                 }
-                ActivityUtils.push(FindPwdFirstAct.class,forgetpwd);
+                ActivityUtils.push(FindPwdFirstAct.class, forgetpwd);
                 break;
-            case R.id.login:
+            case R.id.loginout:
                 login();
                 break;
             case R.id.turn_regist:
                 Intent regist = new Intent();
-                if (RegularUtil.isPhone(mUserName.getText().toString())){
-                    regist.putExtra("phone",mUserName.getText().toString());
+                if (RegularUtil.isPhone(mUserName.getText().toString())) {
+                    regist.putExtra("phone", mUserName.getText().toString());
                 }
-                ActivityUtils.push(RegistFirstAct.class,regist);
+                ActivityUtils.push(RegistFirstAct.class, regist);
                 break;
         }
     }
@@ -183,41 +195,40 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
         loadingDialog.setText("正在登录");
         loadingDialog.show();
         //判断手机号是否符合
-        if (!RegularUtil.isPhone(mUserName.getText().toString())){
+        if (!RegularUtil.isPhone(mUserName.getText().toString())) {
             Utils.toast(Constant.Login_UserName_Null);
             return;
         }
         //判断密码是否符合
-        if (TextUtils.isEmpty(mPassword.getText().toString())){
+        if (TextUtils.isEmpty(mPassword.getText().toString())) {
             Utils.toast(Constant.Login_PassWord_Null);
             return;
         }
 
-        TreeMap<String,String> params = new TreeMap<>();
-        params.put("phone",mUserName.getText().toString());
+        TreeMap<String, String> params = new TreeMap<>();
+        params.put("phone", mUserName.getText().toString());
         params.put("password", MD5Util.getMD5Str(mPassword.getText().toString()));
 
-        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Do_Lgoin,params);
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Do_Lgoin, params);
         postRequest.execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    Login login = JsonUtil.parseJsonToBean(response.body(), Login.class);
-                    if (200 == Integer.parseInt(login.code)) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        Login login = JsonUtil.parseJsonToBean(response.body(), Login.class);
                         MyApplication.getInstance().updataLand(true);
-                        SPUtil.setValue("token",login.data.token);
-                        SPUtil.setValue("userid",login.data.id);
-                        SPUtil.setValue("username",login.data.phone);
-                        SPUtil.setValue("usericon",login.data.headPortraitUrl);
-                        loadingDialog.setText("登录成功");
+                        SPUtil.setValue("token", login.data.token);
+                        SPUtil.setValue("userid", login.data.id+"");
+                        SPUtil.setValue("username", login.data.phone);
+                        SPUtil.setValue("usericon", login.data.headPortraitUrl);
 
-                        handler.sendEmptyMessageDelayed(Constant.NUMBER_1,1500);
+                        handler.sendEmptyMessageDelayed(Constant.NUMBER_1, 1000);
 
                     } else {
-                        Utils.toast(login.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                         loadingDialog.dismiss();
                     }
-                }else loadingDialog.dismiss();
+                }
             }
 
             @Override

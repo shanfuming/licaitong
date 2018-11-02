@@ -2,6 +2,7 @@ package com.zqzr.licaitong.ui.own;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -10,15 +11,31 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cjj.MaterialRefreshLayout;
+import com.cjj.MaterialRefreshListener;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.PostRequest;
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.adapter.DropMenuAdapter;
+import com.zqzr.licaitong.adapter.OrderAdapter;
 import com.zqzr.licaitong.base.BaseActivity;
+import com.zqzr.licaitong.base.BaseParams;
+import com.zqzr.licaitong.base.Constant;
+import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.bean.Menu;
+import com.zqzr.licaitong.bean.Order;
+import com.zqzr.licaitong.http.OKGO_GetData;
 import com.zqzr.licaitong.utils.DensityUtils;
+import com.zqzr.licaitong.utils.JsonUtil;
+import com.zqzr.licaitong.utils.SPUtil;
 import com.zqzr.licaitong.utils.Utils;
+import com.zqzr.licaitong.utils.encryption.MD5Util;
+import com.zqzr.licaitong.view.KeyDownLoadingDialog;
 import com.zqzr.licaitong.view.SpacesItemDecoration;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 /**
  * Author: shanfuming
@@ -45,6 +62,15 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
     private boolean isTime,isState,isProduct;
     private DropMenuAdapter menuAdapter;
 
+    private String currentLimit = "oneMonth";
+    private String currentProductName = "";
+    private String currentStatus = "";
+    private int currentPage = 1,nextPage = 2;
+    private ArrayList<Order.Data.CList> orders = new ArrayList<>();
+    private KeyDownLoadingDialog loadingDialog;
+    private OrderAdapter ordersAdapter;
+
+
     @Override
     protected void initView() {
         setContentView(R.layout.act_order);
@@ -61,6 +87,7 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
         mask = findViewById(R.id.mask);
 
         mRefreshLayout = (MaterialRefreshLayout) findViewById(R.id.mrl_refreshLayout);
+        mRefreshLayout.setLoadMore(true);
         mOrderRecyclerView = (RecyclerView) findViewById(R.id.order_recyclerview) ;
         LinearLayoutManager mLayoutMgr = new LinearLayoutManager(this);
         mOrderRecyclerView.setLayoutManager(mLayoutMgr);
@@ -68,7 +95,8 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
         int leftRight = DensityUtils.dp2px(this, 0f);
         int topBottom = DensityUtils.dp2px(this, 12f);
         mOrderRecyclerView.addItemDecoration(new SpacesItemDecoration(leftRight, topBottom,R.color.line_grey));
-
+        ordersAdapter = new OrderAdapter(orders);
+        mOrderRecyclerView.setAdapter(ordersAdapter);
 
         mLlProduct.setOnClickListener(this);
         mLlState.setOnClickListener(this);
@@ -79,20 +107,31 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initData() {
-        time.add(new Menu("全部"));
-        time.add(new Menu("3个月以下"));
-        time.add(new Menu("3-6个月"));
-        time.add(new Menu("6-12个月"));
-        time.add(new Menu("12个月以上"));
+        loadingDialog = new KeyDownLoadingDialog(this);
+//        time.add(new Menu("全部"));
+        time.add(new Menu("一个月"));
+        time.add(new Menu("三个月"));
+        time.add(new Menu("六个月"));
+        time.add(new Menu("一年"));
 
-        state.add(new Menu("全部"));
+//        state.add(new Menu("全部"));
         state.add(new Menu("待受理"));
         state.add(new Menu("待签约"));
-        state.add(new Menu("待审核"));
+        state.add(new Menu("已签约"));
+        state.add(new Menu("签约作废"));
+        state.add(new Menu("签约不成功"));
+        state.add(new Menu("已取消"));
+        state.add(new Menu("已退款"));
+        state.add(new Menu("待赎回"));
+        state.add(new Menu("已赎回"));
+        state.add(new Menu("已还款"));
 
-        product.add(new Menu("全部"));
+//        product.add(new Menu("全部"));
         product.add(new Menu("票据"));
         product.add(new Menu("保理"));
+        product.add(new Menu("房产"));
+        product.add(new Menu("股权"));
+        product.add(new Menu("票据直投"));
 
         menuAdapter = new DropMenuAdapter();
         mConditionListView.setAdapter(menuAdapter);
@@ -100,7 +139,16 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Utils.toast(menu.get(position).getName());
+                if(isTime){
+                   currentLimit = Utils.dateLimit(menu.get(position).getName());
+                }
+                if (isState){
+                    currentStatus = Utils.orderStatus(menu.get(position).getName());
+                }
+                if (isProduct){
+                    currentProductName = Utils.productName(menu.get(position).getName());
+                }
+
                 for (int i = 0;i<menu.size();i++){
                     menu.get(i).setSelect(false);
                     if (i == position){
@@ -108,11 +156,28 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
                     }
                     menuAdapter.setMenuList(menu);
                 }
+
+                getDataFromServer(currentLimit,currentProductName,currentStatus,currentPage,false);
             }
         });
+        loadingDialog.show();
+        getDataFromServer(currentLimit,currentProductName,currentStatus,currentPage,false);
 
+        mRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                getDataFromServer(currentLimit,currentProductName,currentStatus,currentPage,false);
+                mRefreshLayout.finishRefreshing();
+            }
 
-
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                super.onRefreshLoadMore(materialRefreshLayout);
+                getDataFromServer(currentLimit,currentProductName,currentStatus,nextPage,true);
+                nextPage = nextPage + 1;
+                mRefreshLayout.finishRefreshLoadMore();
+            }
+        });
     }
 
     @Override
@@ -177,8 +242,45 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
     /**
      * 获取数据
      */
-    private void getDataFromServer(){
+    private void getDataFromServer(String dataStatus, String type, String status, int page, final boolean isLoad){
+        TreeMap<String, String> params = new TreeMap<>();
+        params.put("userId", SPUtil.getString("userid",""));
+        params.put("dataStatus", dataStatus);
+        params.put("type", type);
+        params.put("status", status);
+        params.put("pageNum", page+"");
 
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Orders, params);
+        postRequest.execute(new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                if (!TextUtils.isEmpty(response.body())) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        Order order = JsonUtil.parseJsonToBean(response.body(), Order.class);
+                        if (order.data.cList.size() > 0){
+                            if (isLoad){
+                                orders.addAll(order.data.cList);
+
+                            }else{
+                                orders.clear();
+                                orders.addAll(order.data.cList);
+                            }
+                            ordersAdapter.notifyDataSetChanged();
+                        }
+                    } else {
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
+                    }
+                }
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                Utils.toast(Constant.NetWork_Error);
+                loadingDialog.dismiss();
+            }
+        });
     }
 
     /**

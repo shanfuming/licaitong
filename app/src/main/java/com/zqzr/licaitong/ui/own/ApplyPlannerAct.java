@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -99,7 +100,7 @@ public class ApplyPlannerAct extends BaseActivity implements View.OnClickListene
     private void selectCity() {
         // 省市区三级联动
         Intent intent = new Intent(this, ShengShiQuActivity.class);
-        startActivityForResult(intent, CITY_SELECT_CODE);
+        startActivityForResult(intent, 20000);
         // 添加开启底部window的动画
         overridePendingTransition(R.anim.dialog_enter, 0);
     }

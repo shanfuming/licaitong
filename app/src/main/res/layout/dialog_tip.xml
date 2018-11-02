@@ -41,14 +41,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_dark"
-                    android:textSize="@dimen/x32" />
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/x33" />
 
                 <TextView
                     android:id="@+id/content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/x26"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/x27"
+                    android:layout_marginTop="@dimen/y10"
                     android:visibility="gone" />
             </LinearLayout>
         </RelativeLayout>
@@ -73,7 +76,7 @@
                 android:gravity="center"
                 android:text="取消"
                 android:textColor="@color/end_blue"
-                android:textSize="@dimen/x40" />
+                android:textSize="@dimen/x35" />
 
             <TextView style="@style/vLineStyle" />
 
@@ -89,7 +92,7 @@
                 android:gravity="center"
                 android:text="确定"
                 android:textColor="@color/end_blue"
-                android:textSize="@dimen/x40" />
+                android:textSize="@dimen/x35" />
 
         </LinearLayout>
 

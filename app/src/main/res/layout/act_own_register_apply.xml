@@ -60,7 +60,7 @@
             android:inputType="textPersonName"
             android:maxLength="20"
             android:maxLines="1"
-            android:textColor="@color/colorViewbg"
+            android:textColor="@color/text_dark"
             android:textSize="@dimen/x25" />
 
         <View
@@ -98,7 +98,7 @@
                 android:paddingLeft="0dp"
                 android:textSize="@dimen/x25"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorViewbg" />
+                android:textColor="@color/text_dark" />
 
         </LinearLayout>
 
@@ -134,7 +134,7 @@
                 android:hint="@string/apply_city_hint"
                 android:textSize="@dimen/x25"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorViewbg" />
+                android:textColor="@color/text_dark" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -180,7 +180,7 @@
                 android:paddingLeft="0dp"
                 android:textSize="@dimen/x25"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorViewbg" />
+                android:textColor="@color/text_dark" />
 
         </LinearLayout>
 

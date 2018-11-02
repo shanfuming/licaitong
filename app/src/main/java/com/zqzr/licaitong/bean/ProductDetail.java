@@ -20,15 +20,15 @@ public class ProductDetail implements Serializable {
 
     public class Data implements Serializable {
 
-        public int proTotalAmount;
+        public double proTotalAmount;
         public int earningWay;
         public String name;
         public Double expectedYield;
-        public int increasingAmount;
-        public int increasingAmountStr;
-        public int reservationAmount;
+        public double increasingAmount;
+        public String increasingAmountStr;
+        public double reservationAmount;
         public int projectDuration;
-        public int purchaseAmount;
+        public double purchaseAmount;
         public int status;
 
     }

@@ -55,7 +55,7 @@
             android:maxLength="11"
             android:textSize="@dimen/x25"
             android:gravity="center_vertical"
-            android:textColor="@color/colorViewbg" />
+            android:textColor="@color/text_dark" />
 
         <View
             style="@style/hLineStyle_login"
@@ -91,7 +91,7 @@
                 android:paddingLeft="0dp"
                 android:textSize="@dimen/x25"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorViewbg" />
+                android:textColor="@color/text_dark" />
 
             <TextView
                 android:id="@+id/findpwd_timebtn"

@@ -1,5 +1,7 @@
 package com.zqzr.licaitong.ui.home;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -13,32 +15,30 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
 import com.sys.blackcat.stickheaderlayout.IpmlScrollChangListener;
 import com.sys.blackcat.stickheaderlayout.StickHeaderLayout;
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.adapter.FragmentAdapter;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
+import com.zqzr.licaitong.bean.Getcode;
 import com.zqzr.licaitong.bean.ProductDetail;
 import com.zqzr.licaitong.http.OKGO_GetData;
-import com.zqzr.licaitong.ui.find.fragment.DynamicFragment;
-import com.zqzr.licaitong.ui.find.fragment.NewsFragment;
 import com.zqzr.licaitong.ui.home.fragment.ProjectAuditFragment;
 import com.zqzr.licaitong.ui.home.fragment.ProjectIntroduceBaoLiFragment;
 import com.zqzr.licaitong.ui.home.fragment.ProjectIntroduceFragment;
 import com.zqzr.licaitong.ui.home.fragment.ProjectMessureBaoLiFragment;
 import com.zqzr.licaitong.ui.home.fragment.ProjectRecordFragment;
+import com.zqzr.licaitong.ui.own.LoginAct;
 import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
-import com.zqzr.licaitong.utils.Logger;
-import com.zqzr.licaitong.utils.SPUtil;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.view.KeyDownLoadingDialog;
+import com.zqzr.licaitong.view.SuccessAndFailDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
-
-import cn.carbs.android.indicatorview.library.IndicatorView;
 
 /**
  * Author: shanfuming
@@ -53,13 +53,27 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
     private StickHeaderLayout mLayout;
     private FragmentAdapter mAdapter;
     private ViewPager mViewPager;
-    private TextView mTvTitle, mTvPredictIncome, mTvLimit, mTvStart, mTvsubscribe, mTvRepayment, mTvIncremental, mTvReduce, mTvAdd, mTvSum, mTvSubscribe, mTvRest;
+    private TextView mTvTitle, mTvPredictIncome, mTvLimit, mTvStart, mTvTotal, mTvRepayment, mTvIncremental, mTvReduce, mTvAdd, mTvSum, mTvSubscribe, mTvRest;
     private LinearLayout mLlBack, mLlLimit, mLlStart, mLlAll, mLlRest, mLlIn, mLlAudit, mLlRecord;
     private int type, id;
     private KeyDownLoadingDialog loadingDialog;
     private TextView[] textViews = new TextView[3];
     private TextView[] textViewLines = new TextView[3];
-    private int singleAmount,totalAmount,restAmount;
+    private double singleAmount, totalAmount, restAmount, startAmount;
+    private SuccessAndFailDialog successDialog;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            switch (msg.what){
+                case Constant.NUMBER_1:
+                    successDialog.dismiss();
+                    finish();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void initView() {
@@ -129,7 +143,7 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
         mTvPredictIncome = (TextView) findViewById(R.id.tv_detial_predictIncome);
         mTvLimit = (TextView) findViewById(R.id.tv_detail_limit);
         mTvStart = (TextView) findViewById(R.id.tv_detail_start);
-        mTvsubscribe = (TextView) findViewById(R.id.tv_detail_subscribe);
+        mTvTotal = (TextView) findViewById(R.id.tv_detail_total);
         mTvRepayment = (TextView) findViewById(R.id.tv_repayment);
         mTvIncremental = (TextView) findViewById(R.id.tv_incremental);
         mTvRest = (TextView) findViewById(R.id.tv_detail_rest);
@@ -146,7 +160,7 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
         mLlBack.setOnClickListener(this);
         mTvReduce.setOnClickListener(this);
         mTvAdd.setOnClickListener(this);
-        mTvsubscribe.setOnClickListener(this);
+        mTvSubscribe.setOnClickListener(this);
         mLlIn.setOnClickListener(this);
         mLlAudit.setOnClickListener(this);
         mLlRecord.setOnClickListener(this);
@@ -155,6 +169,10 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
     @Override
     protected void initData() {
         loadingDialog = new KeyDownLoadingDialog(this);
+        successDialog = new SuccessAndFailDialog(this);
+        successDialog.setContent("预约成功", true);
+        successDialog.setDes("即将跳转到产品列表", true);
+        successDialog.setImg(R.mipmap.success, true);
         mViewPager.setCurrentItem(0);
         textViews[0].setTextColor(getResources().getColor(R.color.text_dark));
         textViewLines[0].setBackgroundColor(getResources().getColor(R.color.app_color_principal));
@@ -180,13 +198,19 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
                         mTvPredictIncome.setText(productDetail.data.expectedYield + "%");
                         mTvLimit.setText(productDetail.data.projectDuration + "天");
                         mTvStart.setText(Utils.getWan(productDetail.data.purchaseAmount));
-                        mTvsubscribe.setText(Utils.getWan(productDetail.data.proTotalAmount));
+                        mTvTotal.setText(Utils.getWan(productDetail.data.proTotalAmount));
                         mTvRest.setText(Utils.getWan(productDetail.data.reservationAmount));
-                        mTvIncremental.setText(Utils.getWan(productDetail.data.increasingAmountStr)+"及整数倍数递增");
+                        if (productDetail.data.increasingAmount >= 10000){
+                            mTvIncremental.setText(productDetail.data.increasingAmountStr + "万及整数倍数递增");
+                        }else{
+                            mTvIncremental.setText(productDetail.data.increasingAmountStr + "及整数倍数递增");
+                        }
+                        mTvSum.setText(productDetail.data.purchaseAmount+"");
+
                         singleAmount = productDetail.data.increasingAmount;
-                        mTvSum.setText(Utils.getDouble2(productDetail.data.purchaseAmount));
                         totalAmount = productDetail.data.proTotalAmount;
                         restAmount = productDetail.data.reservationAmount;
+                        startAmount = productDetail.data.purchaseAmount;
                     } else {
                         Utils.toast(productDetail.message);
                     }
@@ -223,20 +247,25 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
                 ActivityUtils.pop();
                 break;
             case R.id.tv_reduce:
-                if (Integer.valueOf(mTvSum.getText().toString())-singleAmount < restAmount){
-                    mTvSum.setText(Utils.getDouble2(singleAmount));
-                }else{
-                    mTvSum.setText(Utils.getDouble2(Integer.valueOf(mTvSum.getText().toString())-singleAmount));
+                if (Double.valueOf(mTvSum.getText().toString()) - singleAmount < startAmount) {
+                    mTvSum.setText(Utils.getDouble2(startAmount));
+                } else {
+                    mTvSum.setText(Utils.getDouble2(Double.valueOf(mTvSum.getText().toString()) - singleAmount));
                 }
                 break;
             case R.id.tv_add:
-                if (Integer.valueOf(mTvSum.getText().toString())+singleAmount > totalAmount){
-
+                if (Double.valueOf(mTvSum.getText().toString()) + singleAmount > restAmount) {
+                    mTvSum.setText(Utils.getDouble2(restAmount));
+                } else {
+                    mTvSum.setText(Utils.getDouble2(Double.valueOf(mTvSum.getText().toString()) + singleAmount));
                 }
-                mTvSum.setText(Utils.getDouble2(Integer.valueOf(mTvSum.getText().toString())+singleAmount));
                 break;
             case R.id.tv_subscribe:
-
+                if (!MyApplication.getInstance().isLand()){
+                    subscribe();
+                }else{
+                    ActivityUtils.push(LoginAct.class);
+                }
                 break;
             case R.id.ll_in:
                 resetlaybg();
@@ -257,6 +286,42 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
                 textViewLines[2].setBackgroundColor(getResources().getColor(R.color.app_color_principal));
                 break;
         }
+    }
+
+    /**
+     * 预约
+     */
+    private void subscribe() {
+        TreeMap<String, String> params = new TreeMap<>();
+        params.put("productId", id+"");
+        params.put("subscribeAmount", Utils.getDouble(Double.valueOf(mTvSum.getText().toString())));
+
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.MakeReservation, params);
+        postRequest.execute(new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                if (!TextUtils.isEmpty(response.body())) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        successDialog.show();
+
+                        handler.sendEmptyMessageDelayed(Constant.NUMBER_1, 3000);
+
+                    }else if(Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 10003){
+                        ActivityUtils.push(LoginAct.class);
+                    } else {
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
+                    }
+                }
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                Utils.toast(Constant.NetWork_Error);
+                loadingDialog.dismiss();
+            }
+        });
     }
 
     /**
@@ -288,4 +353,13 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
             textViewLines[position].setBackgroundColor(getResources().getColor(R.color.app_color_principal));
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeMessages(Constant.NUMBER_1);
+        if (successDialog.isShowing()){
+            successDialog.dismiss();
+        }
+    }
 }

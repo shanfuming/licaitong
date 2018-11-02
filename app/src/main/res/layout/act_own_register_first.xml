@@ -62,9 +62,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/x20"
                 android:hint="@string/register_phone_hint"
-                android:inputType="number"
+                android:inputType="phone"
                 android:maxLength="11"
-                android:textColor="@color/colorViewbg" />
+                android:textColor="@color/text_dark" />
         </LinearLayout>
 
         <View
@@ -102,7 +102,7 @@
                     android:inputType="number"
                     android:maxLength="6"
                     android:paddingLeft="0dp"
-                    android:textColor="@color/colorViewbg" />
+                    android:textColor="@color/text_dark" />
             </LinearLayout>
 
             <View
@@ -164,7 +164,7 @@
                         android:maxLength="6"
                         android:paddingLeft="0dp"
                         android:layout_marginLeft="@dimen/x20"
-                        android:textColor="@color/colorViewbg" />
+                        android:textColor="@color/text_dark" />
                 </LinearLayout>
 
                 <View

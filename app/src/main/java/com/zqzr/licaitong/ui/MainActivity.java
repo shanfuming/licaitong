@@ -137,9 +137,9 @@ public class MainActivity extends MenuActivity implements OnClickListener {
         updateTab(v);
         switch (v.getId()){
             case R.id.btn_my_tv:
-                if (MyApplication.getInstance().isLand()){
+                if (!MyApplication.getInstance().isLand()){
                     Intent intent = new Intent();
-                    intent.putExtra("turnMian",3);
+                    intent.putExtra("turn",1);
                     ActivityUtils.push(LoginAct.class,intent);
                 }
                 break;

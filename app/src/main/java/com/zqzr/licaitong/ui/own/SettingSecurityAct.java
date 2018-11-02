@@ -11,6 +11,7 @@ import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.utils.ActivityUtils;
+import com.zqzr.licaitong.utils.SPUtil;
 
 /**
  * Author: shanfuming
@@ -23,7 +24,7 @@ import com.zqzr.licaitong.utils.ActivityUtils;
 public class SettingSecurityAct extends BaseActivity implements View.OnClickListener {
     private RelativeLayout mRlLock,mRlChangeLoginPwd,mRlChangePhone;
     private ImageView mIvIsLock;
-    private boolean isLock = true;
+    private boolean isLock;
 
     @Override
     protected void initView() {
@@ -37,15 +38,28 @@ public class SettingSecurityAct extends BaseActivity implements View.OnClickList
         mRlLock.setOnClickListener(this);
         mRlChangeLoginPwd.setOnClickListener(this);
         mRlChangePhone.setOnClickListener(this);
+        isLock = SPUtil.getBoolean("lockOff",false);
+        if (!isLock){
+            mIvIsLock.setImageDrawable(getResources().getDrawable(R.mipmap.open));
+        }else{
+            mIvIsLock.setImageDrawable(getResources().getDrawable(R.mipmap.off));
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setTitle(getResources().getString(R.string.own_setting_security));
+        setBackOption(true);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.rl_security_lock:
-                setIvLock(!isLock);
-                //开启与关闭手势密码 // TODO: 2018/10/20  
-                
+                setIvLock(isLock);
+                isLock = !isLock;
+                //开启与关闭手势密码
                 break;
             case R.id.rl_security_changeLoginPwd:
                 if(MyApplication.getInstance().isLand()){
@@ -57,7 +71,11 @@ public class SettingSecurityAct extends BaseActivity implements View.OnClickList
                 }
                 break;
             case R.id.rl_security_changePhone:
-
+                if(MyApplication.getInstance().isLand()){
+                    ActivityUtils.push(SecurityChangePhoneActF.class);
+                }else{
+                    ActivityUtils.push(LoginAct.class);
+                }
                 break;
         }
     }
@@ -68,8 +86,10 @@ public class SettingSecurityAct extends BaseActivity implements View.OnClickList
     private void setIvLock(boolean isLock){
         if (isLock){
             mIvIsLock.setImageDrawable(getResources().getDrawable(R.mipmap.open));
+            SPUtil.setValue("lockOff",false);
         }else{
             mIvIsLock.setImageDrawable(getResources().getDrawable(R.mipmap.off));
+            SPUtil.setValue("lockOff",true);
         }
     }
 }

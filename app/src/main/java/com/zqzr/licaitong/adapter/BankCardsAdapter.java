@@ -51,14 +51,14 @@ public class BankCardsAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = View.inflate(ActivityUtils.peek(), R.layout.item_card, null);
+            viewHolder.cardIcon = (ImageView) convertView.findViewById(R.id.iv_bank_logo);
+            viewHolder.cardName = (TextView) convertView.findViewById(R.id.tv_bank_name);
+            viewHolder.cardNum = (TextView) convertView.findViewById(R.id.tv_bank_cardNum);
+            viewHolder.cardBg = (LinearLayout) convertView.findViewById(R.id.ll_card);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.cardIcon = (ImageView) convertView.findViewById(R.id.iv_bank_logo);
-        viewHolder.cardName = (TextView) convertView.findViewById(R.id.tv_bank_name);
-        viewHolder.cardNum = (TextView) convertView.findViewById(R.id.tv_bank_cardNum);
-        viewHolder.cardBg = (LinearLayout) convertView.findViewById(R.id.ll_card);
 
         viewHolder.cardNum.setText(bankcards.get(position).bankNo);
         viewHolder.cardName.setText(bankcards.get(position).bank);

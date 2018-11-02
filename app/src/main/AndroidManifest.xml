@@ -60,7 +60,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.zqzr.licaitong.ui.own.select_shengshiqu.ShengShiQuActivity"
-            android:screenOrientation="portrait" />
+            android:label="请选择所在城市"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.Dialog"
+            />
+        <!--android:theme="@android:style/Theme.Holo.Light.Dialog"-->
         <activity
             android:name="com.zqzr.licaitong.ui.find.FindActivity"
             android:screenOrientation="portrait"
@@ -143,6 +147,27 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.zqzr.licaitong.ui.CommonWebviewAct"
+            android:screenOrientation="portrait" />
+
+        <!-- 登录手势密码 -->
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.gesturelock.activity.LockAct"
+            android:screenOrientation="portrait" />
+
+        <!-- 设置手势密码 -->
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.gesturelock.activity.LockStepAct"
+            android:screenOrientation="portrait" />
+
+        <!-- 修改手势密码 -->
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.gesturelock.activity.LockModifyPwdAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.lzy.imagepicker.ui.ImageGridActivity"
             android:screenOrientation="portrait" />
 
         <!-- 适配全面屏 -->

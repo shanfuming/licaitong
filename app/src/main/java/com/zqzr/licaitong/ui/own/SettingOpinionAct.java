@@ -11,11 +11,13 @@ import android.widget.TextView;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.Banner;
+import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.http.OKGO_GetData;
 import com.zqzr.licaitong.utils.JsonUtil;
 import com.zqzr.licaitong.utils.SPUtil;
@@ -83,8 +85,13 @@ public class SettingOpinionAct extends BaseActivity {
                     @Override
                     public void onSuccess(Response<String> response) {
                         if (!TextUtils.isEmpty(response.body())) {
-                            loadingDialog.setText("反馈成功");
-                            handler.sendEmptyMessageDelayed(1, 2500);
+                            if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                                loadingDialog.setText("反馈成功");
+                                handler.sendEmptyMessageDelayed(1, 2500);
+
+                            } else {
+                                Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
+                            }
                         }
                         loadingDialog.dismiss();
                     }

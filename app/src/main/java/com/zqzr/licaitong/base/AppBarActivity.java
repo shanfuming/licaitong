@@ -100,6 +100,21 @@ public class AppBarActivity extends AppCompatActivity {
     }
 
     /**
+     * 设置是否显示back键
+     */
+    public void setBackOption(boolean option,View.OnClickListener clickListener) {
+        if (option) {
+            mAppBarLeftIv.setVisibility(View.VISIBLE);
+            mAppbarLeftParent.setEnabled(true);
+            mAppbarLeftParent.setOnClickListener(clickListener);
+        } else {
+            mAppbarLeftParent.setOnClickListener(null);
+            mAppbarLeftParent.setEnabled(false);
+            mAppBarLeftIv.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    /**
      * 设置左侧文字
      */
     public void setLeftText(CharSequence text, View.OnClickListener listener, @ColorInt int color) {

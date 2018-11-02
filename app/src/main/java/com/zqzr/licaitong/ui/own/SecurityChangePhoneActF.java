@@ -13,11 +13,13 @@ import android.widget.TextView;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.Getcode;
+import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.http.OKGO_GetData;
 import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
@@ -105,13 +107,18 @@ public class SecurityChangePhoneActF extends BaseActivity implements View.OnClic
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    Getcode getcode = JsonUtil.parseJsonToBean(response.body(), Getcode.class);
-                    if (200 == Integer.parseInt(getcode.code)) {
-                        Intent intent = new Intent();
-                        intent.putExtra("code", mEtCode.getText().toString());
-                        ActivityUtils.push(SecurityChangePhoneActS.class, intent);
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        Getcode getcode = JsonUtil.parseJsonToBean(response.body(), Getcode.class);
+                        if (200 == Integer.parseInt(getcode.code)) {
+                            Intent intent = new Intent();
+                            intent.putExtra("code", mEtCode.getText().toString());
+                            ActivityUtils.push(SecurityChangePhoneActS.class, intent);
+                        } else {
+                            Utils.toast(getcode.message);
+                        }
+
                     } else {
-                        Utils.toast(getcode.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
                 loadingDialog.dismiss();

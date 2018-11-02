@@ -9,11 +9,13 @@ import android.widget.TextView;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.Getcode;
+import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.http.OKGO_GetData;
 import com.zqzr.licaitong.ui.own.select_shengshiqu.ShengShiQuActivity;
 import com.zqzr.licaitong.utils.ActivityUtils;
@@ -88,7 +90,7 @@ public class IdentifyAct extends BaseActivity implements View.OnClickListener {
             return;
         }
 
-        if (TextUtils.isEmpty(addProvince)|| TextUtils.isEmpty(addCity)||TextUtils.isEmpty(mTvSelectCity.getText().toString())){
+        if (TextUtils.isEmpty(addProvince) || TextUtils.isEmpty(addCity) || TextUtils.isEmpty(mTvSelectCity.getText().toString())) {
             Utils.toast(Constant.Apply_City_Null);
             return;
         }
@@ -98,40 +100,39 @@ public class IdentifyAct extends BaseActivity implements View.OnClickListener {
             return;
         }
 
-        TreeMap<String,String> params = new TreeMap<>();
-        params.put("id", SPUtil.getString("userid",""));
-        params.put("name",mEtName.getText().toString());
-        params.put("province",addProvince);
-        params.put("city",addCity);
-        params.put("contactAddress",mEtAddress.getText().toString());
-        params.put("idNum",mEtIdCard.getText().toString());
+        TreeMap<String, String> params = new TreeMap<>();
+        params.put("id", SPUtil.getString("userid", ""));
+        params.put("name", mEtName.getText().toString());
+        params.put("province", addProvince);
+        params.put("city", addCity);
+        params.put("contactAddress", mEtAddress.getText().toString());
+        params.put("idNum", mEtIdCard.getText().toString());
 
-        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.AuthenticationUser,params);
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.AuthenticationUser, params);
         postRequest.execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    Getcode getcode = JsonUtil.parseJsonToBean(response.body(), Getcode.class);
-                    if (200 == Integer.parseInt(getcode.code)) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         successDialog.setContent("认证成功", true);
                         successDialog.setDes("请绑定回款银行卡", true);
                         successDialog.setImg(R.mipmap.success, true);
-                        successDialog.setNext("下一步",true,R.drawable.fillet_loginbtn_normal);
+                        successDialog.setNext("下一步", true, R.drawable.fillet_loginbtn_normal);
                         successDialog.show();
                         successDialog.setClickListener(new SuccessAndFailDialog.ClickListener() {
                             @Override
                             public void onClickLook() {
-                                Intent intent =  new Intent();
-                                intent.putExtra("userRealName",mEtName.getText().toString());
-                                intent.putExtra("idNum",mEtIdCard.getText().toString());
-                                ActivityUtils.push(BankCardAct.class,intent);
+                                Intent intent = new Intent();
+                                intent.putExtra("userRealName", mEtName.getText().toString());
+                                intent.putExtra("idNum", mEtIdCard.getText().toString());
+                                ActivityUtils.push(BankCardAct.class, intent);
                             }
                         });
                     } else {
                         successDialog.setContent("认证失败", true);
-                        successDialog.setDes(getcode.message, true);
+                        successDialog.setDes(JsonUtil.getFieldValue(response.body(), "message"), true);
                         successDialog.setImg(R.mipmap.fail, true);
-                        successDialog.setNext("返回",true,R.drawable.fillet_blue_btn_normal);
+                        successDialog.setNext("返回", true, R.drawable.fillet_blue_btn_normal);
                         successDialog.show();
                         successDialog.setClickListener(new SuccessAndFailDialog.ClickListener() {
                             @Override

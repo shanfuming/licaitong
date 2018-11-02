@@ -115,7 +115,7 @@ public class BankCardAct extends BaseActivity {
     private void unBindCard(int position) {
         loadingDialog.show();
         TreeMap<String, String> params = new TreeMap<>();
-        params.put("id", bankCardses.get(position).id);
+        params.put("id", bankCardses.get(position).id+"");
 
         PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.UnBankCard, params);
         postRequest.execute(new StringCallback() {

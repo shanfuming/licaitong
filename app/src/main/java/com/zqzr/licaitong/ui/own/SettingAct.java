@@ -7,19 +7,27 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.nfc.cardemulation.HostNfcFService;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.base.BaseParams;
+import com.zqzr.licaitong.base.Constant;
+import com.zqzr.licaitong.ui.MainActivity;
 import com.zqzr.licaitong.utils.ActivityUtils;
+import com.zqzr.licaitong.utils.SPUtil;
 import com.zqzr.licaitong.utils.Utils;
+import com.zqzr.licaitong.view.KeyDownLoadingDialog;
 import com.zqzr.licaitong.view.TipDialog;
 
 /**
@@ -35,6 +43,24 @@ public class SettingAct extends BaseActivity implements View.OnClickListener {
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
 
     private RelativeLayout mRlSecurity,mRlHelp,mRlAbout,mRlOpinion,mRlContact;
+    private TextView mLoginOut;
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case Constant.NUMBER_1:
+                    loadingDialog.dismiss();
+                    Intent intent = new Intent();
+                    intent.putExtra("tab", 0);
+                    ActivityUtils.push(MainActivity.class, intent);
+                    finish();
+                    break;
+            }
+        }
+    };
+    private KeyDownLoadingDialog loadingDialog;
 
     @Override
     protected void initView() {
@@ -45,12 +71,16 @@ public class SettingAct extends BaseActivity implements View.OnClickListener {
         mRlAbout = (RelativeLayout) findViewById(R.id.rl_setting_version);
         mRlOpinion = (RelativeLayout) findViewById(R.id.rl_setting_opinion);
         mRlContact = (RelativeLayout) findViewById(R.id.rl_setting_contact);
+        mLoginOut = (TextView) findViewById(R.id.loginout);
 
         mRlAbout.setOnClickListener(this);
         mRlHelp.setOnClickListener(this);
         mRlSecurity.setOnClickListener(this);
         mRlOpinion.setOnClickListener(this);
         mRlContact.setOnClickListener(this);
+        mLoginOut.setOnClickListener(this);
+        loadingDialog = new KeyDownLoadingDialog(this);
+        loadingDialog.setText("正在退出");
     }
 
     @Override
@@ -81,6 +111,12 @@ public class SettingAct extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.rl_setting_contact:
                 callService();
+                break;
+            case R.id.loginout:
+                SPUtil.clear();
+                MyApplication.getInstance().updataLand(false);
+                loadingDialog.show();
+                handler.sendEmptyMessageDelayed(Constant.NUMBER_1,2000);
                 break;
         }
     }

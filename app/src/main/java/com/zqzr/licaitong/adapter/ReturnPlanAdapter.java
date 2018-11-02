@@ -7,7 +7,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.zqzr.licaitong.R;
+import com.zqzr.licaitong.bean.ReturnPlan;
 import com.zqzr.licaitong.utils.ActivityUtils;
+import com.zqzr.licaitong.utils.DateUtil;
+import com.zqzr.licaitong.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -21,9 +24,9 @@ import java.util.ArrayList;
 
 public class ReturnPlanAdapter extends BaseAdapter {
 
-    private ArrayList<String> returnlist;
+    private ArrayList<ReturnPlan.Data.CList> returnlist;
 
-    public ReturnPlanAdapter(ArrayList<String> returnlist) {
+    public ReturnPlanAdapter(ArrayList<ReturnPlan.Data.CList> returnlist) {
         this.returnlist = returnlist;
     }
 
@@ -48,15 +51,18 @@ public class ReturnPlanAdapter extends BaseAdapter {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = View.inflate(ActivityUtils.peek(), R.layout.item_returnplan,null);
+            viewHolder.returnTitle = (TextView) convertView.findViewById(R.id.tv_return_title);
+            viewHolder.returnType = (TextView) convertView.findViewById(R.id.tv_return_type);
+            viewHolder.returnAll = (TextView) convertView.findViewById(R.id.tv_return_all);
+            viewHolder.returnDate = (TextView) convertView.findViewById(R.id.tv_return_date);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
-        viewHolder.returnTitle = (TextView) convertView.findViewById(R.id.tv_return_title);
-        viewHolder.returnType = (TextView) convertView.findViewById(R.id.tv_return_type);
-        viewHolder.returnAll = (TextView) convertView.findViewById(R.id.tv_return_all);
-        viewHolder.returnDate = (TextView) convertView.findViewById(R.id.tv_return_date);
+        viewHolder.returnTitle.setText(returnlist.get(position).borrowName);
+        viewHolder.returnType.setText(Utils.getType(returnlist.get(position).type));
+        viewHolder.returnAll.setText(returnlist.get(position).priAndInt+"");
+        viewHolder.returnDate.setText(DateUtil.formatter(DateUtil.Format.DATE,returnlist.get(position).repTime));
 
         return convertView;
     }

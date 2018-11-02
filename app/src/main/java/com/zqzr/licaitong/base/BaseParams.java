@@ -1,14 +1,6 @@
 package com.zqzr.licaitong.base;
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.Environment;
-
-import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.Utils;
-
-import java.io.File;
 
 /**
  * Author: TinhoXu
@@ -29,8 +21,8 @@ public class BaseParams {
     /**
      * 测试服务器地址
      */
-//    private static final String URL_BETA            = "http://10.16.8.43:8080";
-    private static final String URL_BETA            = "http://10.16.8.33:8080";
+    private static final String URL_BETA            = "http://10.16.8.43:8080";
+//    private static final String URL_BETA            = "http://10.16.8.106:8080";
 
     /**
      * 正式服务器地址
@@ -48,22 +40,6 @@ public class BaseParams {
      * app_secret
      */
     public static final String APP_SECRET          = "gxixd9reotfifeqollfi0e2wgfkcey4x";
-    /**
-     * friday appkey
-     */
-    public static final String FRIDAY_APPKEY       = "6tqiC0AsASwO8T6MvMNfFJK1DQfsHiLC";
-    /**
-     * friday app secret
-     */
-    public static final String FRIDAY_APPSECRET    = "gxixd9reotfifeqollfi0e2wgfkcey4x";
-    /**
-     * ios传“IOS”，安卓传“ANDROID”
-     */
-    public static final String MOBILE_TYPE         = "ANDROID";
-    /**
-     * 发送验证码的短信平台号
-     */
-    public static final String SMS_SENDER          = "";
     /**
      * 加密是需要使用的密钥
      * DES加解密时KEY必须是16进制字符串,不可小于8位
@@ -193,4 +169,36 @@ public class BaseParams {
      * 投资详情
      */
     public static final String ProductDetail = "/home/getProductDetail";
+    /**
+     * 预约
+     */
+    public static final String MakeReservation = "/home/makeReservation";
+    /**
+     * 订单列表
+     */
+    public static final String Orders = "/my/indent";
+    /**
+     * 订单详情
+     */
+    public static final String OrderDetail = "/my/indentDetails";
+    /**
+     * 回款计划
+     */
+    public static final String ReturnMoneySchemes = "/my/returnMoneySchemes";
+    /**
+     * 资金记录
+     */
+    public static final String MoneyRecord = "/my/moneyRecord";
+    /**
+     * 七牛token
+     */
+    public static final String GetQiniuToken = "/getQiniuToken";
+    /**
+     * 上传头像
+     */
+    public static final String UploadIcon = "/my/upload";//
+    /**
+     * 取消订单
+     */
+    public static final String CancelDetails = "/my/cancelDetails";
 }

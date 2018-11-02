@@ -45,13 +45,12 @@ public class DropMenuAdapter extends BaseAdapter {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = View.inflate(ActivityUtils.peek(), R.layout.item_dropmenu,null);
+            viewHolder.menuListName = (TextView) convertView.findViewById(R.id.tv_menuList_name);
+            viewHolder.select = (ImageView) convertView.findViewById(R.id.iv_menu_select);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
-        viewHolder.menuListName = (TextView) convertView.findViewById(R.id.tv_menuList_name);
-        viewHolder.select = (ImageView) convertView.findViewById(R.id.iv_menu_select);
 
         viewHolder.menuListName.setText(menuList.get(position).getName());
         if (menuList.get(position).isSelect()){

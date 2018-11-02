@@ -42,7 +42,7 @@
                 android:paddingLeft="0dp"
                 android:textSize="@dimen/x25"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorViewbg" />
+                android:textColor="@color/text_dark" />
 
             <View style="@style/hLineStyle"/>
 

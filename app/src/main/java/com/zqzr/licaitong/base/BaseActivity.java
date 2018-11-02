@@ -15,8 +15,10 @@ import com.zqzr.licaitong.ui.activity.AActivity;
 import com.zqzr.licaitong.ui.find.FindActivity;
 import com.zqzr.licaitong.ui.home.HomeActivity;
 import com.zqzr.licaitong.ui.own.OwnActivity;
+import com.zqzr.licaitong.ui.own.gesturelock.logic.LockLogic;
 import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.PermissionCheck;
+import com.zqzr.licaitong.utils.SPUtil;
 
 import java.util.List;
 
@@ -78,7 +80,9 @@ public abstract class BaseActivity extends AppBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        LockLogic.getInstance().checkLock(this);
+        if (!SPUtil.getBoolean("lockOff",false)){
+            LockLogic.getInstance().checkLock(this);
+        }
     }
 
     @Override

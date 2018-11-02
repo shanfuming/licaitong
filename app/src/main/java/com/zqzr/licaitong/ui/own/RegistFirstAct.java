@@ -145,6 +145,7 @@ public class RegistFirstAct extends BaseActivity implements View.OnClickListener
         TreeMap<String, String> params = new TreeMap<>();
         params.put("phone", mEtPhone.getText().toString());
         params.put("code", mEtCode.getText().toString());
+        params.put("fpName", mEtInviteCode.getText().toString());
 
         PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Regist_Next, params);
         postRequest.execute(new StringCallback() {

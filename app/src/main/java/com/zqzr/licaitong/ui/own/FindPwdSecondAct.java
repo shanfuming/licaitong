@@ -120,7 +120,7 @@ public class FindPwdSecondAct extends BaseActivity {
         params.put("phone",phone);
         params.put("password", MD5Util.getMD5Str(mEtPwdTwo.getText().toString().trim()));
 
-        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Regist,params);
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.FindPwd,params);
         postRequest.execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {

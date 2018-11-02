@@ -1,5 +1,6 @@
 package com.zqzr.licaitong.ui.own;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -25,13 +26,17 @@ import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.FindItem;
+import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.bean.OwnInfo;
+import com.zqzr.licaitong.bean.QiNiuToken;
 import com.zqzr.licaitong.http.OKGO_GetData;
 import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.GlideImageLoader;
 import com.zqzr.licaitong.utils.JsonUtil;
+import com.zqzr.licaitong.utils.SPUtil;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.view.CircleImageView;
+import com.zqzr.licaitong.view.KeyDownLoadingDialog;
 import com.zqzr.licaitong.view.SelectDialog;
 import com.zqzr.licaitong.view.TipDialog;
 
@@ -59,11 +64,13 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
     private TextView mTvUserName;
     private ImageView mIvCanSee;
     private boolean isNotSee = true;
-    private String all, incomed, incomeing,plannerName,plannerPhone,plannerCity,realName,idNo,phone,headPortraitUrl,inviteCode;
+    private String all, incomed, incomeing, plannerName, plannerPhone, plannerCity, realName, idNo, phone, headPortraitUrl, inviteCode;
     private TextView mTvIsIdentify;
-    private int realNameStatus,bankStatus;
-    private ArrayList<ImageItem> imageItems;
+    private int realNameStatus, bankStatus;
+    private ArrayList<ImageItem> imageItems = new ArrayList<>();
     private int maxImgCount = 1;
+    private KeyDownLoadingDialog loadingDialog;
+    private String doman = "";
 
     @Override
     protected void initView() {
@@ -107,6 +114,7 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void initData() {
         initImagePicker();
+        loadingDialog = new KeyDownLoadingDialog(this);
     }
 
 
@@ -136,8 +144,8 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    OwnInfo ownInfo = JsonUtil.parseJsonToBean(response.body(), OwnInfo.class);
-                    if (200 == Integer.parseInt(ownInfo.code)) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        OwnInfo ownInfo = JsonUtil.parseJsonToBean(response.body(), OwnInfo.class);
                         mTvUserName.setText(Utils.getEncodeStr(ownInfo.data.phone));
                         mTvOwnMoney.setText(Utils.getDouble2(ownInfo.data.amountTotalInvestment));
                         mTvIncomed.setText(Utils.getDouble2(ownInfo.data.incomeCollected));
@@ -159,8 +167,10 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
                         realNameStatus = ownInfo.data.realNameStatus;
                         bankStatus = ownInfo.data.bankStatus;
 
+                    } else  if(Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 10003){
+                        ActivityUtils.push(LoginAct.class);
                     } else {
-                        Utils.toast(ownInfo.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
             }
@@ -201,7 +211,7 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
                 if (MyApplication.getInstance().isLand()) {
                     if (realNameStatus != 1) {//判断是否实名
                         ActivityUtils.push(IdentifyAct.class);
-                    }else{
+                    } else {
                         Utils.toast("您已实名认证");
                     }
                 } else {
@@ -210,9 +220,9 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.rl_own_bankcard:
                 if (MyApplication.getInstance().isLand()) {
-                    if (realNameStatus != 1){
+                    if (realNameStatus != 1) {
                         tip(1);
-                    }else{
+                    } else {
                         ActivityUtils.push(BankCardAct.class);
                     }
                 } else {
@@ -222,22 +232,26 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
             case R.id.rl_own_planner:
                 if (MyApplication.getInstance().isLand()) {
                     Intent intent = new Intent();
-                    intent.putExtra("plannerName",plannerName);
-                    intent.putExtra("plannerPhone",plannerPhone);
-                    intent.putExtra("plannerCity",plannerCity);
-                    ActivityUtils.push(PlannerAct.class,intent);
+                    intent.putExtra("plannerName", plannerName);
+                    intent.putExtra("plannerPhone", plannerPhone);
+                    intent.putExtra("plannerCity", plannerCity);
+                    ActivityUtils.push(PlannerAct.class, intent);
                 } else {
                     ActivityUtils.push(LoginAct.class);
                 }
                 break;
             case R.id.rl_own_evalution:
-
+                Utils.toast(Constant.Wait);
                 break;
             case R.id.rl_own_qualitied:
-
+                Utils.toast(Constant.Wait);
                 break;
             case R.id.ll_person:
-                selectIcon();
+                if (MyApplication.getInstance().isLand()) {
+                    selectIcon();
+                } else {
+                    ActivityUtils.push(LoginAct.class);
+                }
                 break;
             case R.id.ll_setting:
                 if (MyApplication.getInstance().isLand()) {
@@ -248,18 +262,18 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.ll_info:
                 if (MyApplication.getInstance().isLand()) {
-                    if (realNameStatus != 1){
+                    if (realNameStatus != 1) {
                         tip(1);
-                    }else if (bankStatus == 1){
+                    } else if (bankStatus == 1) {
                         tip(2);
-                    }else{
+                    } else {
                         Intent intent = new Intent();
-                        intent.putExtra("realName",realName);
-                        intent.putExtra("idNo",idNo);
-                        intent.putExtra("phone",phone);
-                        intent.putExtra("headPortraitUrl",headPortraitUrl);
-                        intent.putExtra("inviteCode",inviteCode);
-                        ActivityUtils.push(InfoAct.class,intent);
+                        intent.putExtra("realName", realName);
+                        intent.putExtra("idNo", idNo);
+                        intent.putExtra("phone", phone);
+                        intent.putExtra("headPortraitUrl", headPortraitUrl);
+                        intent.putExtra("inviteCode", inviteCode);
+                        ActivityUtils.push(InfoAct.class, intent);
                     }
                 } else {
                     ActivityUtils.push(LoginAct.class);
@@ -281,15 +295,16 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 提示去实名或者绑定银行卡
+     *
      * @param type 1实名 2绑卡
      */
     private void tip(final int type) {
-        final TipDialog tipDialog = new TipDialog(this,true);
+        final TipDialog tipDialog = new TipDialog(this, true);
         tipDialog.setTitle("温馨提示");
-        if(type == 1){
+        if (type == 1) {
             tipDialog.setContent("您还没有实名认证!");
             tipDialog.setButtonDes("取消", "去认证");
-        }else{
+        } else {
             tipDialog.setContent("您还没有绑定银行卡!");
             tipDialog.setButtonDes("取消", "去绑卡");
         }
@@ -302,9 +317,9 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
 
             @Override
             public void onClickConfirm() {
-                if (type == 1){
+                if (type == 1) {
                     ActivityUtils.push(IdentifyAct.class);
-                }else{
+                } else {
                     ActivityUtils.push(BankCardAct.class);
                 }
                 tipDialog.dismiss();
@@ -336,8 +351,8 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
         imagePicker.setSelectLimit(maxImgCount);              //选中数量限制
         imagePicker.setMultiMode(false);                      //多选
         imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
-        imagePicker.setFocusWidth(200);                       //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setFocusHeight(200);                      //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusWidth(800);                       //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(800);                      //裁剪框的高度。单位像素（圆形自动取宽高最小值）
 //        imagePicker.setOutPutX(1000);                         //保存文件的宽度。单位像素
 //        imagePicker.setOutPutY(1000);                         //保存文件的高度。单位像素
     }
@@ -365,7 +380,7 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
                         //打开选择,本次允许选择的数量
                         ImagePicker.getInstance().setSelectLimit(maxImgCount - imageItems.size());
                         Intent intent = new Intent(OwnActivity.this, ImageGridActivity.class);
-                        intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS,true); // 是否是直接打开相机
+                        intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
                         startActivityForResult(intent, Constant.REQUEST_CODE_SELECT);
                         break;
                     case 1:
@@ -388,9 +403,9 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
             //添加图片返回
             if (data != null && requestCode == Constant.REQUEST_CODE_SELECT) {
                 ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                if (images != null){
+                if (images != null) {
                     imageItems.addAll(images);
-                    getQiNiuToken();
+                    getQiNiuToken(imageItems.get(0).path);
                 }
             }
         }
@@ -399,14 +414,39 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
     /**
      * 获取七牛云token
      */
-    private void getQiNiuToken() {
+    private void getQiNiuToken(final String path) {
+        loadingDialog.show();
+        TreeMap<String,String> params = new TreeMap<>();
 
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.GetQiniuToken,params);
+        postRequest.execute(new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                if (!TextUtils.isEmpty(response.body())) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        QiNiuToken qiNiuToken = JsonUtil.parseJsonToBean(response.body(), QiNiuToken.class);
+                        uploadImageToQiniu(path,qiNiuToken.data.token);
+                        doman = qiNiuToken.data.doman;
+                    } else {
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                Utils.toast("网络繁忙，请稍后再试!");
+                loadingDialog.dismiss();
+            }
+        });
     }
 
     /**
      * 上传图片到七牛
+     *
      * @param filePath 要上传的图片路径
-     * @param token 在七牛官网上注册的token
+     * @param token    在七牛官网上注册的token
      */
     private void uploadImageToQiniu(String filePath, String token) {
         UploadManager uploadManager = new UploadManager();
@@ -418,7 +458,7 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
             public void complete(String key, ResponseInfo info, JSONObject res) {
                 // info.error中包含了错误信息，可打印调试
                 // 上传成功后将key值上传到自己的服务器
-                uploadIcon();
+                uploadIcon(doman+key);
             }
 
         }, null);
@@ -427,7 +467,31 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
     /**
      * 上传头像
      */
-    private void uploadIcon() {
+    private void uploadIcon(final String url) {
+        TreeMap<String,String> params = new TreeMap<>();
+        params.put("headImageUrl",url);
 
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.UploadIcon,params);
+        postRequest.execute(new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                if (!TextUtils.isEmpty(response.body())) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        Utils.loadImg(mIvIcon,url,null);
+                        SPUtil.setValue("usericon",url);
+                    } else {
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
+                    }
+                    loadingDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                Utils.toast("网络繁忙，请稍后再试!");
+                loadingDialog.dismiss();
+            }
+        });
     }
 }

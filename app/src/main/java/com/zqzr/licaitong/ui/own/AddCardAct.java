@@ -11,11 +11,13 @@ import android.widget.TextView;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.Getcode;
+import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.http.OKGO_GetData;
 import com.zqzr.licaitong.utils.JsonUtil;
 import com.zqzr.licaitong.utils.SPUtil;
@@ -42,12 +44,12 @@ public class AddCardAct extends BaseActivity {
     private String userRealName;
     private SuccessAndFailDialog successDialog;
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
-            switch (msg.what){
+            switch (msg.what) {
                 case Constant.NUMBER_0:
                     successDialog.dismiss();
                     finish();
@@ -106,8 +108,7 @@ public class AddCardAct extends BaseActivity {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    Getcode getcode = JsonUtil.parseJsonToBean(response.body(), Getcode.class);
-                    if (200 == Integer.parseInt(getcode.code)) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         successDialog.setContent("绑卡成功", true);
                         successDialog.setDes("", true);
                         successDialog.setImg(R.mipmap.success, true);
@@ -117,9 +118,10 @@ public class AddCardAct extends BaseActivity {
                         intent.setAction(Constant.BankCard_Success);
                         sendBroadcast(intent);
 
-                        handler.sendEmptyMessageDelayed(Constant.NUMBER_0,2000);
+                        handler.sendEmptyMessageDelayed(Constant.NUMBER_0, 2000);
+
                     } else {
-                        Utils.toast(getcode.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
                 loadingDialog.dismiss();

@@ -4,8 +4,11 @@ import android.app.Application;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
+import com.zqzr.licaitong.common.info.ErrorInfo;
 import com.zqzr.licaitong.receiver.GestureLockWatcher;
+import com.zqzr.licaitong.ui.own.gesturelock.logic.LockLogic;
 import com.zqzr.licaitong.utils.SPUtil;
+import com.zqzr.licaitong.utils.Utils;
 
 import java.util.Map;
 
@@ -120,21 +123,21 @@ public class MyApplication extends Application {
 //        ViewTarget.setTagId(R.id.glide_tag);
 //        // 抓取异常LOG，保存在本地
 ////        CrashHandler.getInstance().init(this);
-//        // APP启动是，测试网络连接是否异常
-//        if (!Utils.isConnect(this)) {
-//            ErrorInfo.getInstance().addError(null, getString(R.string.app_network_error));
-//        }
-//
-//
-//        // 监听APP是否到后台
-//        watcher = new GestureLockWatcher(this);
-//        watcher.setOnScreenPressedListener(new GestureLockWatcher.OnScreenPressedListener() {
-//            @Override
-//            public void onPressed() {
-//                LockLogic.getInstance().start();
-//            }
-//        });
-//        watcher.startWatch();
+        // APP启动是，测试网络连接是否异常
+        if (!Utils.isConnect(this)) {
+            ErrorInfo.getInstance().addError(null, getString(R.string.app_network_error));
+        }
+        // 监听APP是否到后台
+        watcher = new GestureLockWatcher(this);
+        watcher.setOnScreenPressedListener(new GestureLockWatcher.OnScreenPressedListener() {
+            @Override
+            public void onPressed() {
+                if (!SPUtil.getBoolean("lockOff",false)){
+                    LockLogic.getInstance().start();
+                }
+            }
+        });
+        watcher.startWatch();
         initLocalData();
 //        initUmengShare();
 //        addPromotion();

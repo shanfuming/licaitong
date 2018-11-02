@@ -53,20 +53,20 @@ public class HomeTouziListAdapter extends BaseAdapter {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = View.inflate(ActivityUtils.peek(), R.layout.item_home_touzitype,null);
+            viewHolder.predictIncome = (TextView) convertView.findViewById(R.id.tv_predictIncome);
+            viewHolder.predictIncomeName = (TextView) convertView.findViewById(R.id.tv_predictIncome_name);
+            viewHolder.touziType = (TextView) convertView.findViewById(R.id.tv_touzi_type);
+            viewHolder.touziMore = (TextView) convertView.findViewById(R.id.tv_touzi_more);
+            viewHolder.tenderName = (TextView) convertView.findViewById(R.id.tv_tender_name);
+            viewHolder.tenderDayNum = (TextView) convertView.findViewById(R.id.tv_tender_dayNum);
+            viewHolder.tenderStartMark = (TextView) convertView.findViewById(R.id.tv_condition_startMark);
+            viewHolder.touziDetail = (LinearLayout) convertView.findViewById(R.id.ll_touzi_detail);
+            viewHolder.tenderState = (TextView) convertView.findViewById(R.id.tv_tender_state);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.predictIncome = (TextView) convertView.findViewById(R.id.tv_predictIncome);
-        viewHolder.predictIncomeName = (TextView) convertView.findViewById(R.id.tv_predictIncome_name);
-        viewHolder.touziType = (TextView) convertView.findViewById(R.id.tv_touzi_type);
-        viewHolder.touziMore = (TextView) convertView.findViewById(R.id.tv_touzi_more);
-        viewHolder.tenderName = (TextView) convertView.findViewById(R.id.tv_tender_name);
-        viewHolder.tenderDayNum = (TextView) convertView.findViewById(R.id.tv_tender_dayNum);
-        viewHolder.tenderStartMark = (TextView) convertView.findViewById(R.id.tv_condition_startMark);
-        viewHolder.touziDetail = (LinearLayout) convertView.findViewById(R.id.ll_touzi_detail);
-        viewHolder.tenderState = (TextView) convertView.findViewById(R.id.tv_tender_state);
 
         viewHolder.predictIncome.setText(touziList.get(position).expectedYield+"%");
 //        viewHolder.predictIncomeName.setText(touziList.get(position).getPredictIncomeName());

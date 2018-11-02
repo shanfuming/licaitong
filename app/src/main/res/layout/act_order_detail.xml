@@ -54,17 +54,18 @@
                     android:layout_centerVertical="true"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/x30"
-                    android:text="@string/own_order_id"
                     android:textColor="@color/dayAndMark"
                     android:textSize="@dimen/x30" />
 
-                <ImageView
+                <TextView
                     android:id="@+id/iv_detail_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y30"
                     android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/x30"
+                    android:textColor="@color/text_grey"
                     android:textSize="@dimen/x24" />
 
             </RelativeLayout>
@@ -174,7 +175,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="@dimen/x30"
-                    android:text="@string/own_order_id"
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/x24" />
 
@@ -428,6 +428,7 @@
             android:textColor="@color/text_grey"
             android:layout_marginTop="@dimen/y40"
             android:textSize="@dimen/x32"
+            android:visibility="gone"
             />
 
 

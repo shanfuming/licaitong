@@ -53,14 +53,13 @@ public class FindItemAdapter extends BaseAdapter {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = View.inflate(ActivityUtils.peek(), R.layout.item_find,null);
+            viewHolder.findItemImg = (ImageView) convertView.findViewById(R.id.iv_find_img);
+            viewHolder.findItemTitle = (TextView) convertView.findViewById(R.id.tv_find_title);
+            viewHolder.findItemTime = (TextView) convertView.findViewById(R.id.tv_find_time);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
-        viewHolder.findItemImg = (ImageView) convertView.findViewById(R.id.iv_find_img);
-        viewHolder.findItemTitle = (TextView) convertView.findViewById(R.id.tv_find_title);
-        viewHolder.findItemTime = (TextView) convertView.findViewById(R.id.tv_find_time);
 
         Utils.loadImg(viewHolder.findItemImg,findItems.get(position).imageUrl,null);
         viewHolder.findItemTitle.setText(findItems.get(position).title);
