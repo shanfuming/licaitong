@@ -1,5 +1,6 @@
 package com.zqzr.licaitong.ui.own;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -35,7 +36,7 @@ import java.util.TreeMap;
  */
 
 public class OrderDetailAct extends BaseActivity {
-    private TextView mTvName, mTvOrderId, mTvPredictIncome, mTvPlanMoney, mTvState, mTvState2, mTvUserName, mTvPhone, mTvPayCard, mTvReturnCard, mTvPayNum, mTvVoucher, mTvPaydate, mTvCancel;
+    private TextView mTvName, mTvOrderId, mTvPredictIncome, mTvPlanMoney, mTvAddTime,mTvState, mTvState2, mTvUserName, mTvPhone, mTvPayCard, mTvReturnCard, mTvPayNum, mTvVoucher, mTvPaydate, mTvCancel;
     private LinearLayout mLlVoucher;
     private ImageView mIvArrow, mIvVoucher;
     private KeyDownLoadingDialog loadingDialog;
@@ -55,6 +56,13 @@ public class OrderDetailAct extends BaseActivity {
     };
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        setBackOption(true);
+        setTitle("订单详情");
+    }
+
+    @Override
     protected void initView() {
         setContentView(R.layout.act_order_detail);
 
@@ -69,6 +77,7 @@ public class OrderDetailAct extends BaseActivity {
         mTvPayCard = (TextView) findViewById(R.id.tv_detail_paybankcard);
         mTvReturnCard = (TextView) findViewById(R.id.tv_detail_returnbankcard);
         mTvPayNum = (TextView) findViewById(R.id.tv_detail_paynum);
+        mTvAddTime = (TextView) findViewById(R.id.tv_detail_time);
         mTvPaydate = (TextView) findViewById(R.id.tv_detail_paydate);
         mLlVoucher = (LinearLayout) findViewById(R.id.ll_voucher);
         mTvVoucher = (TextView) findViewById(R.id.tv_detail_voucher);
@@ -122,13 +131,13 @@ public class OrderDetailAct extends BaseActivity {
                         mTvName.setText(orderDetail.data.productName);
                         mTvPredictIncome.setText(orderDetail.data.rateYear + "%");
                         mTvPlanMoney.setText(orderDetail.data.subscribeAmount + "");
-                        mTvPaydate.setText(DateUtil.formatter(DateUtil.Format.SECOND, orderDetail.data.addTime));
+                        mTvAddTime.setText(DateUtil.formatter(DateUtil.Format.SECOND, orderDetail.data.addTime));
                         mTvUserName.setText(Utils.getEncodeName(orderDetail.data.realName));
                         mTvPhone.setText(Utils.getEncodeStr(orderDetail.data.phone));
                         mTvPayCard.setText(orderDetail.data.remitBankNo);
+                        mTvPaydate.setText(DateUtil.formatter(DateUtil.Format.DATE, orderDetail.data.payTime));
                         mTvReturnCard.setText(orderDetail.data.repaymentBankNo);
                         mTvPayNum.setText(orderDetail.data.actualAmount + "");
-                        mTvPaydate.setText(DateUtil.formatter(DateUtil.Format.DATE, orderDetail.data.payTime));
                         Utils.loadImg(mIvVoucher, orderDetail.data.certificateUrl, null);
                         if (orderDetail.data.status == 0 || orderDetail.data.status == 1) {
                             mTvCancel.setVisibility(View.VISIBLE);
@@ -143,71 +152,71 @@ public class OrderDetailAct extends BaseActivity {
                             if (orderDetail.data.status == 0) {
                                 mTvState.setText("待受理");
                                 mTvState2.setText("待受理");
-                                mTvState2.setTextColor(0xfe6b31);
-                                mTvState.setTextColor(0xfe6b31);
+                                mTvState2.setTextColor(Color.parseColor("#fe6b31"));
+                                mTvState.setTextColor(Color.parseColor("#fe6b31"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_accept));
                             }
                             if (orderDetail.data.status == 1) {
                                 mTvState.setText("待签约");
                                 mTvState2.setText("待签约");
-                                mTvState2.setTextColor(0x469ee8);
-                                mTvState.setTextColor(0x469ee8);
+                                mTvState2.setTextColor(Color.parseColor("#469ee8"));
+                                mTvState.setTextColor(Color.parseColor("#469ee8"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_sign));
                             }
                             if (orderDetail.data.status == 2) {
                                 mTvState.setText("已签约");
                                 mTvState2.setText("已签约");
-                                mTvState2.setTextColor(0x5dc748);
-                                mTvState.setTextColor(0x5dc748);
+                                mTvState2.setTextColor(Color.parseColor("#5dc748"));
+                                mTvState.setTextColor(Color.parseColor("#5dc748"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_signed));
                             }
                             if (orderDetail.data.status == 3) {
                                 mTvState.setText("签约作废");
                                 mTvState2.setText("签约作废");
-                                mTvState2.setTextColor(0x0c1997);
-                                mTvState.setTextColor(0x0c1997);
+                                mTvState2.setTextColor(Color.parseColor("#0c1997"));
+                                mTvState.setTextColor(Color.parseColor("#0c1997"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_signinvalid));
                             }
                             if (orderDetail.data.status == 4) {
                                 mTvState.setText("签约不成功");
                                 mTvState2.setText("签约不成功");
-                                mTvState2.setTextColor(0xdc1414);
-                                mTvState.setTextColor(0xdc1414);
+                                mTvState2.setTextColor(Color.parseColor("#dc1414"));
+                                mTvState.setTextColor(Color.parseColor("#dc1414"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_signfail));
                             }
                             if (orderDetail.data.status == 5) {
                                 mTvState.setText("已取消");
                                 mTvState2.setText("已取消");
-                                mTvState2.setTextColor(0xfe6b31);
-                                mTvState.setTextColor(0xfe6b31);
+                                mTvState2.setTextColor(Color.parseColor("#fe6b31"));
+                                mTvState.setTextColor(Color.parseColor("#fe6b31"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_ed));
                             }
                             if (orderDetail.data.status == 6) {
                                 mTvState.setText("已退款");
                                 mTvState2.setText("已退款");
-                                mTvState2.setTextColor(0x7200ff);
-                                mTvState.setTextColor(0x7200ff);
+                                mTvState2.setTextColor(Color.parseColor("#7200ff"));
+                                mTvState.setTextColor(Color.parseColor("#7200ff"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_refund));
                             }
                             if (orderDetail.data.status == 7) {
                                 mTvState.setText("待赎回");
                                 mTvState2.setText("待赎回");
-                                mTvState2.setTextColor(0xcead68);
-                                mTvState.setTextColor(0xcead68);
+                                mTvState2.setTextColor(Color.parseColor("#cead68"));
+                                mTvState.setTextColor(Color.parseColor("#cead68"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_redemption));
                             }
                             if (orderDetail.data.status == 8) {
                                 mTvState.setText("已赎回");
                                 mTvState2.setText("已赎回");
-                                mTvState2.setTextColor(0x088205);
-                                mTvState.setTextColor(0x088205);
+                                mTvState2.setTextColor(Color.parseColor("#088205"));
+                                mTvState.setTextColor(Color.parseColor("#088205"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_redemptioned));
                             }
                             if (orderDetail.data.status == 9) {
                                 mTvState.setText("已还款");
                                 mTvState2.setText("已还款");
-                                mTvState2.setTextColor(0x000000);
-                                mTvState.setTextColor(0x000000);
+                                mTvState2.setTextColor(Color.parseColor("#000000"));
+                                mTvState.setTextColor(Color.parseColor("#000000"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_cancel));
                             }
                         }

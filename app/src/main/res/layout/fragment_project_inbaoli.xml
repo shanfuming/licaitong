@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/introduce_rule1_t"
-            android:textColor="@color/text_dark"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/x26" />
 
         <TextView
@@ -24,7 +24,7 @@
             android:layout_marginBottom="@dimen/y20"
             android:layout_marginTop="@dimen/y20"
             android:text="@string/introduce_rule1"
-            android:textColor="@color/text_grey"
+            android:textColor="@color/text_dark"
             android:textSize="@dimen/x24" />
 
         <View style="@style/hLineStyle" />
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/y30"
             android:text="@string/introduce_rule2_t"
-            android:textColor="@color/text_dark"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/x26" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_marginBottom="@dimen/y20"
             android:layout_marginTop="@dimen/y20"
             android:text="@string/introduce_rule2"
-            android:textColor="@color/text_grey"
+            android:textColor="@color/text_dark"
             android:textSize="@dimen/x24" />
 
         <View style="@style/hLineStyle" />
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/y30"
             android:text="@string/introduce_incoming_t"
-            android:textColor="@color/text_dark"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/x26" />
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_marginBottom="@dimen/y20"
             android:layout_marginTop="@dimen/y20"
             android:text="@string/introduce_incoming"
-            android:textColor="@color/text_grey"
+            android:textColor="@color/text_dark"
             android:textSize="@dimen/x24" />
 
         <View style="@style/hLineStyle" />
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/y30"
             android:text="@string/introduce_rule3_t"
-            android:textColor="@color/text_dark"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/x26" />
 
         <TextView
@@ -81,7 +81,7 @@
             android:layout_marginBottom="@dimen/y20"
             android:layout_marginTop="@dimen/y20"
             android:text="@string/introduce_rule6"
-            android:textColor="@color/text_grey"
+            android:textColor="@color/text_dark"
             android:textSize="@dimen/x24" />
 
         <View style="@style/hLineStyle" />
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/y30"
             android:text="@string/introduce_use_t"
-            android:textColor="@color/text_dark"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/x26" />
 
         <TextView
@@ -100,7 +100,7 @@
             android:layout_marginBottom="@dimen/y20"
             android:layout_marginTop="@dimen/y20"
             android:text="@string/introduce_use2"
-            android:textColor="@color/text_grey"
+            android:textColor="@color/text_dark"
             android:textSize="@dimen/x24" />
 
         <View style="@style/hLineStyle" />
@@ -122,16 +122,17 @@
             android:layout_marginBottom="@dimen/y20"
             android:layout_marginTop="@dimen/y20"
             android:text="@string/introduce_measure1"
-            android:textColor="@color/text_grey"
+            android:textColor="@color/text_dark"
             android:textSize="@dimen/x24" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/y20"
             android:layout_marginTop="@dimen/y20"
             android:text="@string/introduce_measure2"
-            android:textColor="@color/text_grey"
+            android:textColor="@color/text_dark"
             android:textSize="@dimen/x24" />
 
         <View style="@style/hLineStyle" />
@@ -145,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/look_compact"
-                android:textColor="@color/text_dark"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/x26"
                 android:layout_centerVertical="true"
                 />

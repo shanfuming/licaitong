@@ -89,7 +89,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 if (!TextUtils.isEmpty(bannerList.get(position).url)&&!TextUtils.isEmpty(bannerList.get(position).title)){
                     Intent intent = new Intent();
                     intent.putExtra("title",bannerList.get(position).title);
-                    intent.putExtra("url",bannerList.get(position).url);
+                    intent.putExtra("content", bannerList.get(position).content);
+                    intent.putExtra("redirectUrl", bannerList.get(position).url);
                     ActivityUtils.push(CommonWebviewAct.class,intent);
                 }
             }
@@ -119,7 +120,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 if (!TextUtils.isEmpty(findItemList.get(position).urlHref)&&!TextUtils.isEmpty(findItemList.get(position).title)){
                     Intent intent = new Intent();
                     intent.putExtra("title",findItemList.get(position).title);
-                    intent.putExtra("url",findItemList.get(position).urlHref);
+                    intent.putExtra("redirectUrl",findItemList.get(position).urlHref);
+                    intent.putExtra("content", findItemList.get(position).content);
                     ActivityUtils.push(CommonWebviewAct.class,intent);
                 }
             }
@@ -136,8 +138,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 if (!TextUtils.isEmpty(response.body())) {
                     HomeTouziTypeAndFind homeTouziTypeAndFind = JsonUtil.parseJsonToBean(response.body(), HomeTouziTypeAndFind.class);
                     if (200 == Integer.parseInt(homeTouziTypeAndFind.code)&&homeTouziTypeAndFind.data!=null) {
-                        touziTypesList.addAll(homeTouziTypeAndFind.data.inve);
-                        findItemList.addAll(homeTouziTypeAndFind.data.moments);
+                        if (homeTouziTypeAndFind.data.inve !=null){
+                            touziTypesList.addAll(homeTouziTypeAndFind.data.inve);
+                        }
+                        if (homeTouziTypeAndFind.data.moments !=null){
+                            findItemList.addAll(homeTouziTypeAndFind.data.moments);
+                        }
                         homeTouziListAdapter.notifyDataSetChanged();
                         findItemAdapter.notifyDataSetChanged();
                     } else {

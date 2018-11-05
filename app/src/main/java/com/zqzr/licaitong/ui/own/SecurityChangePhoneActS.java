@@ -35,25 +35,26 @@ import java.util.TreeMap;
  * Description:
  */
 
-public class SecurityChangePhoneActS extends BaseActivity implements View.OnClickListener{
+public class SecurityChangePhoneActS extends BaseActivity implements View.OnClickListener {
 
-    private EditText mEtCode,mEtNewPhone;
+    private EditText mEtCode, mEtNewPhone;
     private TextView mTvCode, mTvCommit;
     private KeyDownLoadingDialog loadingDialog;
     private TimeCount time;
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
-            switch (msg.what){
+            switch (msg.what) {
                 case Constant.NUMBER_0:
                     finish();
                     break;
             }
         }
     };
+
     @Override
     protected void initView() {
         setContentView(R.layout.act_changephone_s);
@@ -82,7 +83,7 @@ public class SecurityChangePhoneActS extends BaseActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_change_code:
                 getCode();
                 break;
@@ -96,23 +97,23 @@ public class SecurityChangePhoneActS extends BaseActivity implements View.OnClic
      * 设置新的手机号
      */
     private void setNewPhone() {
-        if (!RegularUtil.isPhone(mEtNewPhone.getText().toString())){
+        if (!RegularUtil.isPhone(mEtNewPhone.getText().toString())) {
             Utils.toast("请正确输入手机号");
             return;
         }
-        if (TextUtils.isEmpty(mEtCode.getText().toString().trim())){
+        if (TextUtils.isEmpty(mEtCode.getText().toString().trim())) {
             Utils.toast("验证码不能为空");
             return;
         }
 
-        if (mEtCode.getText().toString().trim().length() > 6){
+        if (mEtCode.getText().toString().trim().length() > 6) {
             Utils.toast("请正确输入验证码");
             return;
         }
 
         loadingDialog.show();
         TreeMap<String, String> params = new TreeMap<>();
-        params.put("id", SPUtil.getString("userid",""));
+        params.put("id", SPUtil.getString("userid", ""));
         params.put("str", "new");
         params.put("code", mEtCode.getText().toString());
         params.put("phone", mEtNewPhone.getText().toString().trim());
@@ -122,17 +123,18 @@ public class SecurityChangePhoneActS extends BaseActivity implements View.OnClic
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    Getcode getcode = JsonUtil.parseJsonToBean(response.body(), Getcode.class);
-                    if (200 == Integer.parseInt(getcode.code)) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         Intent intent = new Intent();
                         intent.setAction(Constant.ChangeP_Success);
                         sendBroadcast(intent);
 
                         Utils.toast(Constant.ChangeP_Success);
 
-                        handler.sendEmptyMessageDelayed(Constant.NUMBER_0,1500);
+                        SPUtil.setValue("username", mEtNewPhone.getText().toString().trim());
+
+                        handler.sendEmptyMessageDelayed(Constant.NUMBER_0, 1500);
                     } else {
-                        Utils.toast(getcode.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
                 loadingDialog.dismiss();

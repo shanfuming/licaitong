@@ -132,8 +132,10 @@ public class MyApplication extends Application {
         watcher.setOnScreenPressedListener(new GestureLockWatcher.OnScreenPressedListener() {
             @Override
             public void onPressed() {
-                if (!SPUtil.getBoolean("lockOff",false)){
-                    LockLogic.getInstance().start();
+                if(isLand()){
+                    if (!SPUtil.getBoolean("lockOff",false)){
+                        LockLogic.getInstance().start();
+                    }
                 }
             }
         });

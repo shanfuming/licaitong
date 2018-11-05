@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 
 import com.lzy.okgo.OkGo;
 import com.umeng.analytics.MobclickAgent;
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.ui.activity.AActivity;
 import com.zqzr.licaitong.ui.find.FindActivity;
@@ -80,8 +81,10 @@ public abstract class BaseActivity extends AppBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (!SPUtil.getBoolean("lockOff",false)){
-            LockLogic.getInstance().checkLock(this);
+        if (MyApplication.getInstance().isLand()){
+            if (!SPUtil.getBoolean("lockOff",false)){
+                LockLogic.getInstance().checkLock(this);
+            }
         }
     }
 

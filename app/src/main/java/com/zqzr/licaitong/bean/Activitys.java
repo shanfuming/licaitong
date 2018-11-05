@@ -27,6 +27,7 @@ public class Activitys implements Serializable {
         public String imageUrl;
         public String id;
         public String url;
+        public String content;
         public String introduction;
     }
 }

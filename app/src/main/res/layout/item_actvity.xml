@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y240"
             android:background="@mipmap/load_moren"
+            android:scaleType="centerCrop"
             />
 
         <TextView

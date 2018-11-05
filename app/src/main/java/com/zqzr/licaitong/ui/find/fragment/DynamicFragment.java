@@ -1,5 +1,6 @@
 package com.zqzr.licaitong.ui.find.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -22,6 +24,8 @@ import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.FindItem;
 import com.zqzr.licaitong.http.OKGO_GetData;
+import com.zqzr.licaitong.ui.CommonWebviewAct;
+import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.view.KeyDownLoadingDialog;
@@ -59,6 +63,19 @@ public class DynamicFragment extends Fragment {
 
         findItemAdapter = new FindItemAdapter(findItems);
         mNewsListView.setAdapter(findItemAdapter);
+
+        mNewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (!TextUtils.isEmpty(findItems.get(position).urlHref)&&!TextUtils.isEmpty(findItems.get(position).title)){
+                    Intent intent = new Intent();
+                    intent.putExtra("title",findItems.get(position).title);
+                    intent.putExtra("content", findItems.get(position).content);
+                    intent.putExtra("redirectUrl",findItems.get(position).urlHref);
+                    ActivityUtils.push(CommonWebviewAct.class,intent);
+                }
+            }
+        });
 
         getData(currentPage,false);
 

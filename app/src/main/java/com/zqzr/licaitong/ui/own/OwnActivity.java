@@ -167,8 +167,14 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
                         realNameStatus = ownInfo.data.realNameStatus;
                         bankStatus = ownInfo.data.bankStatus;
 
-                    } else  if(Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 10003){
-                        ActivityUtils.push(LoginAct.class);
+                    } else if(Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 10003){
+
+                        SPUtil.clear();
+                        MyApplication.getInstance().updataLand(false);
+
+                        Intent intent = new Intent();
+                        intent.putExtra("turn",1);
+                        ActivityUtils.push(LoginAct.class,intent);
                     } else {
                         Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }

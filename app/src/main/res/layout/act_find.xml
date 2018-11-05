@@ -16,7 +16,9 @@
             android:id="@+id/iv_topBanner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y180"
-            android:background="@mipmap/new_top" />
+            android:background="@mipmap/new_top"
+            android:scaleType="centerCrop"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"

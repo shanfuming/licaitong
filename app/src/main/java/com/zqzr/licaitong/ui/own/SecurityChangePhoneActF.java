@@ -108,14 +108,9 @@ public class SecurityChangePhoneActF extends BaseActivity implements View.OnClic
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
                     if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
-                        Getcode getcode = JsonUtil.parseJsonToBean(response.body(), Getcode.class);
-                        if (200 == Integer.parseInt(getcode.code)) {
-                            Intent intent = new Intent();
-                            intent.putExtra("code", mEtCode.getText().toString());
-                            ActivityUtils.push(SecurityChangePhoneActS.class, intent);
-                        } else {
-                            Utils.toast(getcode.message);
-                        }
+                        Intent intent = new Intent();
+                        intent.putExtra("code", mEtCode.getText().toString());
+                        ActivityUtils.push(SecurityChangePhoneActS.class, intent);
 
                     } else {
                         Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
@@ -147,13 +142,13 @@ public class SecurityChangePhoneActF extends BaseActivity implements View.OnClic
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    Getcode getcode = JsonUtil.parseJsonToBean(response.body(), Getcode.class);
-                    if (200 == Integer.parseInt(getcode.code)) {
+
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         Utils.toast("已发送");
                         //倒计时
                         time.start();//开始计时
                     } else {
-                        Utils.toast(getcode.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
             }

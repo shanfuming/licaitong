@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,12 +30,15 @@ import com.zqzr.licaitong.ui.home.fragment.ProjectIntroduceBaoLiFragment;
 import com.zqzr.licaitong.ui.home.fragment.ProjectIntroduceFragment;
 import com.zqzr.licaitong.ui.home.fragment.ProjectMessureBaoLiFragment;
 import com.zqzr.licaitong.ui.home.fragment.ProjectRecordFragment;
+import com.zqzr.licaitong.ui.own.BankCardAct;
+import com.zqzr.licaitong.ui.own.IdentifyAct;
 import com.zqzr.licaitong.ui.own.LoginAct;
 import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.view.KeyDownLoadingDialog;
 import com.zqzr.licaitong.view.SuccessAndFailDialog;
+import com.zqzr.licaitong.view.TipDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +78,8 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
             }
         }
     };
+    private ImageView mIvDetailPiaoJu;
+    private LinearLayout mLlDetailBapli;
 
     @Override
     protected void initView() {
@@ -98,6 +104,15 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
         mViewPager = (ViewPager) findViewById(R.id.vp_view_pager);
         textViews[0] = (TextView) findViewById(R.id.tv_project_in);
         textViewLines[0] = (TextView) findViewById(R.id.tv_project_in_line);
+        mIvDetailPiaoJu = (ImageView) findViewById(R.id.iv_detail_piaoju);
+        mLlDetailBapli = (LinearLayout) findViewById(R.id.ll_detail_baoli);
+        if (type == 1) {
+            mIvDetailPiaoJu.setVisibility(View.GONE);
+            mLlDetailBapli.setVisibility(View.VISIBLE);
+        } else {
+            mIvDetailPiaoJu.setVisibility(View.VISIBLE);
+            mLlDetailBapli.setVisibility(View.GONE);
+        }
 
         mLlIn = (LinearLayout) findViewById(R.id.ll_in);
         mLlAudit = (LinearLayout) findViewById(R.id.ll_audit);
@@ -211,7 +226,11 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
                         totalAmount = productDetail.data.proTotalAmount;
                         restAmount = productDetail.data.reservationAmount;
                         startAmount = productDetail.data.purchaseAmount;
-                    } else {
+                    }else if(10011 == Integer.parseInt(productDetail.code)){
+                        tip(1);
+                    }else if(10023 == Integer.parseInt(productDetail.code)){
+                        tip(2);
+                    }else {
                         Utils.toast(productDetail.message);
                     }
                     loadingDialog.dismiss();
@@ -223,6 +242,40 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
                 super.onError(response);
                 Utils.toast(Constant.NetWork_Error);
                 loadingDialog.dismiss();
+            }
+        });
+    }
+
+    /**
+     * 提示去实名或者绑定银行卡
+     *
+     * @param type 1实名 2绑卡
+     */
+    private void tip(final int type) {
+        final TipDialog tipDialog = new TipDialog(this, true);
+        tipDialog.setTitle("温馨提示");
+        if (type == 1) {
+            tipDialog.setContent("您还没有实名认证!");
+            tipDialog.setButtonDes("取消", "去认证");
+        } else {
+            tipDialog.setContent("您还没有绑定银行卡!");
+            tipDialog.setButtonDes("取消", "去绑卡");
+        }
+        tipDialog.show();
+        tipDialog.setClickListener(new TipDialog.ClickListener() {
+            @Override
+            public void onClickExit() {
+                tipDialog.dismiss();
+            }
+
+            @Override
+            public void onClickConfirm() {
+                if (type == 1) {
+                    ActivityUtils.push(IdentifyAct.class);
+                } else {
+                    ActivityUtils.push(BankCardAct.class);
+                }
+                tipDialog.dismiss();
             }
         });
     }
@@ -262,6 +315,7 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.tv_subscribe:
                 if (!MyApplication.getInstance().isLand()){
+
                     subscribe();
                 }else{
                     ActivityUtils.push(LoginAct.class);

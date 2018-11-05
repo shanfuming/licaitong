@@ -21,8 +21,7 @@ public class BaseParams {
     /**
      * 测试服务器地址
      */
-    private static final String URL_BETA            = "http://10.16.8.43:8080";
-//    private static final String URL_BETA            = "http://10.16.8.106:8080";
+    private static final String URL_BETA            = "http://10.16.8.46:8080";
 
     /**
      * 正式服务器地址

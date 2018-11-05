@@ -237,4 +237,83 @@
 
     </LinearLayout>
 
+    <View style="@style/hLineheight20Style"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/x30"
+        >
+
+        <ImageView
+            android:id="@+id/iv_detail_piaoju"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y350"
+            android:background="@mipmap/detail_banner"
+            android:visibility="gone"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_detail_baoli"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/in_baoli_rule0_t"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/in_baoli_rule0"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/x24" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y20"
+                android:layout_marginTop="@dimen/y20"
+                android:text="@string/in_baoli_rule01"
+                android:textColor="@color/text_dark"
+                android:textSize="@dimen/x24" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="@dimen/x35"
+            android:layout_height="@dimen/x35"
+            android:background="@mipmap/push_down"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/tv_push_down"
+            android:layout_marginBottom="@dimen/y30"
+            />
+
+        <TextView
+            android:id="@+id/tv_push_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下拉详情"
+            android:textSize="@dimen/x24"
+            android:textColor="#e0dfdf"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            />
+
+
+    </RelativeLayout>
+
 </LinearLayout>

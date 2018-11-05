@@ -94,7 +94,7 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
         //添加ItemDecoration，item之间的间隔
         int leftRight = DensityUtils.dp2px(this, 0f);
         int topBottom = DensityUtils.dp2px(this, 12f);
-        mOrderRecyclerView.addItemDecoration(new SpacesItemDecoration(leftRight, topBottom,R.color.line_grey));
+        mOrderRecyclerView.addItemDecoration(new SpacesItemDecoration(leftRight, topBottom,0));
         ordersAdapter = new OrderAdapter(orders);
         mOrderRecyclerView.setAdapter(ordersAdapter);
 

@@ -63,7 +63,8 @@ public class ActivitysAdapter extends RecyclerView.Adapter<ActivitysAdapter.Acti
                 if (!TextUtils.isEmpty(activityses.get(position).url)&&!TextUtils.isEmpty(activityses.get(position).title)){
                     Intent intent = new Intent();
                     intent.putExtra("title",activityses.get(position).title);
-                    intent.putExtra("url",activityses.get(position).url);
+                    intent.putExtra("content",activityses.get(position).content);
+                    intent.putExtra("redirectUrl",activityses.get(position).url);
                     ActivityUtils.push(CommonWebviewAct.class,intent);
                 }
             }

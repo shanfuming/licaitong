@@ -1,6 +1,7 @@
 package com.zqzr.licaitong.ui;
 
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -43,14 +44,22 @@ public class CommonWebviewAct extends BaseActivity {
     @Override
     protected void initData() {
         loadingDialog = new KeyDownLoadingDialog(this);
-        webview.loadUrl(getIntent().getStringExtra("url"));
+        String url = getIntent().getStringExtra("redirectUrl");
+        String content = getIntent().getStringExtra("content");
+        if (TextUtils.isEmpty(url)) {
+            if (!TextUtils.isEmpty(content)) {
+                webview.loadData(content, "text/html", "UTF-8");
+            }
+        } else {
+            webview.loadUrl(url);
+        }
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setDefaultTextEncodingName("utf-8");
         WebViewClient webViewClient = new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                if(!CommonWebviewAct.this.isFinishing()){
+                if (!CommonWebviewAct.this.isFinishing()) {
                     loadingDialog.show();
                 }
             }

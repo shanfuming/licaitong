@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">理财通</string>
+    <string name="app_name">LCT</string>
     <string name="app_crash">很抱歉,程序出现异常,即将退出.</string>
     <string name="app_network_error">网络链接错误，请查看网络是否已连接!</string>
     <string name="app_exit">再按一次退出程序</string>
@@ -163,6 +163,11 @@
     <string name="in_baoli_rule3">包括但不限于对原债权人经营情况、财务状况、征信状况、法定代表人经历及征信、涉诉涉案情况进行专业调查</string>
     <string name="in_baoli_rule4_t">原债权人关联企业回购责任</string>
     <string name="in_baoli_rule4">原债权人依照保理合同约定承担债权回购责任，同时出具付款承诺函</string>
+
+    <string name="in_baoli_rule0_t">保理债券转让方：</string>
+    <string name="in_baoli_rule0">国润盛世国际商业保理(天津有限公司)</string>
+    <string name="in_baoli_rule01">国润盛世：国润盛世国际商业保理 （天津有限公司）注册于天津自贸试验区，国润保理以风控为核心，以应收账款融资、资信评估、信用风险担保、账款催收业务为导向，为广大的中、小、微企业提供保理融资服务，解决企业在发展过程中所需的流动资金需求。在政府商业保理政策的支持下，国润保理凭积极开拓商业保理业务，呈现良好的发展势头。</string>
+
 
     <string name="audit">已通过</string>
     <string name="audit_1">人工专业验票</string>
