@@ -21,6 +21,7 @@ import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.Getcode;
 import com.zqzr.licaitong.http.OKGO_GetData;
+import com.zqzr.licaitong.ui.CommonWebviewAct;
 import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
 import com.zqzr.licaitong.utils.RegularUtil;
@@ -43,6 +44,7 @@ public class RegistFirstAct extends BaseActivity implements View.OnClickListener
     private CheckBox mChectBox;
     private TimeCount time;
     private KeyDownLoadingDialog loadingDialog;
+    private boolean isCheck;
 
     @Override
     protected void initView() {
@@ -70,6 +72,17 @@ public class RegistFirstAct extends BaseActivity implements View.OnClickListener
         loadingDialog = new KeyDownLoadingDialog(this);
 
         registerBoradcastReceiver();
+
+        mChectBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    isCheck = true;
+                } else {
+                    isCheck = false;
+                }
+            }
+        });
     }
 
     @Override
@@ -92,7 +105,11 @@ public class RegistFirstAct extends BaseActivity implements View.OnClickListener
                 check();
                 break;
             case R.id.turn_rule:
-
+                Intent intent = new Intent();
+                intent.putExtra("title","用户服务协议 ");
+                intent.putExtra("content", "");
+                intent.putExtra("redirectUrl", BaseParams.URL_ADDRESS+BaseParams.ServiceAgreement);
+                ActivityUtils.push(CommonWebviewAct.class,intent);
                 break;
         }
     }
@@ -124,16 +141,11 @@ public class RegistFirstAct extends BaseActivity implements View.OnClickListener
             return;
         }
 
-        mChectBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    next();
-                } else {
-                    Utils.toast("请先阅读并同意用户协议");
-                }
-            }
-        });
+        if (isCheck) {
+            next();
+        } else {
+            Utils.toast("请先阅读并同意用户协议");
+        }
 
     }
 
@@ -152,14 +164,14 @@ public class RegistFirstAct extends BaseActivity implements View.OnClickListener
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    Getcode getcode = JsonUtil.parseJsonToBean(response.body(), Getcode.class);
-                    if (200 == Integer.parseInt(getcode.code)) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         Intent intent = new Intent();
                         intent.putExtra("phone", mEtPhone.getText().toString());
                         intent.putExtra("fpName", mEtInviteCode.getText().toString());
                         ActivityUtils.push(RegistSecondAct.class, intent);
+
                     } else {
-                        Utils.toast(getcode.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
                 loadingDialog.dismiss();
@@ -178,6 +190,19 @@ public class RegistFirstAct extends BaseActivity implements View.OnClickListener
      * 注册发送验证码
      */
     private void getCode() {
+
+        //判断手机号是否符合
+        if (!RegularUtil.isPhone(mEtPhone.getText().toString())) {
+            Utils.toast(Constant.Login_UserName_Null);
+            return;
+        }
+
+        //判断邀请码是否为空
+        if (TextUtils.isEmpty(mEtInviteCode.getText().toString())) {
+            Utils.toast(Constant.Regist_InviteCode_Null);
+            return;
+        }
+
         TreeMap<String, String> params = new TreeMap<>();
         params.put("phone", mEtPhone.getText().toString());
         params.put("fpName", mEtInviteCode.getText().toString());
@@ -187,13 +212,13 @@ public class RegistFirstAct extends BaseActivity implements View.OnClickListener
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    Getcode getcode = JsonUtil.parseJsonToBean(response.body(), Getcode.class);
-                    if (200 == Integer.parseInt(getcode.code)) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         Utils.toast("已发送");
                         //倒计时
                         time.start();//开始计时
+
                     } else {
-                        Utils.toast(getcode.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
             }

@@ -62,10 +62,6 @@ public class GuideAdapter extends PagerAdapter {
     }
 
     private void goHome() {
-//        Intent intent = new Intent(mActivity, MainActivity.class);
-//        mActivity.startActivity(intent);
-//        mActivity.finish();
-
         ActivityUtils.push(MainActivity.class);
         ActivityUtils.pop(mActivity);
     }

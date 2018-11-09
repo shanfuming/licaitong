@@ -14,6 +14,7 @@ import com.cjj.MaterialRefreshListener;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.adapter.DropMenuAdapter;
 import com.zqzr.licaitong.adapter.TenderListAdapter;
@@ -45,22 +46,22 @@ import java.util.TreeMap;
  * Description:
  */
 
-public class TenderListAct extends BaseActivity implements View.OnClickListener{
+public class TenderListAct extends BaseActivity implements View.OnClickListener {
 
     private ArrayList<Menu> menu = new ArrayList<>();
     private ArrayList<Menu> limit = new ArrayList<>();
     private ArrayList<Menu> start = new ArrayList<>();
-    private boolean isLimit,isStart;
+    private boolean isLimit, isStart;
     private ListView mTenderListView;
     private DropMenuAdapter limitAdapter, menuAdapter;
-    private LinearLayout mLlConditionLimit,mLlConditionStart,mLlMenuList;
+    private LinearLayout mLlConditionLimit, mLlConditionStart, mLlMenuList;
     private ListView mConditionListView;
     private MaterialRefreshLayout mRefreshLayout;
-    private TextView mTvConditionLimit,mTvConditionStart;
-    private ImageView mIvConditionLimit,mIvConditionStart;
+    private TextView mTvConditionLimit, mTvConditionStart;
+    private ImageView mIvConditionLimit, mIvConditionStart;
     private View mask;
     private TenderListAdapter tenderListAdapter;
-    private TextView mTvProperty,mTvPiaoju;
+    private TextView mTvProperty, mTvPiaoju;
     private LinearLayout mLlPiaoju;
     private int type;
     private int currentType;
@@ -76,22 +77,22 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onStart() {
         super.onStart();
-        type = getIntent().getIntExtra("type",-1);
+        type = getIntent().getIntExtra("type", -1);
         setBackOption(true);
         //设置标题
-        if(type == Constant.NUMBER_0){
+        if (type == Constant.NUMBER_0) {
             setTitle("票据投资");
         }
-        if (type == Constant.NUMBER_1){
+        if (type == Constant.NUMBER_1) {
             setTitle("保理投资");
         }
         //默认加载数据
-        if(type == Constant.NUMBER_0){
-            getDataList(0,currentPage,false);
+        if (type == Constant.NUMBER_0) {
+            getDataList(0, currentPage, false);
             mLlPiaoju.setVisibility(View.VISIBLE);
         }
-        if (type == Constant.NUMBER_1){
-            getDataList(1,currentPage,false);
+        if (type == Constant.NUMBER_1) {
+            getDataList(1, currentPage, false);
             mLlPiaoju.setVisibility(View.GONE);
         }
         currentType = type;
@@ -166,13 +167,13 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener{
         mRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
-                getDataList(currentType,currentPage,false);
+                getDataList(currentType, currentPage, false);
                 mRefreshLayout.finishRefreshing();
             }
 
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
-                getDataList(currentType,nextPage,true);
+                getDataList(currentType, nextPage, true);
                 nextPage = nextPage + 1;
                 mRefreshLayout.finishRefreshLoadMore();
             }
@@ -182,16 +183,16 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
-                intent.putExtra("type",dataList.get(position).type);
-                intent.putExtra("id",dataList.get(position).id);
-                ActivityUtils.push(TenderDetailAct.class);
+                intent.putExtra("type", dataList.get(position).type);
+                intent.putExtra("id", dataList.get(position).id);
+                ActivityUtils.push(TenderDetailAct.class, intent);
             }
         });
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
 //            case R.id.ll_condition_limit:
 //                if (!isLimit){
 //                    setConditionSelector(true);
@@ -229,24 +230,24 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener{
 //                break;
             case R.id.tv_property:
                 setBg(1);
-                getDataList(0,currentPage,false);
+                getDataList(0, currentPage, false);
                 currentType = 0;
                 break;
             case R.id.tv_piaoju:
                 setBg(2);
-                getDataList(4,currentPage,false);
+                getDataList(4, currentPage, false);
                 currentType = 4;
                 break;
         }
     }
 
-    private void setBg(int isFirst){
-        if (isFirst == 1){
+    private void setBg(int isFirst) {
+        if (isFirst == 1) {
             mTvPiaoju.setTextColor(getResources().getColor(R.color.app_color_principal));
             mTvPiaoju.setBackgroundResource(R.drawable.fillet_btn_diable_right);
             mTvProperty.setTextColor(getResources().getColor(R.color.white));
             mTvProperty.setBackgroundResource(R.drawable.fillet_btn_left);
-        }else{
+        } else {
             mTvPiaoju.setTextColor(getResources().getColor(R.color.white));
             mTvPiaoju.setBackgroundResource(R.drawable.fillet_btn_right);
             mTvProperty.setTextColor(getResources().getColor(R.color.app_color_principal));
@@ -254,31 +255,33 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener{
         }
     }
 
-    private void getDataList(int type, int pageNum, final boolean isload){
+    private void getDataList(int type, int pageNum, final boolean isload) {
         loadingDialog.show();
-        TreeMap<String,String> params = new TreeMap<>();
-        params.put("token", SPUtil.getString("token",""));
-        params.put("userId",SPUtil.getString("userid",""));
-        params.put("pageNum",pageNum+"");
-        params.put("type",""+type);
-        params.put("duration","0");
+        TreeMap<String, String> params = new TreeMap<>();
+        params.put("token", SPUtil.getString("token", ""));
+        params.put("userId", SPUtil.getString("userid", ""));
+        params.put("pageNum", pageNum + "");
+        params.put("type", "" + type);
+        params.put("duration", "0");
 
-        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.ProductList,params);
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.ProductList, params);
         postRequest.execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    Product product = JsonUtil.parseJsonToBean(response.body(), Product.class);
-                    if (200 == Integer.parseInt(product.code)&&product.data!=null) {
-                        if (!isload){
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        Product product = JsonUtil.parseJsonToBean(response.body(), Product.class);
+                        if (!isload) {
                             dataList.clear();
                         }
                         dataList.addAll(product.data.cList);
                         tenderListAdapter.notifyDataSetChanged();
+
                     } else {
-                        Utils.toast(product.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
-                    if (loadingDialog.isShowing()){
+
+                    if (loadingDialog.isShowing()) {
                         loadingDialog.dismiss();
                     }
                 }
@@ -288,7 +291,7 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener{
             public void onError(Response<String> response) {
                 super.onError(response);
                 Utils.toast(Constant.NetWork_Error);
-                if (loadingDialog.isShowing()){
+                if (loadingDialog.isShowing()) {
                     loadingDialog.dismiss();
                 }
             }
@@ -297,16 +300,17 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener{
 
     /**
      * 设置条件文字颜色和尖号方向
+     *
      * @param isSelect 表示第一个条件是否被选中，选中为true,那么第二个条件必定是未选中的状态，反之亦成立！
      */
-    private void setConditionSelector(boolean isSelect){
+    private void setConditionSelector(boolean isSelect) {
         mLlMenuList.setVisibility(View.VISIBLE);
-        if(isSelect){//选中第一个条件
+        if (isSelect) {//选中第一个条件
             mTvConditionLimit.setTextColor(getResources().getColor(R.color.text_dark));
             mIvConditionLimit.setImageDrawable(getResources().getDrawable(R.mipmap.drop_down_selected_icon));
             mTvConditionStart.setTextColor(getResources().getColor(R.color.text_grey));
             mIvConditionStart.setImageDrawable(getResources().getDrawable(R.mipmap.drop_down_unselected_icon));
-        }else{//选中第二个条件
+        } else {//选中第二个条件
             mTvConditionLimit.setTextColor(getResources().getColor(R.color.text_grey));
             mIvConditionLimit.setImageDrawable(getResources().getDrawable(R.mipmap.drop_down_unselected_icon));
             mTvConditionStart.setTextColor(getResources().getColor(R.color.text_dark));

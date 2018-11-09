@@ -1,6 +1,7 @@
 package com.zqzr.licaitong.ui.home.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,7 +23,9 @@ import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.FindItem;
 import com.zqzr.licaitong.http.OKGO_GetData;
+import com.zqzr.licaitong.ui.CommonWebviewAct;
 import com.zqzr.licaitong.ui.find.fragment.OnChangeFindActivityData;
+import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.view.KeyDownLoadingDialog;
@@ -40,6 +43,7 @@ import java.util.TreeMap;
 
 public class ProjectIntroduceFragment extends Fragment {
     private RelativeLayout mRlLook;
+    private String url;
 
     @Nullable
     @Override
@@ -62,7 +66,17 @@ public class ProjectIntroduceFragment extends Fragment {
         });
     }
 
+    public void setUrl(String url){
+        this.url = url;
+    }
+
     private void look() {
+        if (!TextUtils.isEmpty(url)){
+            Intent intent = new Intent();
+            intent.putExtra("title","预览协议");
+            intent.putExtra("redirectUrl", url);
+            ActivityUtils.push(CommonWebviewAct.class,intent);
+        }
 
     }
 }

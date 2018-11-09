@@ -65,13 +65,16 @@ public class TenderListAdapter extends BaseAdapter {
         viewHolder.limit.setText(tenders.get(position).projectDuration+"天");
         viewHolder.start.setText(Utils.getWan(tenders.get(position).purchaseAmount)+"起投");
 
-        if(tenders.get(position).status > 0){
+        if(tenders.get(position).status >= 0){
             if (tenders.get(position).status == 1){
-                viewHolder.status.setText("发行中");
+                viewHolder.status.setText("募集中");
                 viewHolder.status.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_ing));
-            }else{
+            }else if(tenders.get(position).status == 3){
                 viewHolder.status.setText("已募满");
                 viewHolder.status.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_ed));
+            }else if(tenders.get(position).status == 4){
+                viewHolder.status.setText("还款中");
+                viewHolder.status.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_returning));
             }
         }
 

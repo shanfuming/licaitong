@@ -18,15 +18,18 @@ import com.cjj.MaterialRefreshListener;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.adapter.FindItemAdapter;
 import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.FindItem;
+import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.http.OKGO_GetData;
 import com.zqzr.licaitong.ui.CommonWebviewAct;
 import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
+import com.zqzr.licaitong.utils.SPUtil;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.view.KeyDownLoadingDialog;
 
@@ -49,7 +52,7 @@ public class DynamicFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.frag_news,null,false);
+        View view = inflater.inflate(R.layout.frag_news, null, false);
         return view;
     }
 
@@ -61,36 +64,36 @@ public class DynamicFragment extends Fragment {
         mRefreshLayout.setLoadMore(true);
         mNewsListView = (ListView) view.findViewById(R.id.news_listview);
 
-        findItemAdapter = new FindItemAdapter(findItems);
+        findItemAdapter = new FindItemAdapter(getActivity(), findItems);
         mNewsListView.setAdapter(findItemAdapter);
 
         mNewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (!TextUtils.isEmpty(findItems.get(position).urlHref)&&!TextUtils.isEmpty(findItems.get(position).title)){
+                if (!TextUtils.isEmpty(findItems.get(position).title)) {
                     Intent intent = new Intent();
-                    intent.putExtra("title",findItems.get(position).title);
+                    intent.putExtra("title", findItems.get(position).title);
                     intent.putExtra("content", findItems.get(position).content);
-                    intent.putExtra("redirectUrl",findItems.get(position).urlHref);
-                    ActivityUtils.push(CommonWebviewAct.class,intent);
+                    intent.putExtra("redirectUrl", findItems.get(position).urlHref);
+                    ActivityUtils.push(CommonWebviewAct.class, intent);
                 }
             }
         });
 
-        getData(currentPage,false);
+        getData(currentPage, false);
 
         mRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
-                getData(currentPage,false);
+                getData(currentPage, false);
                 mRefreshLayout.finishRefreshing();
             }
 
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
                 super.onRefreshLoadMore(materialRefreshLayout);
-                getData(nextPage,true);
-                nextPage = nextPage+1;
+                getData(nextPage, true);
+                nextPage = nextPage + 1;
                 mRefreshLayout.finishRefreshLoadMore();
             }
         });
@@ -98,24 +101,26 @@ public class DynamicFragment extends Fragment {
 
     public void getData(int currentPage, final boolean isLoadmore) {
         loadingDialog = new KeyDownLoadingDialog(getActivity());
-        TreeMap<String,String> params = new TreeMap<>();
-        params.put("type","2");
-        params.put("pageNum", currentPage+"");
+        TreeMap<String, String> params = new TreeMap<>();
+        params.put("type", "2");
+        params.put("pageNum", currentPage + "");
 
-        PostRequest<String> postRequest = OKGO_GetData.getDatePost(getActivity(), BaseParams.Monent,params);
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(getActivity(), BaseParams.Monent, params);
         postRequest.execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    FindItem finditem = JsonUtil.parseJsonToBean(response.body(), FindItem.class);
-                    if (200 == Integer.parseInt(finditem.code)) {
-                        if (!isLoadmore){
+
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        FindItem finditem = JsonUtil.parseJsonToBean(response.body(), FindItem.class);
+                        if (!isLoadmore) {
                             findItems.clear();
                         }
                         findItems.addAll(finditem.data.cList);
                         findItemAdapter.notifyDataSetChanged();
+
                     } else {
-                        Utils.toast(finditem.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
                 loadingDialog.dismiss();

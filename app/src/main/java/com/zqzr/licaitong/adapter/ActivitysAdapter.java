@@ -1,5 +1,6 @@
 package com.zqzr.licaitong.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -30,9 +31,11 @@ import java.util.ArrayList;
 public class ActivitysAdapter extends RecyclerView.Adapter<ActivitysAdapter.ActivityHolder> {
 
     private ArrayList<Activitys.Data> activityses;
+    private Context context;
 
-    public ActivitysAdapter(ArrayList<Activitys.Data> activityses) {
+    public ActivitysAdapter(Context context,ArrayList<Activitys.Data> activityses) {
         this.activityses = activityses;
+        this.context = context;
     }
 
     @Override
@@ -43,10 +46,7 @@ public class ActivitysAdapter extends RecyclerView.Adapter<ActivitysAdapter.Acti
 
     @Override
     public void onBindViewHolder(ActivityHolder holder, final int position) {
-        Utils.loadImg(holder.ivImg,activityses.get(position).imageUrl,null);
-        if (!TextUtils.isEmpty(activityses.get(position).introduction)){
-            holder.tvContent.setText(activityses.get(position).introduction);
-        }
+        Utils.loadImg(context,holder.ivImg,activityses.get(position).imageUrl,null);
         holder.tvTitle.setText(activityses.get(position).title);
         if (Integer.valueOf(activityses.get(position).activityStatus) == 0){
             holder.llCoundown.setVisibility(View.VISIBLE);
@@ -60,10 +60,10 @@ public class ActivitysAdapter extends RecyclerView.Adapter<ActivitysAdapter.Acti
         holder.rlItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(activityses.get(position).url)&&!TextUtils.isEmpty(activityses.get(position).title)){
+                if (!TextUtils.isEmpty(activityses.get(position).title)){
                     Intent intent = new Intent();
                     intent.putExtra("title",activityses.get(position).title);
-                    intent.putExtra("content",activityses.get(position).content);
+                    intent.putExtra("content",activityses.get(position).introduction);
                     intent.putExtra("redirectUrl",activityses.get(position).url);
                     ActivityUtils.push(CommonWebviewAct.class,intent);
                 }

@@ -114,6 +114,7 @@ public class SettingAct extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.loginout:
                 SPUtil.clear();
+                SPUtil.setValue("isFirstOpen", false);
                 MyApplication.getInstance().updataLand(false);
                 loadingDialog.show();
                 handler.sendEmptyMessageDelayed(Constant.NUMBER_1,2000);

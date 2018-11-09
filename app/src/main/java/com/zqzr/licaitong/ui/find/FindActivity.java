@@ -14,6 +14,7 @@ import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.ui.find.fragment.DynamicFragment;
 import com.zqzr.licaitong.ui.find.fragment.NewsFragment;
 import com.zqzr.licaitong.ui.find.fragment.OnChangeFindActivityData;
+import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.Utils;
 
 import java.util.ArrayList;
@@ -98,6 +99,6 @@ public class FindActivity extends BaseActivity implements OnChangeFindActivityDa
 
     @Override
     public void ChangeDatas(String url) {
-        Utils.loadImg(mIvTopBanner,url,null);
+        Utils.loadImg(this,mIvTopBanner,url,null);
     }
 }

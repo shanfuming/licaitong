@@ -62,9 +62,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/x20"
-                android:hint="@string/login_et_password"
-                android:inputType="number"
-                android:maxLength="11"
+                android:hint="请输入8-20位数字和字母组合密码"
+                android:lines="1"
                 android:textColor="@color/text_dark" />
         </LinearLayout>
 
@@ -98,13 +97,15 @@
                     style="@style/LoginEditTextTheme"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginLeft="@dimen/x20"
+                    android:layout_weight="1"
                     android:hint="@string/register_password_two"
-                    android:inputType="number"
-                    android:maxLength="6"
+                    android:lines="1"
                     android:paddingLeft="0dp"
                     android:textColor="@color/text_dark" />
+
+
+
             </LinearLayout>
 
         </LinearLayout>

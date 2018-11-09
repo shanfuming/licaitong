@@ -1,5 +1,8 @@
 package com.zqzr.licaitong.bean;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * Author: shanfuming
  * E-mail: shanfuming@zqzr.onaliyun.com
@@ -8,38 +11,27 @@ package com.zqzr.licaitong.bean;
  * Description:
  */
 
-public class SubscribeRecord {
-    String name;
-    String num;
-    String phone;
+public class SubscribeRecord  implements Serializable {
+    public String ext;
+    public String code;
+    public String attach;
+    public String message;
+    public Data data;
 
-    public SubscribeRecord(String name, String num, String phone) {
-        this.name = name;
-        this.num = num;
-        this.phone = phone;
-    }
+    public class Data implements Serializable {
+        public List<CList> cList;
 
-    public String getName() {
-        return name;
-    }
+        public class CList implements Serializable {
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNum() {
-        return num;
-    }
-
-    public void setNum(String num) {
-        this.num = num;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+            public int productId;
+            public Long addTime;
+            public int fpId;
+            public String fpName;
+            public int reservationAmount;
+            public int InvestmentId;
+            public int id;
+            public String userName;
+            public int userId;
+        }
     }
 }

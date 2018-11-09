@@ -89,7 +89,7 @@
                     android:layout_height="@dimen/x32"
                     android:layout_marginLeft="@dimen/x10"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/cansee" />
+                    android:background="@mipmap/canseew" />
 
             </LinearLayout>
 
@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/x24"
                     android:textColor="#ffe5e5"
-                    android:text="@string/own_incoming_name"
+                    android:text="@string/own_incomed_name"
                     />
 
                 <TextView
@@ -315,7 +315,7 @@
         <ImageView
             android:id="@+id/iv_next"
             android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/y40"
+            android:layout_height="@dimen/y35"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x30"
@@ -352,7 +352,7 @@
 
         <ImageView
             android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/y40"
+            android:layout_height="@dimen/y35"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x30"
@@ -389,7 +389,7 @@
 
         <ImageView
             android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/y40"
+            android:layout_height="@dimen/y35"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x30"
@@ -426,7 +426,7 @@
 
         <ImageView
             android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/y40"
+            android:layout_height="@dimen/y35"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x30"
@@ -463,7 +463,7 @@
 
         <ImageView
             android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/y40"
+            android:layout_height="@dimen/y35"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x30"

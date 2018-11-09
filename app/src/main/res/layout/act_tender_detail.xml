@@ -100,10 +100,12 @@
 
 
     <RelativeLayout
+        android:id="@+id/rl_subscribe"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y110"
         android:layout_alignParentBottom="true"
         android:background="@color/detail_subscibe_bg"
+        android:visibility="gone"
         >
 
         <LinearLayout

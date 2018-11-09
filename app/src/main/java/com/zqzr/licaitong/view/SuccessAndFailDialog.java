@@ -79,7 +79,7 @@ public class SuccessAndFailDialog extends Dialog implements View.OnClickListener
         if (content != null) {
             if (isShowContent){
                 mContent.setVisibility(View.VISIBLE);
-                mContent.setText(des);
+                mContent.setText(content);
             }else{
                 mContent.setVisibility(View.GONE);
             }

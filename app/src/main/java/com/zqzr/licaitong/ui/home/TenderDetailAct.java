@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lzy.okgo.callback.StringCallback;
@@ -23,8 +24,10 @@ import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.Getcode;
+import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.bean.ProductDetail;
 import com.zqzr.licaitong.http.OKGO_GetData;
+import com.zqzr.licaitong.ui.find.fragment.OnChangeFindActivityData;
 import com.zqzr.licaitong.ui.home.fragment.ProjectAuditFragment;
 import com.zqzr.licaitong.ui.home.fragment.ProjectIntroduceBaoLiFragment;
 import com.zqzr.licaitong.ui.home.fragment.ProjectIntroduceFragment;
@@ -35,6 +38,7 @@ import com.zqzr.licaitong.ui.own.IdentifyAct;
 import com.zqzr.licaitong.ui.own.LoginAct;
 import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
+import com.zqzr.licaitong.utils.SPUtil;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.view.KeyDownLoadingDialog;
 import com.zqzr.licaitong.view.SuccessAndFailDialog;
@@ -65,12 +69,13 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
     private TextView[] textViewLines = new TextView[3];
     private double singleAmount, totalAmount, restAmount, startAmount;
     private SuccessAndFailDialog successDialog;
-    private Handler handler = new Handler(){
+    private String url = "";
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
-            switch (msg.what){
+            switch (msg.what) {
                 case Constant.NUMBER_1:
                     successDialog.dismiss();
                     finish();
@@ -80,6 +85,9 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
     };
     private ImageView mIvDetailPiaoJu;
     private LinearLayout mLlDetailBapli;
+    private RelativeLayout mRlSubsribe;
+    private ProjectIntroduceBaoLiFragment projectIntroduceBaoLiFragment;
+    private ProjectIntroduceFragment projectIntroduceFragment;
 
     @Override
     protected void initView() {
@@ -92,12 +100,14 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
             textViewLines[1] = (TextView) findViewById(R.id.tv_project_audit_line);
             textViews[2] = (TextView) findViewById(R.id.tv_project_record);
             textViewLines[2] = (TextView) findViewById(R.id.tv_project_record_line);
+            mRlSubsribe = (RelativeLayout) findViewById(R.id.rl_subscribe);
         } else {
             setContentView(R.layout.act_tender_detail);
             textViews[1] = (TextView) findViewById(R.id.tv_project_audit);
             textViewLines[1] = (TextView) findViewById(R.id.tv_project_audit_line);
             textViews[2] = (TextView) findViewById(R.id.tv_project_record);
             textViewLines[2] = (TextView) findViewById(R.id.tv_project_record_line);
+            mRlSubsribe = (RelativeLayout) findViewById(R.id.rl_subscribe);
         }
         mLayout = (StickHeaderLayout) findViewById(R.id.stick_header_layout);
         mAdapter = new FragmentAdapter(getSupportFragmentManager(), getFragment(type));
@@ -207,32 +217,36 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    ProductDetail productDetail = JsonUtil.parseJsonToBean(response.body(), ProductDetail.class);
-                    if (200 == Integer.parseInt(productDetail.code) && productDetail.data != null) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        ProductDetail productDetail = JsonUtil.parseJsonToBean(response.body(), ProductDetail.class);
                         mTvTitle.setText(productDetail.data.name);
                         mTvPredictIncome.setText(productDetail.data.expectedYield + "%");
                         mTvLimit.setText(productDetail.data.projectDuration + "天");
                         mTvStart.setText(Utils.getWan(productDetail.data.purchaseAmount));
                         mTvTotal.setText(Utils.getWan(productDetail.data.proTotalAmount));
                         mTvRest.setText(Utils.getWan(productDetail.data.reservationAmount));
-                        if (productDetail.data.increasingAmount >= 10000){
+                        if (productDetail.data.increasingAmount >= 10000) {
                             mTvIncremental.setText(productDetail.data.increasingAmountStr + "万及整数倍数递增");
-                        }else{
+                        } else {
                             mTvIncremental.setText(productDetail.data.increasingAmountStr + "及整数倍数递增");
                         }
-                        mTvSum.setText(productDetail.data.purchaseAmount+"");
+                        mTvSum.setText(productDetail.data.purchaseAmount + "");
+                        if (productDetail.data.reservationAmount > 0) {
+                            mRlSubsribe.setVisibility(View.VISIBLE);
+                        }
 
                         singleAmount = productDetail.data.increasingAmount;
                         totalAmount = productDetail.data.proTotalAmount;
                         restAmount = productDetail.data.reservationAmount;
                         startAmount = productDetail.data.purchaseAmount;
-                    }else if(10011 == Integer.parseInt(productDetail.code)){
-                        tip(1);
-                    }else if(10023 == Integer.parseInt(productDetail.code)){
-                        tip(2);
-                    }else {
-                        Utils.toast(productDetail.message);
+                        url = productDetail.data.url;
+                        projectIntroduceBaoLiFragment.setUrl(url);
+                        projectIntroduceFragment.setUrl(url);
+
+                    } else {
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
+
                     loadingDialog.dismiss();
                 }
             }
@@ -282,14 +296,16 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
 
     private List<Fragment> getFragment(int type) {
         List<Fragment> list = new ArrayList<>();
+        projectIntroduceBaoLiFragment = new ProjectIntroduceBaoLiFragment();
+        projectIntroduceFragment = new ProjectIntroduceFragment();
         if (type != 1) {
-            list.add(new ProjectIntroduceFragment());
+            list.add(projectIntroduceFragment);
             list.add(new ProjectAuditFragment());
         } else {
-            list.add(new ProjectIntroduceBaoLiFragment());
+            list.add(projectIntroduceBaoLiFragment);
             list.add(new ProjectMessureBaoLiFragment());
         }
-        list.add(new ProjectRecordFragment());
+        list.add(new ProjectRecordFragment().setProductId(id + ""));
         return list;
     }
 
@@ -300,11 +316,16 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
                 ActivityUtils.pop();
                 break;
             case R.id.tv_reduce:
-                if (Double.valueOf(mTvSum.getText().toString()) - singleAmount < startAmount) {
-                    mTvSum.setText(Utils.getDouble2(startAmount));
-                } else {
-                    mTvSum.setText(Utils.getDouble2(Double.valueOf(mTvSum.getText().toString()) - singleAmount));
+                if (restAmount > startAmount){
+                    if (Double.valueOf(mTvSum.getText().toString()) - singleAmount < startAmount){
+                        mTvSum.setText(Utils.getDouble2(startAmount));
+                    }else{
+                        mTvSum.setText(Utils.getDouble2(Double.valueOf(mTvSum.getText().toString()) - singleAmount));
+                    }
+                }else{
+                    mTvSum.setText(Utils.getDouble2(restAmount));
                 }
+
                 break;
             case R.id.tv_add:
                 if (Double.valueOf(mTvSum.getText().toString()) + singleAmount > restAmount) {
@@ -314,10 +335,9 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
                 }
                 break;
             case R.id.tv_subscribe:
-                if (!MyApplication.getInstance().isLand()){
-
+                if (MyApplication.getInstance().isLand()) {
                     subscribe();
-                }else{
+                } else {
                     ActivityUtils.push(LoginAct.class);
                 }
                 break;
@@ -347,7 +367,7 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
      */
     private void subscribe() {
         TreeMap<String, String> params = new TreeMap<>();
-        params.put("productId", id+"");
+        params.put("productId", id + "");
         params.put("subscribeAmount", Utils.getDouble(Double.valueOf(mTvSum.getText().toString())));
 
         PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.MakeReservation, params);
@@ -360,8 +380,12 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
 
                         handler.sendEmptyMessageDelayed(Constant.NUMBER_1, 3000);
 
-                    }else if(Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 10003){
+                    } else if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 10003) {
                         ActivityUtils.push(LoginAct.class);
+                    } else if (10011 == Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code"))) {
+                        tip(1);
+                    } else if (10023 == Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code"))) {
+                        tip(2);
                     } else {
                         Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
@@ -412,7 +436,7 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
     protected void onDestroy() {
         super.onDestroy();
         handler.removeMessages(Constant.NUMBER_1);
-        if (successDialog.isShowing()){
+        if (successDialog.isShowing()) {
             successDialog.dismiss();
         }
     }

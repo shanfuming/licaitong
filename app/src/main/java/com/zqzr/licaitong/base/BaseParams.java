@@ -195,9 +195,22 @@ public class BaseParams {
     /**
      * 上传头像
      */
-    public static final String UploadIcon = "/my/upload";//
+    public static final String UploadIcon = "/my/upload";
     /**
      * 取消订单
      */
     public static final String CancelDetails = "/my/cancelDetails";
+    /**
+     * 计划详情
+     */
+    public static final String SchemesDetails = "/my/schemesDetails";
+    /**
+     * 预约记录
+     */
+    public static final String GetProductLog = "/home/getProductLog";
+
+    /**
+     * 用户注册协议
+     */
+    public static final String ServiceAgreement = "/view/serviceAgreement";
 }

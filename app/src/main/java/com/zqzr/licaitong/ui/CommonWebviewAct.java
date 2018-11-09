@@ -1,13 +1,17 @@
 package com.zqzr.licaitong.ui;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.cjj.MaterialRefreshLayout;
+import com.cjj.MaterialRefreshListener;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.view.KeyDownLoadingDialog;
@@ -24,6 +28,8 @@ public class CommonWebviewAct extends BaseActivity {
     private MaterialRefreshLayout mRefreshLayout;
     private WebView webview;
     private KeyDownLoadingDialog loadingDialog;
+    private String url;
+    private String content;
 
     @Override
     protected void initView() {
@@ -44,16 +50,27 @@ public class CommonWebviewAct extends BaseActivity {
     @Override
     protected void initData() {
         loadingDialog = new KeyDownLoadingDialog(this);
-        String url = getIntent().getStringExtra("redirectUrl");
-        String content = getIntent().getStringExtra("content");
+        url = getIntent().getStringExtra("redirectUrl");
+        content = getIntent().getStringExtra("content");
         if (TextUtils.isEmpty(url)) {
             if (!TextUtils.isEmpty(content)) {
-                webview.loadData(content, "text/html", "UTF-8");
+                webview.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
             }
         } else {
             webview.loadUrl(url);
         }
         webview.getSettings().setJavaScriptEnabled(true);
+        //扩大比例的缩放
+        webview.getSettings().setUseWideViewPort(true);
+        //自适应屏幕
+        webview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webview.getSettings().setDomStorageEnabled(true);
+        webview.getSettings().setAppCacheMaxSize(1024*1024*8);
+        String appCachePath = getApplicationContext().getCacheDir().getAbsolutePath();
+        webview.getSettings().setAppCachePath(appCachePath);
+        webview.getSettings().setAllowFileAccess(true);
+        webview.getSettings().setAppCacheEnabled(true);
+        webview.getSettings().setLoadWithOverviewMode(true);
         webview.getSettings().setDefaultTextEncodingName("utf-8");
         WebViewClient webViewClient = new WebViewClient() {
             @Override
@@ -77,7 +94,19 @@ public class CommonWebviewAct extends BaseActivity {
             }
         };
         webview.setWebViewClient(webViewClient);
-
+        mRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                if (TextUtils.isEmpty(url)){
+                    if (!TextUtils.isEmpty(content)){
+                        webview.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
+                    }
+                }else{
+                    webview.loadUrl(url);
+                }
+                mRefreshLayout.finishRefreshing();
+            }
+        });
     }
 
     @Override

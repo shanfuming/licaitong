@@ -249,7 +249,7 @@
         <ImageView
             android:id="@+id/iv_detail_piaoju"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y350"
+            android:layout_height="@dimen/y320"
             android:background="@mipmap/detail_banner"
             android:visibility="gone"
             />
@@ -297,10 +297,9 @@
             android:layout_width="@dimen/x35"
             android:layout_height="@dimen/x35"
             android:background="@mipmap/push_down"
-            android:layout_centerHorizontal="true"
             android:layout_above="@+id/tv_push_down"
-            android:layout_marginBottom="@dimen/y30"
-            />
+            android:layout_marginBottom="@dimen/y10"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/tv_push_down"
@@ -309,6 +308,7 @@
             android:text="下拉详情"
             android:textSize="@dimen/x24"
             android:textColor="#e0dfdf"
+            android:layout_marginBottom="@dimen/y80"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             />

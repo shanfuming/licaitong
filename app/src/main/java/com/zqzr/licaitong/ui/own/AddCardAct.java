@@ -94,7 +94,7 @@ public class AddCardAct extends BaseActivity {
         }
 
         loadingDialog.show();
-
+        mAddBind.setClickable(false);
         TreeMap<String, String> params = new TreeMap<>();
         params.put("name", userRealName);
         params.put("idNum", idNum);
@@ -124,6 +124,7 @@ public class AddCardAct extends BaseActivity {
                         Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
+                mAddBind.setClickable(true);
                 loadingDialog.dismiss();
             }
 
@@ -132,6 +133,7 @@ public class AddCardAct extends BaseActivity {
                 super.onError(response);
                 Utils.toast(Constant.NetWork_Error);
                 loadingDialog.dismiss();
+                mAddBind.setClickable(true);
             }
         });
     }

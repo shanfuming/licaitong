@@ -1,6 +1,7 @@
 package com.zqzr.licaitong.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,9 +25,11 @@ import java.util.ArrayList;
 public class BannerAdapter extends StaticPagerAdapter {
 
     private ArrayList<Banner.Data> bannerList;
+    private Context context;
 
-    public BannerAdapter(ArrayList<Banner.Data> bannerList) {
+    public BannerAdapter(Context context,ArrayList<Banner.Data> bannerList) {
         this.bannerList = bannerList;
+        this.context = context;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class BannerAdapter extends StaticPagerAdapter {
         imageView.setBackground(ActivityUtils.peek().getResources().getDrawable(R.mipmap.load_moren));
         imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         //设置banner图片
-        Utils.loadImg(imageView,bannerList.get(position).imageUrl,null);
+        Utils.loadImg(context,imageView,bannerList.get(position).imageUrl,null);
         return imageView;
     }
 

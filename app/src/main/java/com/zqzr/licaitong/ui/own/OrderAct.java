@@ -46,8 +46,8 @@ import java.util.TreeMap;
  */
 
 public class OrderAct extends BaseActivity implements View.OnClickListener {
-    private LinearLayout mLlTime,mLlState,mLlProduct,mLlMenuList;
-    private TextView mTvTime,mTvState,mTvProduct;
+    private LinearLayout mLlTime, mLlState, mLlProduct, mLlMenuList;
+    private TextView mTvTime, mTvState, mTvProduct;
 
     private ArrayList<Menu> menu = new ArrayList<>();
     private ArrayList<Menu> time = new ArrayList<>();
@@ -59,13 +59,13 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
     private ListView mConditionListView;
     private View mask;
 
-    private boolean isTime,isState,isProduct;
+    private boolean isTime, isState, isProduct;
     private DropMenuAdapter menuAdapter;
 
     private String currentLimit = "oneMonth";
     private String currentProductName = "";
     private String currentStatus = "";
-    private int currentPage = 1,nextPage = 2;
+    private int currentPage = 1, nextPage = 2;
     private ArrayList<Order.Data.CList> orders = new ArrayList<>();
     private KeyDownLoadingDialog loadingDialog;
     private OrderAdapter ordersAdapter;
@@ -88,13 +88,13 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
 
         mRefreshLayout = (MaterialRefreshLayout) findViewById(R.id.mrl_refreshLayout);
         mRefreshLayout.setLoadMore(true);
-        mOrderRecyclerView = (RecyclerView) findViewById(R.id.order_recyclerview) ;
+        mOrderRecyclerView = (RecyclerView) findViewById(R.id.order_recyclerview);
         LinearLayoutManager mLayoutMgr = new LinearLayoutManager(this);
         mOrderRecyclerView.setLayoutManager(mLayoutMgr);
         //添加ItemDecoration，item之间的间隔
         int leftRight = DensityUtils.dp2px(this, 0f);
         int topBottom = DensityUtils.dp2px(this, 12f);
-        mOrderRecyclerView.addItemDecoration(new SpacesItemDecoration(leftRight, topBottom,0));
+        mOrderRecyclerView.addItemDecoration(new SpacesItemDecoration(leftRight, topBottom, 0));
         ordersAdapter = new OrderAdapter(orders);
         mOrderRecyclerView.setAdapter(ordersAdapter);
 
@@ -139,41 +139,41 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if(isTime){
-                   currentLimit = Utils.dateLimit(menu.get(position).getName());
+                if (isTime) {
+                    currentLimit = Utils.dateLimit(menu.get(position).getName());
                 }
-                if (isState){
+                if (isState) {
                     currentStatus = Utils.orderStatus(menu.get(position).getName());
                 }
-                if (isProduct){
+                if (isProduct) {
                     currentProductName = Utils.productName(menu.get(position).getName());
                 }
 
-                for (int i = 0;i<menu.size();i++){
+                for (int i = 0; i < menu.size(); i++) {
                     menu.get(i).setSelect(false);
-                    if (i == position){
+                    if (i == position) {
                         menu.get(i).setSelect(true);
                     }
                     menuAdapter.setMenuList(menu);
                 }
 
-                getDataFromServer(currentLimit,currentProductName,currentStatus,currentPage,false);
+                getDataFromServer(currentLimit, currentProductName, currentStatus, currentPage, false);
             }
         });
         loadingDialog.show();
-        getDataFromServer(currentLimit,currentProductName,currentStatus,currentPage,false);
+        getDataFromServer(currentLimit, currentProductName, currentStatus, currentPage, false);
 
         mRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
-                getDataFromServer(currentLimit,currentProductName,currentStatus,currentPage,false);
+                getDataFromServer(currentLimit, currentProductName, currentStatus, currentPage, false);
                 mRefreshLayout.finishRefreshing();
             }
 
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
                 super.onRefreshLoadMore(materialRefreshLayout);
-                getDataFromServer(currentLimit,currentProductName,currentStatus,nextPage,true);
+                getDataFromServer(currentLimit, currentProductName, currentStatus, nextPage, true);
                 nextPage = nextPage + 1;
                 mRefreshLayout.finishRefreshLoadMore();
             }
@@ -189,15 +189,15 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ll_condition_time:
-                if (!isTime){
+                if (!isTime) {
                     setConditionSelector(1);
                     menu.clear();
                     menu.addAll(time);
                     menuAdapter.setMenuList(menu);
                     isTime = true;
-                }else{
+                } else {
                     mTvTime.setTextColor(getResources().getColor(R.color.text_grey));
                     mLlMenuList.setVisibility(View.GONE);
                     isTime = false;
@@ -205,26 +205,26 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.ll_condition_state:
                 setConditionSelector(2);
-                if (!isState){
+                if (!isState) {
                     setConditionSelector(1);
                     menu.clear();
                     menu.addAll(state);
                     menuAdapter.setMenuList(menu);
                     isState = true;
-                }else{
+                } else {
                     mTvState.setTextColor(getResources().getColor(R.color.text_grey));
                     mLlMenuList.setVisibility(View.GONE);
                     isState = false;
                 }
                 break;
             case R.id.ll_condition_product:
-                if (!isProduct){
+                if (!isProduct) {
                     setConditionSelector(3);
                     menu.clear();
                     menu.addAll(product);
                     menuAdapter.setMenuList(menu);
                     isProduct = true;
-                }else{
+                } else {
                     mTvProduct.setTextColor(getResources().getColor(R.color.text_grey));
                     mLlMenuList.setVisibility(View.GONE);
                     isProduct = false;
@@ -242,13 +242,13 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
     /**
      * 获取数据
      */
-    private void getDataFromServer(String dataStatus, String type, String status, int page, final boolean isLoad){
+    private void getDataFromServer(String dataStatus, String type, String status, int page, final boolean isLoad) {
         TreeMap<String, String> params = new TreeMap<>();
-        params.put("userId", SPUtil.getString("userid",""));
+        params.put("userId", SPUtil.getString("userid", ""));
         params.put("dataStatus", dataStatus);
         params.put("type", type);
         params.put("status", status);
-        params.put("pageNum", page+"");
+        params.put("pageNum", page + "");
 
         PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Orders, params);
         postRequest.execute(new StringCallback() {
@@ -257,16 +257,14 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
                 if (!TextUtils.isEmpty(response.body())) {
                     if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         Order order = JsonUtil.parseJsonToBean(response.body(), Order.class);
-                        if (order.data.cList.size() > 0){
-                            if (isLoad){
-                                orders.addAll(order.data.cList);
+                        if (isLoad) {
+                            orders.addAll(order.data.cList);
 
-                            }else{
-                                orders.clear();
-                                orders.addAll(order.data.cList);
-                            }
-                            ordersAdapter.notifyDataSetChanged();
+                        } else {
+                            orders.clear();
+                            orders.addAll(order.data.cList);
                         }
+                        ordersAdapter.notifyDataSetChanged();
                     } else {
                         Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
@@ -286,21 +284,21 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
     /**
      * 设置条件文字颜色和尖号方向
      */
-    private void setConditionSelector(int type){
+    private void setConditionSelector(int type) {
         mLlMenuList.setVisibility(View.VISIBLE);
-        if(type == 1){//选中第一个条件
+        if (type == 1) {//选中第一个条件
             mTvTime.setTextColor(getResources().getColor(R.color.text_dark));
             mTvState.setTextColor(getResources().getColor(R.color.text_grey));
             mTvProduct.setTextColor(getResources().getColor(R.color.text_grey));
         }
 
-        if(type == 2){//选中第二个条件
+        if (type == 2) {//选中第二个条件
             mTvTime.setTextColor(getResources().getColor(R.color.text_grey));
             mTvProduct.setTextColor(getResources().getColor(R.color.text_grey));
             mTvState.setTextColor(getResources().getColor(R.color.text_dark));
         }
 
-        if(type == 3){//选中第三个条件
+        if (type == 3) {//选中第三个条件
             mTvProduct.setTextColor(getResources().getColor(R.color.text_dark));
             mTvTime.setTextColor(getResources().getColor(R.color.text_grey));
             mTvState.setTextColor(getResources().getColor(R.color.text_grey));

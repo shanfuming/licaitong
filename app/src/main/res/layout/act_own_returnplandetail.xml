@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/appbar_layout" />
+
+    <View style="@style/hLineheight30Style" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="产品名称"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x30" />
+
+            <TextView
+                android:id="@+id/tv_detail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x30"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x30" />
+        </RelativeLayout>
+
+        <View style="@style/hLineStyle" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="状态"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x30" />
+
+            <TextView
+                android:id="@+id/tv_detail_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x30"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x30" />
+        </RelativeLayout>
+
+        <View style="@style/hLineStyle" />
+
+        <RelativeLayout
+            android:id="@+id/rl_info_trueName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="年化利率"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x30" />
+
+            <TextView
+                android:id="@+id/tv_detail_expectedYield"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x30"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x30" />
+        </RelativeLayout>
+
+        <View style="@style/hLineStyle" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="投资总额"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x30" />
+
+            <TextView
+                android:id="@+id/tv_detail_actualAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x30"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x30" />
+        </RelativeLayout>
+
+        <View style="@style/hLineStyle" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="计息起始日"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x30" />
+
+            <TextView
+                android:id="@+id/tv_detail_startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x30"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x30" />
+        </RelativeLayout>
+
+        <View style="@style/hLineStyle" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="到期日"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x30" />
+
+            <TextView
+                android:id="@+id/tv_detail_endStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x30"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x30" />
+        </RelativeLayout>
+
+        <View style="@style/hLineStyle" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="已收益"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x30" />
+
+            <TextView
+                android:id="@+id/tv_detail_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x30"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x30" />
+        </RelativeLayout>
+
+        <View style="@style/hLineStyle" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x30"
+                android:text="回款总额"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/x30" />
+
+            <TextView
+                android:id="@+id/tv_detail_returnAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x30"
+                android:textColor="@color/dayAndMark"
+                android:textSize="@dimen/x30" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View style="@style/hLineheight20Style" />
+
+    <RelativeLayout
+        android:id="@+id/rl_look_rule"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x30"
+            android:text="查看协议"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x30" />
+
+        <ImageView
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y32"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x30"
+            android:background="@mipmap/next" />
+    </RelativeLayout>
+
+    <View style="@style/hLineStyle" />
+
+</LinearLayout>

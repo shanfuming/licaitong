@@ -20,16 +20,19 @@ import com.cjj.MaterialRefreshListener;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.adapter.FindItemAdapter;
 import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.CommonBean;
 import com.zqzr.licaitong.bean.FindItem;
+import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.http.OKGO_GetData;
 import com.zqzr.licaitong.ui.CommonWebviewAct;
 import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
+import com.zqzr.licaitong.utils.SPUtil;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.utils.encryption.MD5Util;
 import com.zqzr.licaitong.view.KeyDownLoadingDialog;
@@ -72,18 +75,18 @@ public class NewsFragment extends Fragment {
         mRefreshLayout.setLoadMore(true);
         mNewsListView = (ListView) view.findViewById(R.id.news_listview);
 
-        findItemAdapter = new FindItemAdapter(findItems);
+        findItemAdapter = new FindItemAdapter(getActivity(), findItems);
         mNewsListView.setAdapter(findItemAdapter);
 
         mNewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (!TextUtils.isEmpty(findItems.get(position).urlHref)&&!TextUtils.isEmpty(findItems.get(position).title)){
+                if (!TextUtils.isEmpty(findItems.get(position).title)) {
                     Intent intent = new Intent();
-                    intent.putExtra("title",findItems.get(position).title);
+                    intent.putExtra("title", findItems.get(position).title);
                     intent.putExtra("content", findItems.get(position).content);
-                    intent.putExtra("redirectUrl",findItems.get(position).urlHref);
-                    ActivityUtils.push(CommonWebviewAct.class,intent);
+                    intent.putExtra("redirectUrl", findItems.get(position).urlHref);
+                    ActivityUtils.push(CommonWebviewAct.class, intent);
                 }
             }
         });
@@ -118,8 +121,9 @@ public class NewsFragment extends Fragment {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    FindItem finditem = JsonUtil.parseJsonToBean(response.body(), FindItem.class);
-                    if (200 == Integer.parseInt(finditem.code)) {
+
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        FindItem finditem = JsonUtil.parseJsonToBean(response.body(), FindItem.class);
                         topBannerUrl = finditem.data.bannerUrl;
                         changeData.ChangeDatas(topBannerUrl);
                         if (!isLoadmore) {
@@ -127,8 +131,9 @@ public class NewsFragment extends Fragment {
                         }
                         findItems.addAll(finditem.data.cList);
                         findItemAdapter.notifyDataSetChanged();
+
                     } else {
-                        Utils.toast(finditem.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
                 loadingDialog.dismiss();

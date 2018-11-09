@@ -44,7 +44,7 @@ import static android.R.attr.version;
  */
 
 public class SettingVersionAct extends BaseActivity implements View.OnClickListener {
-    private TextView mTvName,mTvTip;
+    private TextView mTvName, mTvTip;
     private KeyDownLoadingDialog loadingDialog;
     private ImageView mIvUpdate;
     private UpdateProgressDialog mDownloadDialog;
@@ -86,29 +86,31 @@ public class SettingVersionAct extends BaseActivity implements View.OnClickListe
     @Override
     protected void initData() {
         loadingDialog = new KeyDownLoadingDialog(this);
-        mTvName.setText("版本号 "+Utils.getVersionName());
+        mTvName.setText("版本号 " + Utils.getVersionName());
 
-        TreeMap<String,String> params = new TreeMap<>();
-        params.put("v","0");
-        params.put("userId", SPUtil.getString("userid",""));
+        TreeMap<String, String> params = new TreeMap<>();
+        params.put("v", "0");
+        params.put("userId", SPUtil.getString("userid", ""));
 
-        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Version,params);
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Version, params);
         postRequest.execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    Version version = JsonUtil.parseJsonToBean(response.body(), Version.class);
-                    if (200 == Integer.parseInt(version.code)&&version.data!=null) {
-                        if (Integer.valueOf(version.data.get(0).versionCode.replace(".","")) > Integer.valueOf(Utils.getVersionName().replace(".",""))){
+
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        Version version = JsonUtil.parseJsonToBean(response.body(), Version.class);
+                        if (Integer.valueOf(version.data.versionCode.replace(".", "")) > Integer.valueOf(Utils.getVersionName().replace(".", ""))) {
                             mIvUpdate.setVisibility(View.VISIBLE);
                             mTvTip.setText(getResources().getString(R.string.own_version_tip1));
-                        }else{
+                        } else {
                             mIvUpdate.setVisibility(View.GONE);
                             mTvTip.setText(getResources().getString(R.string.own_version_tip2));
                         }
-                        updateUrl = version.data.get(0).loadUrl;
+                        updateUrl = version.data.loadUrl;
+
                     } else {
-                        Utils.toast(version.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
                 loadingDialog.dismiss();
@@ -133,7 +135,7 @@ public class SettingVersionAct extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_version_update:
                 showDownloadDialog();
                 break;
@@ -157,29 +159,29 @@ public class SettingVersionAct extends BaseActivity implements View.OnClickListe
 
         OkGo.<File>get(updateUrl)//
                 .tag(this)//
-                .execute(new FileCallback("理财通" + version + ".apk") {
+                .execute(new FileCallback("永业通" + version + ".apk") {
 
                     @Override
                     public void onStart(Request<File, ? extends Request> request) {
-                        Logger.e("test","正在下载中");
+                        Logger.e("test", "正在下载中");
                     }
 
                     @Override
                     public void onSuccess(Response<File> response) {
-                        Logger.e("test","下载完成"+response.body());
+                        Logger.e("test", "下载完成" + response.body());
 //                        mSavePath = BaseParams.ROOT_PATH+response.body().toString();
                         mSavePath = response.body().toString();
                     }
 
                     @Override
                     public void onError(Response<File> response) {
-                        Logger.e("test","下载出错message="+response.message()+"----code="+response.code()+"----body="+response.body());
+                        Logger.e("test", "下载出错message=" + response.message() + "----code=" + response.code() + "----body=" + response.body());
                         Utils.toast("下载错误,请重新尝试!");
                     }
 
                     @Override
                     public void downloadProgress(Progress progress) {
-                        mDownloadDialog.setProgressUp((int)(progress.fraction * 100));
+                        mDownloadDialog.setProgressUp((int) (progress.fraction * 100));
                         if (progress.currentSize == progress.totalSize) {
                             // 下载完成
                             mDownloadDialog.dismiss();

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LCT</string>
+    <string name="app_name">永业通</string>
     <string name="app_crash">很抱歉,程序出现异常,即将退出.</string>
     <string name="app_network_error">网络链接错误，请查看网络是否已连接!</string>
     <string name="app_exit">再按一次退出程序</string>
@@ -31,7 +31,7 @@
     <!-- 登录页面 -->
     <string name="login_title">登录</string>
     <string name="login_et_username">请输入手机号码</string>
-    <string name="login_et_password">请输入登录密码</string>
+    <string name="login_et_password">请输入密码</string>
     <string name="login_btn_loginout">退出登录</string>
     <string name="login_tv_forget">忘记密码?</string>
     <string name="login_tv_register">注册新用户</string>
@@ -57,7 +57,7 @@
 
     <!-- 注册页面 -->
     <string name="register_title">注册</string>
-    <string name="register_first_tip">欢迎加入中企智信</string>
+    <string name="register_first_tip">欢迎加入永业通</string>
     <string name="register_second_tip">设置登录密码</string>
     <string name="register_apply_planner">申请理财师</string>
     <string name="register_planner_hint">请输入理财师推荐码</string>
@@ -72,7 +72,7 @@
     <string name="register_invit_hint">请输入邀请人（选填）</string>
     <string name="register_register">立即注册</string>
     <string name="register_agree_one">点击注册表示同意</string>
-    <string name="register_agree_two">《中企智信用户协议》</string>
+    <string name="register_agree_two">《用户服务协议》</string>
     <string name="apply_name">姓名</string>
     <string name="apply_city">所在城市</string>
     <string name="apply_address">居住地址</string>
@@ -145,14 +145,14 @@
     <string name="introduce_incoming_t">预期收益</string>
     <string name="introduce_incoming">单个出借中借款标应计利息=出借本金*年利率*(累计计息天数/365)</string>
     <string name="introduce_rule3_t">计息规则</string>
-    <string name="introduce_rule3">即投即息，即T+1,从投资次日开始计算利息，到期付息</string>
+    <string name="introduce_rule3">项目募集成功后当日开始计算利息；到期付息</string>
     <string name="introduce_use_t">资金用途</string>
     <string name="introduce_use">资金投向电子商业汇票系统ECDS中基于真实贸易背景的支付型优质票据</string>
     <string name="introduce_measure_t">风控措施</string>
     <string name="introduce_measure1">1.线下风控筛选票据资产，线上系统审核承兑企业征信，承兑企业均为上市公司，国企，央企，商业信用优质，保证资金按时到期兑付。</string>
     <string name="introduce_measure2">2.所做票据均为央行开发ECDS系统内电子商业承兑汇票，底层资产真实可查，信息披露及时，公开透明</string>
 
-    <string name="introduce_rule6">即投即息，即T+1,从投资次日开始计算利息</string>
+    <string name="introduce_rule6">项目募集成功后当日开始计算利息；到期付息</string>
     <string name="introduce_use2">投向国润盛世国际商业保理，为广大的中、小、微企业提供保理融资服务，解决企业在发展过程中所需的流动资金需求</string>
 
     <string name="in_baoli_rule1_t">账户监管</string>

@@ -1,5 +1,6 @@
 package com.zqzr.licaitong.adapter;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -25,9 +26,11 @@ import java.util.ArrayList;
 
 public class HomeFindAdapter extends BaseAdapter {
     private ArrayList<HomeTouziTypeAndFind.Data.Moments> findItems;
+    private Context context;
 
-    public HomeFindAdapter(ArrayList<HomeTouziTypeAndFind.Data.Moments> findItems) {
+    public HomeFindAdapter(Context context,ArrayList<HomeTouziTypeAndFind.Data.Moments> findItems) {
         this.findItems = findItems;
+        this.context = context;
     }
 
     @Override
@@ -59,7 +62,7 @@ public class HomeFindAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Utils.loadImg(viewHolder.findItemImg,findItems.get(position).imageUrl,null);
+        Utils.loadImg(context,viewHolder.findItemImg,findItems.get(position).imageUrl,null);
         viewHolder.findItemTitle.setText(findItems.get(position).title);
         viewHolder.findItemTime.setText(DateUtil.formatter(DateUtil.Format.DATE,Long.valueOf(findItems.get(position).publishTime)));
 

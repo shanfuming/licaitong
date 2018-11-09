@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
@@ -414,11 +415,11 @@ public class Utils {
      * @param url
      * @param drawable
      */
-    public static void loadImg(ImageView view, String url, Drawable drawable) {
-        if (drawable != null) {
-            Glide.with(ActivityUtils.peek()).load(url).placeholder(drawable).into(view);//设置默认加载图
-        } else {
-            Glide.with(ActivityUtils.peek()).load(url).placeholder(drawable).into(view);//默认加载图
+    public static void loadImg(Context context,ImageView view, String url, Drawable drawable) {
+        if (drawable!=null){
+            Glide.with(context).load(url).placeholder(drawable).into(view);//设置默认加载图
+        }else{
+            Glide.with(context).load(url).into(view);
         }
     }
 
@@ -651,14 +652,15 @@ public class Utils {
 
     /**
      * 返回详情页字段
+     *
      * @param num
      * @return
      */
-    public static String getWan(double num){
+    public static String getWan(double num) {
         String str = "";
-        if (num > 10000){
+        if (num > 10000) {
             str = getDouble(num / 10000) + "万";
-        }else{
+        } else {
             str = getDouble(num) + "";
         }
         return str;
@@ -666,12 +668,13 @@ public class Utils {
 
     /**
      * 获取时间范围
+     *
      * @param currentDate
      * @return
      */
-    public static String dateLimit(String currentDate){
+    public static String dateLimit(String currentDate) {
         String date = "";
-        switch (currentDate){
+        switch (currentDate) {
             case "一个月":
                 date = "oneMonth";
                 break;
@@ -690,12 +693,13 @@ public class Utils {
 
     /**
      * 获取产品类型
+     *
      * @param currentDate
      * @return
      */
-    public static String productName(String currentDate){
+    public static String productName(String currentDate) {
         String name = "";
-        switch (currentDate){
+        switch (currentDate) {
             case "票据":
                 name = "0";
                 break;
@@ -717,12 +721,13 @@ public class Utils {
 
     /**
      * 获取订单状态
+     *
      * @param currentDate
      * @return
      */
-    public static String orderStatus(String currentDate){
+    public static String orderStatus(String currentDate) {
         String status = "";
-        switch (currentDate){
+        switch (currentDate) {
             case "待受理":
                 status = "0";
                 break;
@@ -759,12 +764,13 @@ public class Utils {
 
     /**
      * 获取订单状态
+     *
      * @param currentDate
      * @return
      */
-    public static String orderStatus(int currentDate){
+    public static String orderStatus(int currentDate) {
         String status = "";
-        switch (currentDate){
+        switch (currentDate) {
             case 0:
                 status = "待受理";
                 break;

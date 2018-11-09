@@ -153,12 +153,13 @@ public class BankCardAct extends BaseActivity {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    BankCards bankCards = JsonUtil.parseJsonToBean(response.body(), BankCards.class);
-                    if (200 == Integer.parseInt(bankCards.code)) {
+
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        BankCards bankCards = JsonUtil.parseJsonToBean(response.body(), BankCards.class);
                         bankCardses.addAll(bankCards.data);
                         bankCardsAdapter.notifyDataSetChanged();
                     } else {
-                        Utils.toast(bankCards.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                     loadingDialog.dismiss();
                 }

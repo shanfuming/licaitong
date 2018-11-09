@@ -22,6 +22,7 @@ import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
 import com.zqzr.licaitong.utils.SPUtil;
 import com.zqzr.licaitong.utils.Utils;
+import com.zqzr.licaitong.view.KeyDownLoadingDialog;
 import com.zqzr.licaitong.view.SuccessAndFailDialog;
 
 import java.util.TreeMap;
@@ -41,6 +42,7 @@ public class IdentifyAct extends BaseActivity implements View.OnClickListener {
     private TextView mCommit;
     private TextView mTvSelectCity;
     private SuccessAndFailDialog successDialog;
+    private KeyDownLoadingDialog loadingDialog;
 
     @Override
     protected void initView() {
@@ -66,6 +68,7 @@ public class IdentifyAct extends BaseActivity implements View.OnClickListener {
     @Override
     protected void initData() {
         successDialog = new SuccessAndFailDialog(this);
+        loadingDialog = new KeyDownLoadingDialog(this);
     }
 
     @Override
@@ -99,7 +102,7 @@ public class IdentifyAct extends BaseActivity implements View.OnClickListener {
             Utils.toast("请输入居住地址");
             return;
         }
-
+        loadingDialog.show();
         TreeMap<String, String> params = new TreeMap<>();
         params.put("id", SPUtil.getString("userid", ""));
         params.put("name", mEtName.getText().toString());
@@ -126,6 +129,8 @@ public class IdentifyAct extends BaseActivity implements View.OnClickListener {
                                 intent.putExtra("userRealName", mEtName.getText().toString());
                                 intent.putExtra("idNum", mEtIdCard.getText().toString());
                                 ActivityUtils.push(BankCardAct.class, intent);
+
+                                finish();
                             }
                         });
                     } else {
@@ -141,6 +146,7 @@ public class IdentifyAct extends BaseActivity implements View.OnClickListener {
                             }
                         });
                     }
+                    loadingDialog.dismiss();
                 }
             }
 
@@ -148,6 +154,7 @@ public class IdentifyAct extends BaseActivity implements View.OnClickListener {
             public void onError(Response<String> response) {
                 super.onError(response);
                 Utils.toast(Constant.NetWork_Error);
+                loadingDialog.dismiss();
             }
         });
 

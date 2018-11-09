@@ -31,7 +31,7 @@
             />
 
         <TextView
-            android:id="@+id/record_phone"
+            android:id="@+id/record_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/x24"

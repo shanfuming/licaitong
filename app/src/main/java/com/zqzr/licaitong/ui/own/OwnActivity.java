@@ -126,9 +126,9 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
             mTvIsIdentify.setVisibility(View.VISIBLE);
         } else {
             mTvUserName.setText("");
-            mTvOwnMoney.setText("*****");
-            mTvIncomed.setText("*****");
-            mTvIncoming.setText("*****");
+            mTvOwnMoney.setText("******");
+            mTvIncomed.setText("******");
+            mTvIncoming.setText("******");
             mTvIsIdentify.setVisibility(View.GONE);
         }
     }
@@ -146,35 +146,38 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
                 if (!TextUtils.isEmpty(response.body())) {
                     if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         OwnInfo ownInfo = JsonUtil.parseJsonToBean(response.body(), OwnInfo.class);
-                        mTvUserName.setText(Utils.getEncodeStr(ownInfo.data.phone));
-                        mTvOwnMoney.setText(Utils.getDouble2(ownInfo.data.amountTotalInvestment));
-                        mTvIncomed.setText(Utils.getDouble2(ownInfo.data.incomeCollected));
-                        mTvIncoming.setText(Utils.getDouble2(ownInfo.data.incomeCollecting));
-                        Utils.loadImg(mIvIcon, ownInfo.data.headPortraitUrl, null);
-                        mTvIsIdentify.setText(Utils.getIdentifyType(ownInfo.data.realNameStatus));
+                        if (ownInfo.data!=null){
+                            mTvUserName.setText(Utils.getEncodeStr(ownInfo.data.phone));
+                            mTvOwnMoney.setText(Utils.getDouble2(ownInfo.data.amountTotalInvestment));
+                            mTvIncomed.setText(Utils.getDouble2(ownInfo.data.incomeCollected));
+                            mTvIncoming.setText(Utils.getDouble2(ownInfo.data.incomeCollecting));
+                            Utils.loadImg(OwnActivity.this,mIvIcon, ownInfo.data.headPortraitUrl, null);
+                            mTvIsIdentify.setText(Utils.getIdentifyType(ownInfo.data.realNameStatus));
 
-                        all = Utils.getDouble2(ownInfo.data.amountTotalInvestment);
-                        incomed = Utils.getDouble2(ownInfo.data.incomeCollected);
-                        incomeing = Utils.getDouble2(ownInfo.data.incomeCollecting);
-                        plannerCity = ownInfo.data.lcsCity;
-                        plannerName = ownInfo.data.lcsRealName;
-                        plannerPhone = ownInfo.data.lcsPhone;
-                        realName = ownInfo.data.realName;
-                        idNo = ownInfo.data.idNo;
-                        phone = ownInfo.data.phone;
-                        headPortraitUrl = ownInfo.data.headPortraitUrl;
-                        inviteCode = ownInfo.data.referralCode;
-                        realNameStatus = ownInfo.data.realNameStatus;
-                        bankStatus = ownInfo.data.bankStatus;
+                            all = Utils.getDouble2(ownInfo.data.amountTotalInvestment);
+                            incomed = Utils.getDouble2(ownInfo.data.incomeCollected);
+                            incomeing = Utils.getDouble2(ownInfo.data.incomeCollecting);
+                            plannerCity = ownInfo.data.lcsCity;
+                            plannerName = ownInfo.data.lcsRealName;
+                            plannerPhone = ownInfo.data.lcsPhone;
+                            realName = ownInfo.data.realName;
+                            idNo = ownInfo.data.idNo;
+                            phone = ownInfo.data.phone;
+                            headPortraitUrl = ownInfo.data.headPortraitUrl;
+                            inviteCode = ownInfo.data.referralCode;
+                            realNameStatus = ownInfo.data.realNameStatus;
+                            bankStatus = ownInfo.data.bankStatus;
+                            SPUtil.setValue("usericon", headPortraitUrl);
+                        }
 
-                    } else if(Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 10003){
+                    } else if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 10003) {
 
                         SPUtil.clear();
                         MyApplication.getInstance().updataLand(false);
 
                         Intent intent = new Intent();
-                        intent.putExtra("turn",1);
-                        ActivityUtils.push(LoginAct.class,intent);
+                        intent.putExtra("turn", 1);
+                        ActivityUtils.push(LoginAct.class, intent);
                     } else {
                         Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
@@ -229,7 +232,10 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
                     if (realNameStatus != 1) {
                         tip(1);
                     } else {
-                        ActivityUtils.push(BankCardAct.class);
+                        Intent intent = new Intent();
+                        intent.putExtra("userRealName", realName);
+                        intent.putExtra("idNum", idNo);
+                        ActivityUtils.push(BankCardAct.class, intent);
                     }
                 } else {
                     ActivityUtils.push(LoginAct.class);
@@ -277,7 +283,6 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
                         intent.putExtra("realName", realName);
                         intent.putExtra("idNo", idNo);
                         intent.putExtra("phone", phone);
-                        intent.putExtra("headPortraitUrl", headPortraitUrl);
                         intent.putExtra("inviteCode", inviteCode);
                         ActivityUtils.push(InfoAct.class, intent);
                     }
@@ -338,9 +343,9 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
      */
     private void setCanSee(boolean isNotSee) {
         if (isNotSee) {
-            mTvOwnMoney.setText("*****");
-            mTvIncomed.setText("*****");
-            mTvIncoming.setText("*****");
+            mTvOwnMoney.setText("******");
+            mTvIncomed.setText("******");
+            mTvIncoming.setText("******");
         } else {
             mTvOwnMoney.setText(all);
             mTvIncomed.setText(incomed);
@@ -422,16 +427,16 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
      */
     private void getQiNiuToken(final String path) {
         loadingDialog.show();
-        TreeMap<String,String> params = new TreeMap<>();
+        TreeMap<String, String> params = new TreeMap<>();
 
-        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.GetQiniuToken,params);
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.GetQiniuToken, params);
         postRequest.execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
                     if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         QiNiuToken qiNiuToken = JsonUtil.parseJsonToBean(response.body(), QiNiuToken.class);
-                        uploadImageToQiniu(path,qiNiuToken.data.token);
+                        uploadImageToQiniu(path, qiNiuToken.data.token);
                         doman = qiNiuToken.data.doman;
                     } else {
                         Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
@@ -464,7 +469,7 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
             public void complete(String key, ResponseInfo info, JSONObject res) {
                 // info.error中包含了错误信息，可打印调试
                 // 上传成功后将key值上传到自己的服务器
-                uploadIcon(doman+key);
+                uploadIcon(doman + key);
             }
 
         }, null);
@@ -474,17 +479,17 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
      * 上传头像
      */
     private void uploadIcon(final String url) {
-        TreeMap<String,String> params = new TreeMap<>();
-        params.put("headImageUrl",url);
+        TreeMap<String, String> params = new TreeMap<>();
+        params.put("headPortraitUrl", url);
 
-        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.UploadIcon,params);
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.UploadIcon, params);
         postRequest.execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
                     if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
-                        Utils.loadImg(mIvIcon,url,null);
-                        SPUtil.setValue("usericon",url);
+                        Utils.loadImg(OwnActivity.this,mIvIcon, url, null);
+                        SPUtil.setValue("usericon", url);
                     } else {
                         Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }

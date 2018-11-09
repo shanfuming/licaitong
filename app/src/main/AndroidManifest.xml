@@ -33,13 +33,12 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,6 +46,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.zqzr.licaitong.ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name="com.zqzr.licaitong.ui.GuideActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.zqzr.licaitong.ui.home.HomeActivity"
             android:screenOrientation="portrait"
@@ -169,9 +177,15 @@
         <activity
             android:name="com.lzy.imagepicker.ui.ImageGridActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.zqzr.licaitong.ui.own.ReturnPlanDetailAct"
+            android:screenOrientation="portrait" />
 
         <!-- 适配全面屏 -->
         <meta-data android:name="android.max_aspect" android:value="2.3" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
 
     </application>
 

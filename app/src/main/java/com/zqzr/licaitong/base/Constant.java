@@ -74,6 +74,7 @@ public class Constant {
     public static final String ChangeP_Success = "更换手机号成功";
     public static final String BankCard_Tip = "请输入银行卡号";
     public static final String BankCard_Success = "请输入银行卡号";
+    public static final String PassWord_Tip = "请设置为8-20位数字与字母组合密码";
 
     /**
      * 网络连接

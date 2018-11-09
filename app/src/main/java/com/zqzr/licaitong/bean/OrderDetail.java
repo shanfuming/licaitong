@@ -9,6 +9,8 @@ package com.zqzr.licaitong.bean;
  */
 
 import java.io.Serializable;
+import java.util.List;
+import java.io.Serializable;
 
 public class OrderDetail implements Serializable {
 
@@ -20,21 +22,23 @@ public class OrderDetail implements Serializable {
 
     public class Data implements Serializable {
 
-        public int  id;
-        public int  productId;
-        public String productName;
-        public double rateYear;
-        public double subscribeAmount;
-        public long addTime;
-        public int status;
-        public String realName;
-        public String phone;
-        public String bank;
-        public double actualAmount;
-        public long payTime;
-        public String certificateUrl;
-        public String url;
-        public String remitBankNo;
+        public String subscribeAmount;
         public String repaymentBankNo;
+        public String productId;
+        public String addTime;
+        public String payTime;
+        public String actualAmount;
+        public String investmentNo;
+        public String url;
+        public String productName;
+        public String remitBankNo;
+        public String rateYear;
+        public String realName;
+        public String bank;
+        public String phone;
+        public String id;
+        public String status;
+        public List<String> certificateUrl;
+
     }
 }

@@ -24,6 +24,7 @@ import com.zqzr.licaitong.utils.JsonUtil;
 import com.zqzr.licaitong.utils.SPUtil;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.view.KeyDownLoadingDialog;
+import com.zqzr.licaitong.view.TipDialog;
 
 import java.util.TreeMap;
 
@@ -102,7 +103,24 @@ public class OrderDetailAct extends BaseActivity {
         mTvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cancel();
+
+                final TipDialog tipDialog = new TipDialog(OrderDetailAct.this,true);
+                tipDialog.setTitle("温馨提示");
+                tipDialog.setContent("您确定取消该订单吗？");
+                tipDialog.setButtonDes("取消", "确定");
+                tipDialog.show();
+                tipDialog.setClickListener(new TipDialog.ClickListener() {
+                    @Override
+                    public void onClickExit() {
+                        tipDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onClickConfirm() {
+                        cancel();
+                        tipDialog.dismiss();
+                    }
+                });
             }
         });
 
@@ -127,97 +145,99 @@ public class OrderDetailAct extends BaseActivity {
                     if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         OrderDetail orderDetail = JsonUtil.parseJsonToBean(response.body(), OrderDetail.class);
 
-                        mTvOrderId.setText(orderDetail.data.id + "");
+                        mTvOrderId.setText(orderDetail.data.investmentNo);
                         mTvName.setText(orderDetail.data.productName);
                         mTvPredictIncome.setText(orderDetail.data.rateYear + "%");
-                        mTvPlanMoney.setText(orderDetail.data.subscribeAmount + "");
-                        mTvAddTime.setText(DateUtil.formatter(DateUtil.Format.SECOND, orderDetail.data.addTime));
+                        mTvPlanMoney.setText(orderDetail.data.subscribeAmount);
+                        mTvAddTime.setText(orderDetail.data.addTime);
                         mTvUserName.setText(Utils.getEncodeName(orderDetail.data.realName));
                         mTvPhone.setText(Utils.getEncodeStr(orderDetail.data.phone));
                         mTvPayCard.setText(orderDetail.data.remitBankNo);
-                        mTvPaydate.setText(DateUtil.formatter(DateUtil.Format.DATE, orderDetail.data.payTime));
+                        mTvPaydate.setText( orderDetail.data.payTime);
                         mTvReturnCard.setText(orderDetail.data.repaymentBankNo);
-                        mTvPayNum.setText(orderDetail.data.actualAmount + "");
-                        Utils.loadImg(mIvVoucher, orderDetail.data.certificateUrl, null);
-                        if (orderDetail.data.status == 0 || orderDetail.data.status == 1) {
+                        mTvPayNum.setText(orderDetail.data.actualAmount);
+                        if(orderDetail.data.certificateUrl.size() > 0){
+                            Utils.loadImg(OrderDetailAct.this,mIvVoucher, orderDetail.data.certificateUrl.get(0), null);
+                        }
+                        if (Integer.valueOf(orderDetail.data.status) == 0 || Integer.valueOf(orderDetail.data.status) == 1) {
                             mTvCancel.setVisibility(View.VISIBLE);
                         } else {
                             mTvCancel.setVisibility(View.GONE);
                         }
 
-                        productId = orderDetail.data.productId;
-                        orderId = orderDetail.data.id;
+                        productId = Integer.valueOf(orderDetail.data.productId);
+                        orderId = Integer.valueOf(orderDetail.data.id);
 
-                        if (orderDetail.data.status > 0) {
-                            if (orderDetail.data.status == 0) {
+                        if (Integer.valueOf(orderDetail.data.status) >= 0) {
+                            if (Integer.valueOf(orderDetail.data.status) == 0) {
                                 mTvState.setText("待受理");
                                 mTvState2.setText("待受理");
                                 mTvState2.setTextColor(Color.parseColor("#fe6b31"));
                                 mTvState.setTextColor(Color.parseColor("#fe6b31"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_accept));
                             }
-                            if (orderDetail.data.status == 1) {
+                            if (Integer.valueOf(orderDetail.data.status) == 1) {
                                 mTvState.setText("待签约");
                                 mTvState2.setText("待签约");
                                 mTvState2.setTextColor(Color.parseColor("#469ee8"));
                                 mTvState.setTextColor(Color.parseColor("#469ee8"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_sign));
                             }
-                            if (orderDetail.data.status == 2) {
+                            if (Integer.valueOf(orderDetail.data.status) == 2) {
                                 mTvState.setText("已签约");
                                 mTvState2.setText("已签约");
                                 mTvState2.setTextColor(Color.parseColor("#5dc748"));
                                 mTvState.setTextColor(Color.parseColor("#5dc748"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_signed));
                             }
-                            if (orderDetail.data.status == 3) {
+                            if (Integer.valueOf(orderDetail.data.status) == 3) {
                                 mTvState.setText("签约作废");
                                 mTvState2.setText("签约作废");
                                 mTvState2.setTextColor(Color.parseColor("#0c1997"));
                                 mTvState.setTextColor(Color.parseColor("#0c1997"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_signinvalid));
                             }
-                            if (orderDetail.data.status == 4) {
+                            if (Integer.valueOf(orderDetail.data.status) == 4) {
                                 mTvState.setText("签约不成功");
                                 mTvState2.setText("签约不成功");
                                 mTvState2.setTextColor(Color.parseColor("#dc1414"));
                                 mTvState.setTextColor(Color.parseColor("#dc1414"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_signfail));
                             }
-                            if (orderDetail.data.status == 5) {
+                            if (Integer.valueOf(orderDetail.data.status) == 5) {
                                 mTvState.setText("已取消");
                                 mTvState2.setText("已取消");
                                 mTvState2.setTextColor(Color.parseColor("#fe6b31"));
                                 mTvState.setTextColor(Color.parseColor("#fe6b31"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_ed));
                             }
-                            if (orderDetail.data.status == 6) {
+                            if (Integer.valueOf(orderDetail.data.status) == 6) {
                                 mTvState.setText("已退款");
                                 mTvState2.setText("已退款");
                                 mTvState2.setTextColor(Color.parseColor("#7200ff"));
                                 mTvState.setTextColor(Color.parseColor("#7200ff"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_refund));
                             }
-                            if (orderDetail.data.status == 7) {
+                            if (Integer.valueOf(orderDetail.data.status) == 7) {
                                 mTvState.setText("待赎回");
                                 mTvState2.setText("待赎回");
                                 mTvState2.setTextColor(Color.parseColor("#cead68"));
                                 mTvState.setTextColor(Color.parseColor("#cead68"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_redemption));
                             }
-                            if (orderDetail.data.status == 8) {
+                            if (Integer.valueOf(orderDetail.data.status) == 8) {
                                 mTvState.setText("已赎回");
                                 mTvState2.setText("已赎回");
                                 mTvState2.setTextColor(Color.parseColor("#088205"));
                                 mTvState.setTextColor(Color.parseColor("#088205"));
                                 mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_redemptioned));
                             }
-                            if (orderDetail.data.status == 9) {
+                            if (Integer.valueOf(orderDetail.data.status) == 9) {
                                 mTvState.setText("已还款");
                                 mTvState2.setText("已还款");
-                                mTvState2.setTextColor(Color.parseColor("#000000"));
-                                mTvState.setTextColor(Color.parseColor("#000000"));
-                                mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_cancel));
+                                mTvState2.setTextColor(Color.parseColor("#d32bcd"));
+                                mTvState.setTextColor(Color.parseColor("#d32bcd"));
+                                mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_returned));
                             }
                         }
 
@@ -241,7 +261,7 @@ public class OrderDetailAct extends BaseActivity {
      * 取消订单
      */
     private void cancel() {
-        loadingDialog.setText("已取消");
+        loadingDialog.setText("正在取消");
         loadingDialog.show();
         TreeMap<String,String> params = new TreeMap<>();
         params.put("id", orderId+"");
@@ -259,7 +279,7 @@ public class OrderDetailAct extends BaseActivity {
                         Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
-
+                loadingDialog.dismiss();
             }
 
             @Override

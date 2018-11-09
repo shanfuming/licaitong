@@ -8,7 +8,6 @@
         android:id="@+id/stick_header_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:retentionHeight="48dp"
         >
 
         <include layout="@layout/act_tender_detail_top" />
@@ -101,10 +100,13 @@
 
 
     <RelativeLayout
+        android:id="@+id/rl_subscribe"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y110"
         android:layout_alignParentBottom="true"
-        android:background="@color/detail_subscibe_bg">
+        android:background="@color/detail_subscibe_bg"
+        android:visibility="gone"
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -5,176 +5,190 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    >
+    android:focusableInTouchMode="true">
 
-    <ScrollView
+    <com.cjj.MaterialRefreshLayout
+        android:id="@+id/mrl_refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        >
+        android:layout_height="match_parent">
 
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/white"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            >
-
-            <com.jude.rollviewpager.RollPagerView
-                android:id="@+id/roll_view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y360"
-                app:rollviewpager_play_delay="3000"
-                />
+            android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y150"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
+                android:layout_height="match_parent"
                 android:background="@color/white"
-                >
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+                <com.jude.rollviewpager.RollPagerView
+                    android:id="@+id/roll_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y360"
+                    app:rollviewpager_play_delay="3000" />
 
                 <LinearLayout
-                    android:id="@+id/ll_piaoju"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y150"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="@dimen/x48"
-                        android:layout_height="@dimen/x48"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/home_tab1_selector" />
+                    <LinearLayout
+                        android:id="@+id/ll_piaoju"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/x48"
+                            android:layout_height="@dimen/x48"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/home_tab1_selector" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/y10"
+                            android:text="@string/home_tv_piaoju"
+                            android:textColor="@color/text_grey"
+                            android:textSize="@dimen/x24" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_baoli"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/x48"
+                            android:layout_height="@dimen/x48"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/home_tab2_selector" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/y10"
+                            android:text="@string/home_tv_baoli"
+                            android:textColor="@color/text_grey"
+                            android:textSize="@dimen/x24" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_guquan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="@dimen/x48"
+                            android:layout_height="@dimen/x48"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/home_tab3_selector" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/y10"
+                            android:text="@string/home_tv_guquan"
+                            android:textColor="@color/text_grey"
+                            android:textSize="@dimen/x24" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_fangchan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/x48"
+                            android:layout_height="@dimen/x48"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/home_tab4_selector" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/y10"
+                            android:text="@string/home_tv_fangchan"
+                            android:textColor="@color/text_grey"
+                            android:textSize="@dimen/x24" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <View style="@style/hLineheight30Style" />
+
+
+                <com.zqzr.licaitong.view.PowerListView
+                    android:id="@+id/touziType_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:divider="@color/view_grey"
+                    android:dividerHeight="@dimen/y20" />
+
+                <View style="@style/hLineheight20Style" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/y10"
-                        android:text="@string/home_tv_piaoju"
-                        android:textColor="@color/text_grey"
-                        android:textSize="@dimen/x24" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_baoli"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="@dimen/x48"
-                        android:layout_height="@dimen/x48"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/home_tab2_selector" />
+                        android:layout_height="@dimen/y90"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:text="@string/bottom_tv_find"
+                        android:textColor="@color/text_dark"
+                        android:textSize="@dimen/x32" />
 
                     <TextView
+                        android:id="@+id/tv_find_more"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/y10"
-                        android:text="@string/home_tv_baoli"
+                        android:layout_height="@dimen/y90"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/x30"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:text="更多>>"
                         android:textColor="@color/text_grey"
-                        android:textSize="@dimen/x24" />
-                </LinearLayout>
+                        android:textSize="@dimen/x32" />
 
-                <LinearLayout
-                    android:id="@+id/ll_guquan"
-                    android:layout_width="0dp"
+                </RelativeLayout>
+
+                <View style="@style/hLineStyle" />
+
+                <com.zqzr.licaitong.view.PowerListView
+                    android:id="@+id/find_listview"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="@dimen/x48"
-                        android:layout_height="@dimen/x48"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/home_tab3_selector" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/y10"
-                        android:text="@string/home_tv_guquan"
-                        android:textColor="@color/text_grey"
-                        android:textSize="@dimen/x24" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_fangchan"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="@dimen/x48"
-                        android:layout_height="@dimen/x48"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/home_tab4_selector" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/y10"
-                        android:text="@string/home_tv_fangchan"
-                        android:textColor="@color/text_grey"
-                        android:textSize="@dimen/x24" />
-                </LinearLayout>
-
+                    android:layout_marginBottom="@dimen/y50"
+                    android:background="@color/white"
+                    android:divider="@color/line_grey"
+                    android:dividerHeight="@dimen/y1" />
 
             </LinearLayout>
 
-            <View style="@style/hLineheight30Style" />
-
-
-            <com.zqzr.licaitong.view.PowerListView
-                android:id="@+id/touziType_listview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@color/view_grey"
-                android:dividerHeight="@dimen/y20"
-                android:background="@color/white"
-                />
-
-            <View style="@style/hLineheight20Style" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y90"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="@dimen/x30"
-                android:text="@string/bottom_tv_find"
-                android:textSize="@dimen/x32"
-                android:textColor="@color/text_dark"
-                android:gravity="center_vertical"
-                android:background="@color/white"
-                />
-
-            <View
-                style="@style/hLineStyle"/>
-
-            <com.zqzr.licaitong.view.PowerListView
-                android:id="@+id/find_listview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/y100"
-                android:divider="@color/line_grey"
-                android:dividerHeight="@dimen/y1"
-                android:background="@color/white"
-                />
-
-        </LinearLayout>
-
-    </ScrollView>
-
+        </ScrollView>
+    </com.cjj.MaterialRefreshLayout>
 </RelativeLayout>

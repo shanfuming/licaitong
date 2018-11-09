@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
 
     <include layout="@layout/appbar_layout"/>
 
@@ -30,7 +32,7 @@
             android:layout_gravity="center_horizontal"
             android:textSize="@dimen/x26"
             android:gravity="center_vertical"
-            android:textColor="@color/dayAndMark" />
+            android:textColor="@color/text_dark" />
 
         <TextView
             android:layout_width="@dimen/x542"
@@ -58,9 +60,8 @@
                 android:gravity="center_vertical"
                 android:hint="@string/own_card_addHint"
                 android:inputType="number"
-                android:maxLength="6"
                 android:paddingLeft="0dp"
-                android:textColor="@color/colorViewbg"
+                android:textColor="@color/text_dark"
                 android:textSize="@dimen/x25" />
 
         </LinearLayout>

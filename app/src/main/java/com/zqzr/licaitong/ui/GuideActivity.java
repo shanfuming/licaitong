@@ -57,7 +57,6 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
 
 	@Override
 	protected void onDestroy() {
-//		this.finishBroadcastReceiver();
 		super.onDestroy();
 	}
 }

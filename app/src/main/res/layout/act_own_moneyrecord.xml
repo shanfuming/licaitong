@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
 
     <include layout="@layout/appbar_layout"/>
 
@@ -19,6 +21,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginRight="@dimen/x30"
+            android:scrollbars="none"
             />
 
     </com.cjj.MaterialRefreshLayout>

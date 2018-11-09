@@ -414,7 +414,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:layout_marginTop="@dimen/y100"
+                android:layout_marginBottom="@dimen/y50"
                 />
 
         </LinearLayout>

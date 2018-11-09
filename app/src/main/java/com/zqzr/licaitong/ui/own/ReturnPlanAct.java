@@ -1,7 +1,9 @@
 package com.zqzr.licaitong.ui.own;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,7 +19,9 @@ import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.ReturnPlan;
 import com.zqzr.licaitong.http.OKGO_GetData;
+import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
+import com.zqzr.licaitong.utils.Logger;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.view.KeyDownLoadingDialog;
 
@@ -72,6 +76,8 @@ public class ReturnPlanAct extends BaseActivity implements View.OnClickListener 
 
         returnAdapterIngs = new ReturnPlanAdapter(returnIngs);
         returnAdapterEds = new ReturnPlanAdapter(returnEds);
+        mReturnListIng.setAdapter(returnAdapterIngs);
+        mReturnListed.setAdapter(returnAdapterEds);
 
         mRefreshIng.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
@@ -102,6 +108,24 @@ public class ReturnPlanAct extends BaseActivity implements View.OnClickListener 
                 getData(currentStatus,nextPage,true);
                 nextPage = nextPage + 1;
                 mRefreshEd.finishRefreshLoadMore();
+            }
+        });
+
+        mReturnListIng.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.putExtra("id",returnIngs.get(position).id+"");
+                ActivityUtils.push(ReturnPlanDetailAct.class,intent);
+            }
+        });
+
+        mReturnListed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.putExtra("id",returnEds.get(position).id+"");
+                ActivityUtils.push(ReturnPlanDetailAct.class,intent);
             }
         });
     }
@@ -141,13 +165,13 @@ public class ReturnPlanAct extends BaseActivity implements View.OnClickListener 
         if (isFirst){
             mTvReturnEd.setTextColor(getResources().getColor(R.color.app_color_principal));
             mTvReturnEd.setBackgroundResource(R.drawable.fillet_btn_diable_right);
-            mTvReturnEd.setTextColor(getResources().getColor(R.color.white));
-            mTvReturnEd.setBackgroundResource(R.drawable.fillet_btn_left);
+            mTvReturnNot.setTextColor(getResources().getColor(R.color.white));
+            mTvReturnNot.setBackgroundResource(R.drawable.fillet_btn_left);
         }else{
             mTvReturnEd.setTextColor(getResources().getColor(R.color.white));
             mTvReturnEd.setBackgroundResource(R.drawable.fillet_btn_right);
-            mTvReturnEd.setTextColor(getResources().getColor(R.color.app_color_principal));
-            mTvReturnEd.setBackgroundResource(R.drawable.fillet_btn_disable_left);
+            mTvReturnNot.setTextColor(getResources().getColor(R.color.app_color_principal));
+            mTvReturnNot.setBackgroundResource(R.drawable.fillet_btn_disable_left);
         }
     }
 
@@ -167,15 +191,17 @@ public class ReturnPlanAct extends BaseActivity implements View.OnClickListener 
                 if (!TextUtils.isEmpty(response.body())) {
                     if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         ReturnPlan returnPlan = JsonUtil.parseJsonToBean(response.body(), ReturnPlan.class);
-                        if (!isLoad){
-                            returnEds.clear();
-                            returnIngs.clear();
-                        }
                         if (status == 0){
+                            if (!isLoad){
+                                returnIngs.clear();
+                            }
                             returnIngs.addAll(returnPlan.data.cList);
                             returnAdapterIngs.notifyDataSetChanged();
                         }
                         if (status == 1){
+                            if (!isLoad){
+                                returnEds.clear();
+                            }
                             returnEds.addAll(returnPlan.data.cList);
                             returnAdapterEds.notifyDataSetChanged();
                         }

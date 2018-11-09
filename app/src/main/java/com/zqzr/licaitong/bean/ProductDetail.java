@@ -23,6 +23,7 @@ public class ProductDetail implements Serializable {
         public double proTotalAmount;
         public int earningWay;
         public String name;
+        public String url;
         public Double expectedYield;
         public double increasingAmount;
         public String increasingAmountStr;

@@ -18,11 +18,12 @@ public class Version implements Serializable {
     public String code;
     public String attach;
     public String message;
-    public ArrayList<Data> data;
+    public Data data;
 
     public class Data implements Serializable {
 
         public String versionCode;
         public String loadUrl;
+        public String isCompulsion;
     }
 }

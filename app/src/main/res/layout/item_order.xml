@@ -57,8 +57,7 @@
         android:id="@+id/rl_next"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y100"
-        android:layout_marginBottom="@dimen/y15"
-        >
+        android:layout_marginBottom="@dimen/y15">
 
         <TextView
             android:id="@+id/tv_orderName"
@@ -77,6 +76,7 @@
             android:layout_marginRight="@dimen/x20"
             android:layout_toLeftOf="@+id/iv_next"
             android:gravity="center"
+            android:padding="0dp"
             android:textColor="@color/text_grey"
             android:textSize="@dimen/x20" />
 

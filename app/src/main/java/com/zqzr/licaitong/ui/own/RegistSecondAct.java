@@ -18,6 +18,7 @@ import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.Getcode;
 import com.zqzr.licaitong.http.OKGO_GetData;
 import com.zqzr.licaitong.utils.ActivityUtils;
+import com.zqzr.licaitong.utils.InputCheck;
 import com.zqzr.licaitong.utils.JsonUtil;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.utils.encryption.MD5Util;
@@ -36,16 +37,16 @@ import java.util.TreeMap;
 
 public class RegistSecondAct extends BaseActivity {
     private TextView mTvRegist;
-    private EditText mEtPwdOne,mEtPwdTwo;
+    private EditText mEtPwdOne, mEtPwdTwo;
     private KeyDownLoadingDialog loadingDialog;
     private SuccessAndFailDialog successDialog;
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
-            switch (msg.what){
+            switch (msg.what) {
                 case Constant.NUMBER_0:
                     successDialog.dismiss();
                     finish();
@@ -66,7 +67,7 @@ public class RegistSecondAct extends BaseActivity {
         setContentView(R.layout.act_own_register_second);
 
         mEtPwdOne = (EditText) findViewById(R.id.register_pwd_first);
-        mEtPwdTwo= (EditText) findViewById(R.id.register_pwd_two);
+        mEtPwdTwo = (EditText) findViewById(R.id.register_pwd_two);
         mTvRegist = (TextView) findViewById(R.id.register_regist);
 
     }
@@ -79,64 +80,68 @@ public class RegistSecondAct extends BaseActivity {
 
         loadingDialog = new KeyDownLoadingDialog(this);
         successDialog = new SuccessAndFailDialog(this);
-        successDialog.setContent(Constant.Regist_Success,true);
-        successDialog.setDes("即将跳转到登录页",true);
-        successDialog.setImg(R.mipmap.success,true);
+        successDialog.setContent(Constant.Regist_Success, true);
+        successDialog.setDes("即将跳转到登录页", true);
+        successDialog.setImg(R.mipmap.success, true);
 
         mTvRegist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                regist(phone,fpName);
+                regist(phone, fpName);
             }
         });
     }
 
     /**
      * 注册
+     *
      * @param phone
      * @param fpName
      */
-    private void regist(String phone,String fpName){
+    private void regist(String phone, String fpName) {
         //判断密码是否为空
-        if (TextUtils.isEmpty(mEtPwdOne.getText().toString())){
+        if (TextUtils.isEmpty(mEtPwdOne.getText().toString())) {
             Utils.toast(Constant.Login_PassWord_Null);
             return;
         }
+        //判断密码是否符合规则
+        if (!InputCheck.checkPwdRule(mEtPwdOne.getText().toString().trim())) {
+            Utils.toast(Constant.PassWord_Tip);
+            return;
+        }
 
-        if (TextUtils.isEmpty(mEtPwdTwo.getText().toString())){
+        if (TextUtils.isEmpty(mEtPwdTwo.getText().toString())) {
             Utils.toast(Constant.Regist_PassWordTwo_Null);
             return;
         }
 
-        if (!TextUtils.equals(mEtPwdTwo.getText().toString().trim(),mEtPwdOne.getText().toString().trim())){
+        if (!TextUtils.equals(mEtPwdTwo.getText().toString().trim(), mEtPwdOne.getText().toString().trim())) {
             Utils.toast(Constant.Regist_PassWord_Dif);
             return;
         }
 
         loadingDialog.show();
 
-        TreeMap<String,String> params = new TreeMap<>();
-        params.put("phone",phone);
-        params.put("fpName",fpName);
+        TreeMap<String, String> params = new TreeMap<>();
+        params.put("phone", phone);
+        params.put("fpName", fpName);
         params.put("password", MD5Util.getMD5Str(mEtPwdTwo.getText().toString().trim()));
 
-        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Regist,params);
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Regist, params);
         postRequest.execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    Getcode getcode = JsonUtil.parseJsonToBean(response.body(), Getcode.class);
-                    if (200 == Integer.parseInt(getcode.code)) {
 
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         Intent intent = new Intent();
                         intent.setAction(Constant.Regist_Success);
                         sendBroadcast(intent);
 
                         successDialog.show();
-                        handler.sendEmptyMessageDelayed(Constant.NUMBER_0,3000);
-
+                        handler.sendEmptyMessageDelayed(Constant.NUMBER_0, 3000);
                     } else {
-                        Utils.toast(getcode.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
                 loadingDialog.dismiss();

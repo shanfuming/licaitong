@@ -63,15 +63,15 @@ public class BankCardsAdapter extends BaseAdapter {
         viewHolder.cardNum.setText(bankcards.get(position).bankNo);
         viewHolder.cardName.setText(bankcards.get(position).bank);
         if (position % getCount() == 0 ){
-            viewHolder.cardBg.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_bank_red));
+            viewHolder.cardBg.setBackground(ActivityUtils.peek().getResources().getDrawable(R.mipmap.card_red));
         }
 
         if (position % getCount() == 1 ){
-            viewHolder.cardBg.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_bank_blue));
+            viewHolder.cardBg.setBackground(ActivityUtils.peek().getResources().getDrawable(R.mipmap.card_blue));
         }
 
         if (position % getCount() == 2 ){
-            viewHolder.cardBg.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_bank_green));
+            viewHolder.cardBg.setBackground(ActivityUtils.peek().getResources().getDrawable(R.mipmap.card_green));
         }
 
         return convertView;

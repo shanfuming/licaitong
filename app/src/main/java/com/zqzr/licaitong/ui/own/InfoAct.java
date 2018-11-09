@@ -1,6 +1,7 @@
 package com.zqzr.licaitong.ui.own;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.RelativeLayout;
@@ -10,15 +11,25 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.PostRequest;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.base.BaseActivity;
+import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
+import com.zqzr.licaitong.bean.QiNiuToken;
+import com.zqzr.licaitong.http.OKGO_GetData;
+import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.GlideImageLoader;
+import com.zqzr.licaitong.utils.JsonUtil;
+import com.zqzr.licaitong.utils.SPUtil;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.view.CircleImageView;
+import com.zqzr.licaitong.view.KeyDownLoadingDialog;
 import com.zqzr.licaitong.view.SelectDialog;
 
 import org.json.JSONObject;
@@ -27,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Author: shanfuming
@@ -40,8 +52,10 @@ public class InfoAct extends BaseActivity {
     private CircleImageView mIvIcon;
     private TextView mTvTrueName, mTvPhone, mTvIDCardNum, mTvInviteCode;
     private RelativeLayout mRlHead;
-    private ArrayList<ImageItem> imageItems;
+    private ArrayList<ImageItem> imageItems = new ArrayList<>();
     private int maxImgCount = 1;
+    private KeyDownLoadingDialog loadingDialog;
+    private String doman;
 
     @Override
     protected void initView() {
@@ -58,8 +72,9 @@ public class InfoAct extends BaseActivity {
 
     @Override
     protected void initData() {
+        loadingDialog = new KeyDownLoadingDialog(this);
         Intent intent = getIntent();
-        Utils.loadImg(mIvIcon, intent.getStringExtra("headPortraitUrl"),null);
+        Utils.loadImg(this,mIvIcon,SPUtil.getString("usericon",""),null);
         mTvTrueName.setText(intent.getStringExtra("realName"));
         mTvPhone.setText(intent.getStringExtra("phone"));
         mTvIDCardNum.setText(intent.getStringExtra("idNo"));
@@ -91,8 +106,8 @@ public class InfoAct extends BaseActivity {
         imagePicker.setSelectLimit(maxImgCount);              //选中数量限制
         imagePicker.setMultiMode(false);                      //多选
         imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
-        imagePicker.setFocusWidth(200);                       //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setFocusHeight(200);                      //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusWidth(800);                       //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(800);                      //裁剪框的高度。单位像素（圆形自动取宽高最小值）
 //        imagePicker.setOutPutX(1000);                         //保存文件的宽度。单位像素
 //        imagePicker.setOutPutY(1000);                         //保存文件的高度。单位像素
     }
@@ -145,7 +160,7 @@ public class InfoAct extends BaseActivity {
                 ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 if (images != null){
                     imageItems.addAll(images);
-                    getQiNiuToken();
+                    getQiNiuToken(imageItems.get(0).path);
                 }
             }
         }
@@ -154,14 +169,40 @@ public class InfoAct extends BaseActivity {
     /**
      * 获取七牛云token
      */
-    private void getQiNiuToken() {
+    private void getQiNiuToken(final String path) {
+        loadingDialog.show();
+        TreeMap<String, String> params = new TreeMap<>();
 
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.GetQiniuToken, params);
+        postRequest.execute(new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                if (!TextUtils.isEmpty(response.body())) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        QiNiuToken qiNiuToken = JsonUtil.parseJsonToBean(response.body(), QiNiuToken.class);
+                        uploadImageToQiniu(path, qiNiuToken.data.token);
+                        doman = qiNiuToken.data.doman;
+                    } else {
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                Utils.toast("网络繁忙，请稍后再试!");
+                loadingDialog.dismiss();
+            }
+        });
     }
+
 
     /**
      * 上传图片到七牛
+     *
      * @param filePath 要上传的图片路径
-     * @param token 在七牛官网上注册的token
+     * @param token    在七牛官网上注册的token
      */
     private void uploadImageToQiniu(String filePath, String token) {
         UploadManager uploadManager = new UploadManager();
@@ -173,7 +214,7 @@ public class InfoAct extends BaseActivity {
             public void complete(String key, ResponseInfo info, JSONObject res) {
                 // info.error中包含了错误信息，可打印调试
                 // 上传成功后将key值上传到自己的服务器
-                uploadIcon();
+                uploadIcon(doman + key);
             }
 
         }, null);
@@ -182,7 +223,31 @@ public class InfoAct extends BaseActivity {
     /**
      * 上传头像
      */
-    private void uploadIcon() {
+    private void uploadIcon(final String url) {
+        TreeMap<String, String> params = new TreeMap<>();
+        params.put("headPortraitUrl", url);
 
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.UploadIcon, params);
+        postRequest.execute(new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                if (!TextUtils.isEmpty(response.body())) {
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        Utils.loadImg(InfoAct.this,mIvIcon, url, null);
+                        SPUtil.setValue("usericon", url);
+                    } else {
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
+                    }
+                    loadingDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                Utils.toast("网络繁忙，请稍后再试!");
+                loadingDialog.dismiss();
+            }
+        });
     }
 }

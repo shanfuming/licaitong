@@ -40,13 +40,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
 
     @Override
     public void onBindViewHolder(OrderHolder holder, final int position) {
-        holder.tvOrderId.setText(orders.get(position).id);
+        holder.tvOrderId.setText(orders.get(position).investmentNo);
         holder.tvOrderName.setText(orders.get(position).productName);
         holder.tvOrderTime.setText(DateUtil.formatter(DateUtil.Format.SECOND,orders.get(position).addTime));
         holder.tvPlanMoney.setText(orders.get(position).subscribeAmount+"");
         holder.tvPredictIncome.setText(orders.get(position).rateYear+"%");
 
-        if(orders.get(position).status > 0){
+        if(orders.get(position).status >= 0){
             if (orders.get(position).status == 0){
                 holder.tvOrderState.setText("待受理");
                 holder.tvOrderState.setTextColor(Color.parseColor("#fe6b31"));
@@ -74,8 +74,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             }
             if (orders.get(position).status == 5){
                 holder.tvOrderState.setText("已取消");
-                holder.tvOrderState.setTextColor(Color.parseColor("#fe6b31"));
-                holder.tvOrderState.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_ed));
+                holder.tvOrderState.setTextColor(Color.parseColor("#989898"));
+                holder.tvOrderState.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_cancel));
             }
             if (orders.get(position).status == 6){
                 holder.tvOrderState.setText("已退款");
@@ -94,8 +94,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             }
             if (orders.get(position).status == 9){
                 holder.tvOrderState.setText("已还款");
-                holder.tvOrderState.setTextColor(Color.parseColor("#000000"));
-                holder.tvOrderState.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_cancel));
+                holder.tvOrderState.setTextColor(Color.parseColor("#d32bcd"));
+                holder.tvOrderState.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_returned));
             }
 
             holder.rlNext.setOnClickListener(new View.OnClickListener() {

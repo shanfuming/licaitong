@@ -41,7 +41,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/dayAndMark"
-                android:textSize="@dimen/x24" />
+                android:textSize="@dimen/x24"
+                android:visibility="gone"
+                />
 
             <LinearLayout
                 android:id="@+id/ll_act_countdown"

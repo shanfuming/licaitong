@@ -47,7 +47,6 @@ public class SplashActivity extends BaseActivity {
             super.handleMessage(msg);
         }
     };
-//    private AddInfoNetwork addInfoNetwork;
 
     @Override
     protected void initView() {
@@ -67,37 +66,6 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void initData() {
         String Metadata = getAppMetaData(this, "UMENG_CHANNEL");
-        sendLoginInfo();
-    }
-
-    private void sendLoginInfo() {
-
-//        if (!isFirstLogin()){
-//            int userId = SPUtil.getInt(YiYuanDuoBaoApplication.sContext, "userId", -1);
-//            String loginToken = SharePrefUtil.getString(YiYuanDuoBaoApplication.sContext, "loginToken", null);
-//            String device_model = Build.MODEL; // 设备型号
-//            String brand = Build.BRAND;//设备名称
-//            String version_sdk = Build.VERSION.SDK; // 设备SDK版本
-//            String version_release = Build.VERSION.RELEASE;
-//            final TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
-//            final String tmDeviceId, tmSerial, tmPhone, androidId;
-//            tmDeviceId = "" + tm.getDeviceId();
-//            tmSerial = "" + tm.getSimSerialNumber();
-//            androidId = "" + android.provider.Settings.Secure.getString(this.getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
-//            UUID deviceUuid = new UUID(androidId.hashCode(), ((long)tmDeviceId.hashCode() << 32) | tmSerial.hashCode());
-//            String uniqueId = deviceUuid.toString().toUpperCase();
-//
-//            HashMap<String, String> params = new HashMap<String, String>();
-//            params.put("userid", String.valueOf(userId));
-//            params.put("token", loginToken);
-//            params.put("UUID", "");
-//            params.put("IDFA", uniqueId);
-//            params.put("Device", device_model);
-//            params.put("OS", version_sdk);
-//            params.put("Version", getVersionCode(SplashActivity.this)+"");
-//            addInfoNetwork = new AddInfoNetwork(YiYuanDuoBaoApplication.sContext);
-//            addInfoNetwork.sendPostRequest(SystemParams.AddInfo,params);
-//        }
     }
 
     private void goHome() {

@@ -74,13 +74,16 @@ public class HomeTouziListAdapter extends BaseAdapter {
         viewHolder.tenderName.setText(touziList.get(position).name);
         viewHolder.tenderDayNum.setText(touziList.get(position).projectDuration+"天");
         viewHolder.tenderStartMark.setText(Utils.getWan(touziList.get(position).purchaseAmount)+"起投");
-        if(touziList.get(position).status > 0){
+        if(touziList.get(position).status >= 0){
             if (touziList.get(position).status == 1){
-                viewHolder.tenderState.setText("发行中");
+                viewHolder.tenderState.setText("募集中");
                 viewHolder.tenderState.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_ing));
-            }else{
+            }else if(touziList.get(position).status == 3){
                 viewHolder.tenderState.setText("已募满");
                 viewHolder.tenderState.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_ed));
+            }else if(touziList.get(position).status == 4){
+                viewHolder.tenderState.setText("还款中");
+                viewHolder.tenderState.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_returning));
             }
         }
 

@@ -19,7 +19,7 @@
 	    android:layout_height="@dimen/y100"
 	    android:layout_alignParentBottom="true"
 	    android:layout_centerHorizontal="true"
-	    android:layout_marginBottom="@dimen/x34"
+	    android:layout_marginBottom="@dimen/y50"
 		android:gravity="center"
 	    android:textColor="#eeeeee"
 	    android:textSize="20sp" />

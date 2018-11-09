@@ -9,6 +9,7 @@ import com.cjj.MaterialRefreshListener;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
+import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.adapter.ActivitysAdapter;
 import com.zqzr.licaitong.base.BaseActivity;
@@ -16,9 +17,11 @@ import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
 import com.zqzr.licaitong.bean.Activitys;
 import com.zqzr.licaitong.bean.Banner;
+import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.http.OKGO_GetData;
 import com.zqzr.licaitong.utils.DensityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
+import com.zqzr.licaitong.utils.SPUtil;
 import com.zqzr.licaitong.utils.Utils;
 import com.zqzr.licaitong.view.KeyDownLoadingDialog;
 import com.zqzr.licaitong.view.SpacesItemDecoration;
@@ -48,7 +51,6 @@ public class AActivity extends BaseActivity {
         setContentView(R.layout.act_activity);
 
         mRefreshLayout = (MaterialRefreshLayout) findViewById(R.id.mrl_refreshLayout);
-        mRefreshLayout.setLoadMore(true);
         mActRecyclerView = (RecyclerView) findViewById(R.id.activity_recylerview);
         LinearLayoutManager mLayoutMgr = new LinearLayoutManager(this);
         mActRecyclerView.setLayoutManager(mLayoutMgr);
@@ -57,7 +59,7 @@ public class AActivity extends BaseActivity {
         int topBottom = DensityUtils.dp2px(this, 12f);
         mActRecyclerView.addItemDecoration(new SpacesItemDecoration(leftRight, topBottom, 0));
 
-        activitysAdapter = new ActivitysAdapter(activityses);
+        activitysAdapter = new ActivitysAdapter(this, activityses);
         mActRecyclerView.setAdapter(activitysAdapter);
     }
 
@@ -65,42 +67,44 @@ public class AActivity extends BaseActivity {
     protected void initData() {
         loadingDialog = new KeyDownLoadingDialog(this);
         loadingDialog.show();
-        getActivitys(currentPage,false);
+        getActivitys(currentPage, false);
 
         mRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
-                getActivitys(currentPage,false);
+                getActivitys(currentPage, false);
                 mRefreshLayout.finishRefreshing();
             }
 
-            @Override
-            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
-                super.onRefreshLoadMore(materialRefreshLayout);
-                getActivitys(nextPage,true);
-                nextPage = nextPage + 1;
-                mRefreshLayout.finishRefreshLoadMore();
-            }
+//            @Override
+//            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+//                super.onRefreshLoadMore(materialRefreshLayout);
+//                getActivitys(nextPage,true);
+//                nextPage = nextPage + 1;
+//                mRefreshLayout.finishRefreshLoadMore();
+//            }
         });
     }
 
     private void getActivitys(int pageNum, final boolean isLoad) {
-        TreeMap<String,String> params = new TreeMap<>();
-        params.put("pageNum",pageNum+"");
-        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Activity,params);
+        TreeMap<String, String> params = new TreeMap<>();
+        params.put("pageNum", pageNum + "");
+        PostRequest<String> postRequest = OKGO_GetData.getDatePost(this, BaseParams.Activity, params);
         postRequest.execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
-                    Activitys activitys = JsonUtil.parseJsonToBean(response.body(), Activitys.class);
-                    if (200 == Integer.parseInt(activitys.code)&&activitys.data!=null) {
-                        if (!isLoad){
+
+                    if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+                        Activitys activitys = JsonUtil.parseJsonToBean(response.body(), Activitys.class);
+                        if (!isLoad) {
                             activityses.clear();
                         }
                         activityses.addAll(activitys.data);
                         activitysAdapter.notifyDataSetChanged();
+
                     } else {
-                        Utils.toast(activitys.message);
+                        Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
                     }
                 }
                 loadingDialog.dismiss();
