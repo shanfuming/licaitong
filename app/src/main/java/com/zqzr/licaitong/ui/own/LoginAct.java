@@ -239,4 +239,17 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (getIntent().getIntExtra("turn",-1) == 1){
+            Intent intent = new Intent();
+            intent.putExtra("tab", 0);
+            ActivityUtils.push(MainActivity.class, intent);
+            finish();
+        }else{
+            ActivityUtils.pop();
+        }
+    }
 }

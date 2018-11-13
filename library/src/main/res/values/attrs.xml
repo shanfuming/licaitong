@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="StickHeaderLayout">
-        <attr name="retentionHeight" format="dimension"/>
-        <attr name="scrollable" format="boolean"/>
+        <attr name="StickHeaderLayoutRetentionHeight" format="dimension"/>
+        <attr name="StickHeaderLayoutScrollable" format="boolean"/>
     </declare-styleable>
 </resources>

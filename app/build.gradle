@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        realase {
+            keyAlias 'licaitong'
+            keyPassword '123456'
+            storeFile file('D:/working/licaitong/licaitong.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion '25.0.0'
     // 关闭PNG合法性检查的
@@ -20,13 +28,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     productFlavors {
-        client {}
+        client {
+            signingConfig signingConfigs.realase
+        }
     }
-
     productFlavors.all {
-        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE : name]
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
     }
 }
 

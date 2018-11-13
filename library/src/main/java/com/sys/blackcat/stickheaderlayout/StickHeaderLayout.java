@@ -49,8 +49,8 @@ public class StickHeaderLayout extends ViewGroup {
     public StickHeaderLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.StickHeaderLayout);
-        retentionHeight = typedArray.getDimensionPixelSize(R.styleable.StickHeaderLayout_retentionHeight, 0);
-        scrollable = typedArray.getBoolean(R.styleable.StickHeaderLayout_scrollable, true);
+        retentionHeight = typedArray.getDimensionPixelSize(R.styleable.StickHeaderLayout_StickHeaderLayoutRetentionHeight, 0);
+        scrollable = typedArray.getBoolean(R.styleable.StickHeaderLayout_StickHeaderLayoutScrollable, true);
         typedArray.recycle();
         mDragHelper = ViewDragHelper.create(this, 1f, callback);
     }

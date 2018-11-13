@@ -15,10 +15,6 @@ public class BaseParams {
      */
     public static final  boolean IS_DEBUG            = true;
     /**
-     * OCRkey
-     */
-    public static final String OCRAPPKEY           = "VdB1gDXNPJh6VHbCdU5hbfT1";
-    /**
      * 测试服务器地址
      */
     private static final String URL_BETA            = "http://10.16.8.46:8080";
@@ -26,19 +22,11 @@ public class BaseParams {
     /**
      * 正式服务器地址
      */
-    private static final String URL_RELEASE         = "https://www.51ztj.com";
+    private static final String URL_RELEASE         = "http://clinet.zqbill.com";
     /**
      * 服务器地址
      */
     public static final String URL_ADDRESS         = IS_DEBUG ? URL_BETA : URL_RELEASE;
-    /**
-     * appkey
-     */
-    public static final String APP_KEY             = "6tqiC0AsASwO8T6MvMNfFJK1DQfsHiLC";
-    /**
-     * app_secret
-     */
-    public static final String APP_SECRET          = "gxixd9reotfifeqollfi0e2wgfkcey4x";
     /**
      * 加密是需要使用的密钥
      * DES加解密时KEY必须是16进制字符串,不可小于8位
