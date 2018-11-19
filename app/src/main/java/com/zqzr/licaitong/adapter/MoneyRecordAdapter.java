@@ -10,6 +10,7 @@ import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.bean.MoneyRecord;
 import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.DateUtil;
+import com.zqzr.licaitong.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -60,7 +61,7 @@ public class MoneyRecordAdapter extends BaseAdapter {
 
         viewHolder.recordTitle.setText(records.get(position).productName);
         viewHolder.recordTime.setText(DateUtil.formatter(DateUtil.Format.SECOND,records.get(position).addTime));
-        viewHolder.recordmoney.setText(records.get(position).actualAmount+"");
+        viewHolder.recordmoney.setText(Utils.getDouble2(records.get(position).actualAmount));
         return convertView;
     }
 

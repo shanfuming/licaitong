@@ -17,8 +17,8 @@
         android:orientation="horizontal"
         android:layout_marginLeft="@dimen/x150"
         android:layout_marginRight="@dimen/x150"
-        android:layout_marginTop="@dimen/y30"
-        android:layout_marginBottom="@dimen/y10"
+        android:layout_marginTop="@dimen/y20"
+        android:layout_marginBottom="@dimen/y20"
         >
 
         <TextView

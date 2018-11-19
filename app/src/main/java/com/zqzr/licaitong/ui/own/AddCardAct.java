@@ -73,9 +73,16 @@ public class AddCardAct extends BaseActivity {
         loadingDialog = new KeyDownLoadingDialog(this);
         loadingDialog.setText("正在提交");
         successDialog = new SuccessAndFailDialog(this);
-        mUsername.setText(getIntent().getStringExtra("userRealName"));
-        idNum = getIntent().getStringExtra("idNum");
         userRealName = getIntent().getStringExtra("userRealName");
+        if (!TextUtils.isEmpty(userRealName)){
+            mUsername.setText(userRealName);
+        }else{
+            mUsername.setText(SPUtil.getString("realname",""));
+        }
+        idNum = getIntent().getStringExtra("idNum");
+        if (TextUtils.isEmpty(idNum)){
+            idNum = SPUtil.getString("idNo","");
+        }
         mAddBind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +103,7 @@ public class AddCardAct extends BaseActivity {
         loadingDialog.show();
         mAddBind.setClickable(false);
         TreeMap<String, String> params = new TreeMap<>();
-        params.put("name", userRealName);
+        params.put("name", mUsername.getText().toString());
         params.put("idNum", idNum);
         params.put("mobile", SPUtil.getString("username", ""));
         params.put("cardNo", mEtCardNum.getText().toString().trim());

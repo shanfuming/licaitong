@@ -95,11 +95,15 @@ public class Constant {
     public static final String Wait = "敬请期待";
 
     /**
-     * 投资类型
+     * 认证类型
      */
     public static final String Identify_Success = "已认证";
     public static final String Identify_Not = "未认证";
     public static final String Identify_Fail = "未通过";
+    /**
+     * 订单取消成功
+     */
+    public static final String Cancel_Suc = "取消成功";
 
     /**
      * 投资状态值

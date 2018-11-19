@@ -2,6 +2,8 @@ package com.zqzr.licaitong.base;
 
 import com.zqzr.licaitong.utils.Utils;
 
+import java.lang.annotation.AnnotationFormatError;
+
 /**
  * Author: TinhoXu
  * E-mail: xth@erongdu.com
@@ -13,7 +15,7 @@ public class BaseParams {
     /**
      * 是否是debug模式
      */
-    public static final  boolean IS_DEBUG            = true;
+    public static final  boolean IS_DEBUG            = false;
     /**
      * 测试服务器地址
      */

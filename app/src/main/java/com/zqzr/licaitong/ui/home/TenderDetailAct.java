@@ -230,7 +230,7 @@ public class TenderDetailAct extends BaseActivity implements View.OnClickListene
                         } else {
                             mTvIncremental.setText(productDetail.data.increasingAmountStr + "及整数倍数递增");
                         }
-                        mTvSum.setText(productDetail.data.purchaseAmount + "");
+                        mTvSum.setText(Utils.getDouble2(productDetail.data.purchaseAmount));
                         if (productDetail.data.reservationAmount > 0) {
                             mRlSubsribe.setVisibility(View.VISIBLE);
                         }

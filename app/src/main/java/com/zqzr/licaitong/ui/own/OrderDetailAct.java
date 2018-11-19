@@ -1,5 +1,6 @@
 package com.zqzr.licaitong.ui.own;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -49,6 +50,10 @@ public class OrderDetailAct extends BaseActivity {
             super.handleMessage(msg);
             switch (msg.what){
                 case Constant.NUMBER_1:
+                    loadingDialog.setText("取消成功");
+                    handler.sendEmptyMessageDelayed(2,2000);
+                    break;
+                case Constant.NUMBER_2:
                     loadingDialog.dismiss();
                     finish();
                     break;
@@ -159,7 +164,7 @@ public class OrderDetailAct extends BaseActivity {
                         if(orderDetail.data.certificateUrl.size() > 0){
                             Utils.loadImg(OrderDetailAct.this,mIvVoucher, orderDetail.data.certificateUrl.get(0), null);
                         }
-                        if (Integer.valueOf(orderDetail.data.status) == 0 || Integer.valueOf(orderDetail.data.status) == 1) {
+                        if (Integer.valueOf(orderDetail.data.status) == 0) {
                             mTvCancel.setVisibility(View.VISIBLE);
                         } else {
                             mTvCancel.setVisibility(View.GONE);
@@ -207,9 +212,9 @@ public class OrderDetailAct extends BaseActivity {
                             if (Integer.valueOf(orderDetail.data.status) == 5) {
                                 mTvState.setText("已取消");
                                 mTvState2.setText("已取消");
-                                mTvState2.setTextColor(Color.parseColor("#fe6b31"));
-                                mTvState.setTextColor(Color.parseColor("#fe6b31"));
-                                mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_type_ed));
+                                mTvState2.setTextColor(Color.parseColor("#989898"));
+                                mTvState.setTextColor(Color.parseColor("#989898"));
+                                mTvState2.setBackground(ActivityUtils.peek().getResources().getDrawable(R.drawable.fillet_cancel));
                             }
                             if (Integer.valueOf(orderDetail.data.status) == 6) {
                                 mTvState.setText("已退款");
@@ -275,11 +280,15 @@ public class OrderDetailAct extends BaseActivity {
 
                     if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         handler.sendEmptyMessageDelayed(1, 2500);
+
+                        Intent intent = new Intent(Constant.Cancel_Suc);
+                        sendBroadcast(intent);
+
                     } else {
                         Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
+                        loadingDialog.dismiss();
                     }
                 }
-                loadingDialog.dismiss();
             }
 
             @Override

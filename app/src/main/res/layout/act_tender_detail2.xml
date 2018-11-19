@@ -136,7 +136,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@color/text_dark"
-                android:textSize="@dimen/x40" />
+                android:textSize="@dimen/x32" />
 
             <View style="@style/vLineStyle" />
 

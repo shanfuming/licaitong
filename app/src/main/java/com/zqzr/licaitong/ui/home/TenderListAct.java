@@ -95,6 +95,7 @@ public class TenderListAct extends BaseActivity implements View.OnClickListener 
             getDataList(1, currentPage, false);
             mLlPiaoju.setVisibility(View.GONE);
         }
+        setBg(1);
         currentType = type;
     }
 

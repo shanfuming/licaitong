@@ -1,7 +1,9 @@
 package com.zqzr.licaitong.ui.own;
 
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
@@ -55,19 +57,19 @@ public class MoneyRecordAct extends BaseActivity {
         moneyRecordAdapter = new MoneyRecordAdapter(records);
         moneyRecordListView.setAdapter(moneyRecordAdapter);
 
-        getData(currentPage,false);
+        getData(currentPage, false);
 
         mRefreshlayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
-                getData(currentPage,false);
+                getData(currentPage, false);
                 mRefreshlayout.finishRefreshing();
             }
 
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
                 super.onRefreshLoadMore(materialRefreshLayout);
-                getData(nextPage,true);
+                getData(nextPage, true);
                 nextPage = nextPage + 1;
                 mRefreshlayout.finishRefreshLoadMore();
             }

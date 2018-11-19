@@ -236,7 +236,7 @@
     <string name="own_return_ed">已回款</string>
     <string name="own_return_type">产品类型</string>
     <string name="own_return_All">本息金额</string>
-    <string name="own_return_date">汇款日期</string>
+    <string name="own_return_date">回款日期</string>
 
     <!--取消订单-->
     <string name="own_order_cancelTip1">您确定要取消订单吗？</string>

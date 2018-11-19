@@ -27,5 +27,6 @@ public class Login implements Serializable {
         public int  id;
         public String headPortraitUrl;
         public String token;
+        public String idNo;
     }
 }

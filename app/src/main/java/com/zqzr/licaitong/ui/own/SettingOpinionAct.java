@@ -67,14 +67,15 @@ public class SettingOpinionAct extends BaseActivity {
 
         loadingDialog = new KeyDownLoadingDialog(this);
 
-        if (mEtOpinion.getText().toString().trim().length() < 10){
-            Utils.toast(getResources().getString(R.string.own_opinion_hint));
-            return;
-        }
-
         mCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (mEtOpinion.getText().toString().trim().length() < 10){
+                    Utils.toast(getResources().getString(R.string.own_opinion_hint));
+                    return;
+                }
+                mCommit.setClickable(false);
                 loadingDialog.setText("正在提交");
                 TreeMap<String,String> params = new TreeMap<>();
                 params.put("userId", SPUtil.getString("userid",""));
@@ -91,9 +92,10 @@ public class SettingOpinionAct extends BaseActivity {
 
                             } else {
                                 Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
+                                loadingDialog.dismiss();
+                                mCommit.setClickable(true);
                             }
                         }
-                        loadingDialog.dismiss();
                     }
 
                     @Override
@@ -101,6 +103,7 @@ public class SettingOpinionAct extends BaseActivity {
                         super.onError(response);
                         Utils.toast(Constant.NetWork_Error);
                         loadingDialog.dismiss();
+                        mCommit.setClickable(true);
                     }
                 });
 

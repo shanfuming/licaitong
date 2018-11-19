@@ -221,7 +221,8 @@ public class LoginAct extends BaseActivity implements View.OnClickListener {
                         SPUtil.setValue("userid", login.data.id+"");
                         SPUtil.setValue("username", login.data.phone);
                         SPUtil.setValue("usericon", login.data.headPortraitUrl);
-
+                        SPUtil.setValue("realname", login.data.realName);
+                        SPUtil.setValue("idNo", login.data.idNo);
                         handler.sendEmptyMessageDelayed(Constant.NUMBER_1, 1000);
 
                     } else {

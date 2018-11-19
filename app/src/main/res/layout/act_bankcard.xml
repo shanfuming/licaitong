@@ -2,27 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/view_grey"
-    >
+    android:orientation="vertical">
 
-    <include layout="@layout/appbar_layout"/>
+    <include layout="@layout/appbar_layout" />
 
-    <com.cjj.MaterialRefreshLayout
-        android:id="@+id/mrl_refreshLayout"
+
+    <ListView
+        android:id="@+id/card_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-
-        <ListView
-            android:id="@+id/card_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/x30"
-            android:dividerHeight="@dimen/x20"
-            android:divider="@color/view_grey"
-            />
-
-    </com.cjj.MaterialRefreshLayout>
+        android:layout_margin="@dimen/x30"
+        android:divider="@color/view_grey"
+        android:dividerHeight="@dimen/x20" />
 
 </LinearLayout>

@@ -34,5 +34,8 @@ public class ReturnDetail implements Serializable {
         public Long repaymentTime;
         public String url;
         public String token;
+
+        public Double repaymentAmount;
+        public Double interest;
     }
 }

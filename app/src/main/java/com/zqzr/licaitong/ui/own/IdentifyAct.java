@@ -117,6 +117,10 @@ public class IdentifyAct extends BaseActivity implements View.OnClickListener {
             public void onSuccess(Response<String> response) {
                 if (!TextUtils.isEmpty(response.body())) {
                     if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
+
+                        SPUtil.setValue("realname", mEtName.getText().toString());
+                        SPUtil.setValue("idNo", mEtIdCard.getText().toString());
+
                         successDialog.setContent("认证成功", true);
                         successDialog.setDes("请绑定回款银行卡", true);
                         successDialog.setImg(R.mipmap.success, true);

@@ -168,6 +168,8 @@ public class OwnActivity extends BaseActivity implements View.OnClickListener {
                             realNameStatus = ownInfo.data.realNameStatus;
                             bankStatus = ownInfo.data.bankStatus;
                             SPUtil.setValue("usericon", headPortraitUrl);
+                            SPUtil.setValue("realname", realName);
+                            SPUtil.setValue("idNo", idNo);
                         }
 
                     } else if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 10003) {

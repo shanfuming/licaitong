@@ -44,7 +44,6 @@ import java.util.TreeMap;
  */
 
 public class BankCardAct extends BaseActivity {
-    private MaterialRefreshLayout mRefreshLayout;
     private ListView mCardListView;
     private View footerView;
     private LinearLayout mLlAddCard;
@@ -56,7 +55,6 @@ public class BankCardAct extends BaseActivity {
     protected void initView() {
         setContentView(R.layout.act_bankcard);
 
-        mRefreshLayout = (MaterialRefreshLayout) findViewById(R.id.mrl_refreshLayout);
         mCardListView = (ListView) findViewById(R.id.card_listview);
         footerView = View.inflate(this, R.layout.footer_card, null);
         mLlAddCard = (LinearLayout) footerView.findViewById(R.id.ll_addCard);

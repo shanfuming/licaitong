@@ -37,6 +37,9 @@ public class ReturnPlanDetailAct extends BaseActivity {
     private RelativeLayout mRlLook;
     private KeyDownLoadingDialog loadingDialog;
     private String url;
+    private int type;
+    private TextView mTvTip1;
+    private TextView mTvTip2;
 
     @Override
     protected void initView() {
@@ -51,7 +54,8 @@ public class ReturnPlanDetailAct extends BaseActivity {
         mTvReturnAll = (TextView) findViewById(R.id.tv_detail_returnAll);
         mRlLook = (RelativeLayout) findViewById(R.id.rl_look_rule);
         mTvActualAmount = (TextView) findViewById(R.id.tv_detail_actualAmount);
-
+        mTvTip1 = (TextView) findViewById(R.id.tv_tip1);
+        mTvTip2 = (TextView) findViewById(R.id.tv_tip2);
     }
 
     @Override
@@ -98,19 +102,23 @@ public class ReturnPlanDetailAct extends BaseActivity {
 
                         mTvName.setText(returnDetail.data.borrowName);
                         mTvExpectedYield.setText(returnDetail.data.rateYear + "%");
-                        mTvIncome.setText(Utils.getDouble2(returnDetail.data.repaidInterest));
                         mTvStartDate.setText(DateUtil.formatter(DateUtil.Format.DATE, returnDetail.data.addTime));
                         mTvEndDate.setText(DateUtil.formatter(DateUtil.Format.DATE, returnDetail.data.repaymentTime));
-                        mTvReturnAll.setText(Utils.getDouble2(returnDetail.data.repaidCapital));
                         mTvActualAmount.setText(Utils.getDouble2(returnDetail.data.actualAmount));
 
                         if (returnDetail.data.status == 0) {
                             mTvStatus.setText("待回款");
                             mTvStatus.setTextColor(getResources().getColor(R.color.app_color_principal));
+                            mTvReturnAll.setText(Utils.getDouble2(returnDetail.data.repaymentAmount));
+                            mTvIncome.setText(Utils.getDouble2(returnDetail.data.interest));
+                            mTvTip1.setText("待收收益");
+                            mTvTip2.setText("待回总额");
                         }
                         if (returnDetail.data.status == 1) {
                             mTvStatus.setText("已回款");
                             mTvStatus.setTextColor(getResources().getColor(R.color.app_color_principal));
+                            mTvReturnAll.setText(Utils.getDouble2(returnDetail.data.repaidCapital));
+                            mTvIncome.setText(Utils.getDouble2(returnDetail.data.repaidInterest));
                         }
 
                         url = returnDetail.data.url;

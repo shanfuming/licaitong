@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.widget.ProgressBar;
@@ -38,10 +39,6 @@ public class UpdateProgressDialog extends AlertDialog {
         mContext = context;
     }
 
-//    public static UpdateProgressDialog create(Context context){
-//        return new UpdateProgressDialog(context, R.style.MyDialogStyle);
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,5 +60,13 @@ public class UpdateProgressDialog extends AlertDialog {
     @Override
     public boolean dispatchTouchEvent(@NonNull MotionEvent ev) {
         return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            return true;//不执行父类点击事件
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

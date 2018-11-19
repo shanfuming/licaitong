@@ -375,7 +375,7 @@
             android:layout_height="@dimen/x44"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x30"
-            android:background="@mipmap/person_identify" />
+            android:background="@mipmap/own_planner" />
 
         <TextView
             android:layout_width="wrap_content"

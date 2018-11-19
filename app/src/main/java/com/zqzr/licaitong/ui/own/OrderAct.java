@@ -1,11 +1,14 @@
 package com.zqzr.licaitong.ui.own;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,14 +18,12 @@ import com.cjj.MaterialRefreshListener;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
-import com.zqzr.licaitong.MyApplication;
 import com.zqzr.licaitong.R;
 import com.zqzr.licaitong.adapter.DropMenuAdapter;
 import com.zqzr.licaitong.adapter.OrderAdapter;
 import com.zqzr.licaitong.base.BaseActivity;
 import com.zqzr.licaitong.base.BaseParams;
 import com.zqzr.licaitong.base.Constant;
-import com.zqzr.licaitong.bean.Login;
 import com.zqzr.licaitong.bean.Menu;
 import com.zqzr.licaitong.bean.Order;
 import com.zqzr.licaitong.http.OKGO_GetData;
@@ -30,7 +31,6 @@ import com.zqzr.licaitong.utils.DensityUtils;
 import com.zqzr.licaitong.utils.JsonUtil;
 import com.zqzr.licaitong.utils.SPUtil;
 import com.zqzr.licaitong.utils.Utils;
-import com.zqzr.licaitong.utils.encryption.MD5Util;
 import com.zqzr.licaitong.view.KeyDownLoadingDialog;
 import com.zqzr.licaitong.view.SpacesItemDecoration;
 
@@ -156,7 +156,6 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
                     }
                     menuAdapter.setMenuList(menu);
                 }
-
                 getDataFromServer(currentLimit, currentProductName, currentStatus, currentPage, false);
             }
         });
@@ -178,6 +177,8 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
                 mRefreshLayout.finishRefreshLoadMore();
             }
         });
+
+        registerBoradcastReceiver();
     }
 
     @Override
@@ -191,44 +192,44 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_condition_time:
-                if (!isTime) {
+//                if (!isTime) {
                     setConditionSelector(1);
                     menu.clear();
                     menu.addAll(time);
                     menuAdapter.setMenuList(menu);
                     isTime = true;
-                } else {
-                    mTvTime.setTextColor(getResources().getColor(R.color.text_grey));
-                    mLlMenuList.setVisibility(View.GONE);
-                    isTime = false;
-                }
+//                } else {
+//                    mTvTime.setTextColor(getResources().getColor(R.color.text_grey));
+//                    mLlMenuList.setVisibility(View.GONE);
+//                    isTime = false;
+//                }
                 break;
             case R.id.ll_condition_state:
-                setConditionSelector(2);
-                if (!isState) {
-                    setConditionSelector(1);
+//                if (!isState) {
+                    setConditionSelector(2);
                     menu.clear();
                     menu.addAll(state);
                     menuAdapter.setMenuList(menu);
                     isState = true;
-                } else {
-                    mTvState.setTextColor(getResources().getColor(R.color.text_grey));
-                    mLlMenuList.setVisibility(View.GONE);
-                    isState = false;
-                }
+//                } else {
+//                    mTvState.setTextColor(getResources().getColor(R.color.text_grey));
+//                    mLlMenuList.setVisibility(View.GONE);
+//                    isState = false;
+//                }
                 break;
             case R.id.ll_condition_product:
-                if (!isProduct) {
+//                if (!isProduct) {
                     setConditionSelector(3);
                     menu.clear();
                     menu.addAll(product);
                     menuAdapter.setMenuList(menu);
                     isProduct = true;
-                } else {
-                    mTvProduct.setTextColor(getResources().getColor(R.color.text_grey));
-                    mLlMenuList.setVisibility(View.GONE);
-                    isProduct = false;
-                }
+//                }
+//                else {
+//                    mTvProduct.setTextColor(getResources().getColor(R.color.text_grey));
+//                    mLlMenuList.setVisibility(View.GONE);
+//                    isProduct = false;
+//                }
                 break;
             case R.id.mask:
                 mLlMenuList.setVisibility(View.GONE);
@@ -257,13 +258,10 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
                 if (!TextUtils.isEmpty(response.body())) {
                     if (Integer.parseInt(JsonUtil.getFieldValue(response.body(), "code")) == 200) {
                         Order order = JsonUtil.parseJsonToBean(response.body(), Order.class);
-                        if (isLoad) {
-                            orders.addAll(order.data.cList);
-
-                        } else {
+                        if (!isLoad) {
                             orders.clear();
-                            orders.addAll(order.data.cList);
                         }
+                        orders.addAll(order.data.cList);
                         ordersAdapter.notifyDataSetChanged();
                     } else {
                         Utils.toast(JsonUtil.getFieldValue(response.body(), "message"));
@@ -279,6 +277,10 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
                 loadingDialog.dismiss();
             }
         });
+        mLlMenuList.setVisibility(View.GONE);
+        mTvTime.setTextColor(getResources().getColor(R.color.text_grey));
+        mTvState.setTextColor(getResources().getColor(R.color.text_grey));
+        mTvProduct.setTextColor(getResources().getColor(R.color.text_grey));
     }
 
     /**
@@ -304,4 +306,29 @@ public class OrderAct extends BaseActivity implements View.OnClickListener {
             mTvState.setTextColor(getResources().getColor(R.color.text_grey));
         }
     }
+
+    private BroadcastReceiver mCancelSucBroadcast = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Constant.Cancel_Suc)) {
+                getDataFromServer(currentLimit, currentProductName, currentStatus, currentPage, false);
+            }
+        }
+
+    };
+
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction(Constant.Cancel_Suc);
+        //注册广播
+        registerReceiver(mCancelSucBroadcast, myIntentFilter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mCancelSucBroadcast);
+    }
+
 }

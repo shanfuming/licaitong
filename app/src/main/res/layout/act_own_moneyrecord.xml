@@ -2,13 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
-    >
+    android:orientation="vertical">
 
-    <include layout="@layout/appbar_layout"/>
+    <include layout="@layout/appbar_layout" />
 
-    <View style="@style/hLineheight20Style"/>
+    <View style="@style/hLineheight20Style" />
 
     <com.cjj.MaterialRefreshLayout
         android:id="@+id/mrl_refreshLayout"
@@ -21,8 +20,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/x30"
             android:layout_marginRight="@dimen/x30"
-            android:scrollbars="none"
-            />
+            android:scrollbars="none" />
 
     </com.cjj.MaterialRefreshLayout>
 

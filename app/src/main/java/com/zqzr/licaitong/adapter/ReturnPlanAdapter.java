@@ -61,7 +61,7 @@ public class ReturnPlanAdapter extends BaseAdapter {
         }
         viewHolder.returnTitle.setText(returnlist.get(position).borrowName);
         viewHolder.returnType.setText(Utils.getType(returnlist.get(position).type));
-        viewHolder.returnAll.setText(returnlist.get(position).priAndInt+"");
+        viewHolder.returnAll.setText(Utils.getDouble2(returnlist.get(position).priAndInt));
         viewHolder.returnDate.setText(DateUtil.formatter(DateUtil.Format.DATE,returnlist.get(position).repTime));
 
         return convertView;

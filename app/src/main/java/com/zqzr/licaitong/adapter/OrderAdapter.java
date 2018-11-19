@@ -13,6 +13,7 @@ import com.zqzr.licaitong.bean.Order;
 import com.zqzr.licaitong.ui.own.OrderDetailAct;
 import com.zqzr.licaitong.utils.ActivityUtils;
 import com.zqzr.licaitong.utils.DateUtil;
+import com.zqzr.licaitong.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -43,7 +44,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         holder.tvOrderId.setText(orders.get(position).investmentNo);
         holder.tvOrderName.setText(orders.get(position).productName);
         holder.tvOrderTime.setText(DateUtil.formatter(DateUtil.Format.SECOND,orders.get(position).addTime));
-        holder.tvPlanMoney.setText(orders.get(position).subscribeAmount+"");
+        holder.tvPlanMoney.setText(Utils.getDouble2(orders.get(position).subscribeAmount));
         holder.tvPredictIncome.setText(orders.get(position).rateYear+"%");
 
         if(orders.get(position).status >= 0){

@@ -2,9 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/view_grey"
-    >
+    android:orientation="vertical">
 
     <include
         android:id="@+id/titleBar"
@@ -14,9 +13,8 @@
         android:id="@+id/ll_condition"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y88"
-        android:orientation="horizontal"
         android:background="@color/white"
-        >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/ll_condition_time"
@@ -112,46 +110,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <com.cjj.MaterialRefreshLayout
             android:id="@+id/mrl_refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/view"
-            >
+            android:layout_below="@+id/view">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/order_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
+                android:layout_height="match_parent" />
 
         </com.cjj.MaterialRefreshLayout>
-
 
         <LinearLayout
             android:id="@+id/ll_menuList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
 
             <ListView
                 android:id="@+id/condition_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:divider="@color/hint_grey"
-                android:dividerHeight="@dimen/y1"
                 android:background="@color/white"
-                />
+                android:divider="@color/hint_grey"
+                android:dividerHeight="@dimen/y1" />
 
             <View
                 android:id="@+id/mask"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/round_out_paint"
-                />
+                android:background="@color/round_out_paint" />
         </LinearLayout>
 
     </RelativeLayout>

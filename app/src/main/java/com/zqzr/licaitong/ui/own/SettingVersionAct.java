@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,9 +50,6 @@ public class SettingVersionAct extends BaseActivity implements View.OnClickListe
     private ImageView mIvUpdate;
     private UpdateProgressDialog mDownloadDialog;
     private String updateUrl;
-
-    /* 下载中 */
-    private static final int DOWNLOAD = 1;
     /* 下载结束 */
     private static final int DOWNLOAD_FINISH = 2;
     /* 下载保存路径 */
